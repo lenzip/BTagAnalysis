@@ -4,6 +4,8 @@ from ROOT import *
 from optparse import OptionParser
 import os.path
 import sys
+from muon import *
+from jet import *
 
 def skim(tree, eventSel):
   mylist = TEventList("mylist") 
@@ -27,6 +29,7 @@ def book(outFileName, variables, cuts):
     
 
 
+
 usage="usage: %prog [options] inputList outputFile"
   
 parser = OptionParser(usage=usage)
@@ -40,6 +43,18 @@ if len(args) != 2:
   sys.exit(1)
 
 activeBranches=[]
+
+activeBranches.extend([
+"PFMuon_isGlobal",
+"PFMuon_nMuHit",
+"PFMuon_nTkHit",
+"PFMuon_nPixHit",
+"PFMuon_nOutHit",
+"PFMuon_nMatched",
+"PFMuon_chi2",
+"PFMuon_chi2Tk"]
+)
+
 cutsFile = options.cutsFile
 
 if os.path.exists(cutsFile) :
@@ -92,16 +107,35 @@ for event in chain:
     if (i%10==0):
       sys.stdout.write("\rprocessing event %d" %i)
       sys.stdout.flush()
-      #print "processing event ", i
-    #print event.nJet, eventsel(event)  
+
+# global event selection    
     if not (eventsel(event)): continue
+# prepare lists with jets and leptons    
     nJet=event.nJet
+    nPFMuon=event.nPFMuon
+    jets=[]
     for IJ in range(nJet):
-      #print "IJ", IJ
+      jet=Jet(event,IJ)
+      if (jet.fourMomentum.Pt()>30. and abs(jet.fourMomentum.Eta()<2.4)):
+        jets.append(jet)
+    muons=[]
+    for IM in range(nPFMuon):
+      muon=Muon(event,IM)
+      if (muon.fourMomentum.Pt()>5. and abs(muon.fourMomentum.Eta()<2.4)):
+        muons.append(muon)
+# at least one jet matching an identified muon    
+    matchedMuon=False
+    for muon in muons:
+      if not muon.passMuId(): continue
+      for jet in jets:
+        if muon.match(jet):
+           matchedMuon=True
+           break
+    if not matchedMuon: continue
+# loop over jets, apply jet specific categorization and fill plots   
+    for IJ in range(nJet):
       for cut in cuts.keys():
-        #print "cut", cut, event.Jet_pt[IJ], event.Jet_eta[IJ], (cutFunctions[cut])(event, IJ), cutFunctions[cut]
         if cutFunctions[cut](event, IJ):
-          #print cut, event.Jet_pt
           for variable in variables.keys():
             histos[variable][cut].Fill(variables[variable]["expression"](event, IJ))
   except KeyboardInterrupt:

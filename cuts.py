@@ -1,5 +1,5 @@
 # global event selection
-eventsel="(event.nJet>=2)"
+eventsel="(event.nJet>=2 and event.nPFMuon>=1)"
 
 cuts={}
 
@@ -25,7 +25,8 @@ activeBranches.extend([
 "nJet",
 "Jet_pt",
 "Jet_eta",
-"Jet_flavour"
+"Jet_flavour",
+"nPFMuon"
 ]
 )
 
@@ -51,7 +52,7 @@ for ipt in range(len(ptbins)-1):
   for flavor in flavors:
     if flavor == "l":
       baseCutNameAndFlavor = baseCutName+"_l"
-      cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*(event.Jet_flavour[IJ] == 1 or event.Jet_flavour[IJ] == 21)") 
+      cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*((event.Jet_flavour[IJ] >= 1 and event.Jet_flavour[IJ]<=3) or event.Jet_flavour[IJ] == 21)") 
     elif flavor == "c":
       baseCutNameAndFlavor = baseCutName+"_c"
       cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*(event.Jet_flavour[IJ] == 4)")   
@@ -73,6 +74,12 @@ for cut in cuts.keys():
   cutFunctions[cut]=lambda event,IJ: eval(cuts[cut])
   #cuts[cut]=lambda event,IJ: eval(stringcut)
   #print cut, cuts[cut]
+
+
+
+def passTrigger(event,index):
+  bitIdx = index/32
+  return event.BitTrigger[bitIdx] & ( 1 << (index - bitIdx*32) )
 
 eventSelString = eventsel
 eventsel=lambda event: eval(eventSelString)
