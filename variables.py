@@ -12,7 +12,6 @@ variables["PT"] = {
   "xmin": 0,
   "xmax": 1000,
   "nbins": 1000
-
 }
 
 activeBranches.extend([
@@ -20,7 +19,9 @@ activeBranches.extend([
 'Jet_pt'
 ])
 
+variableFunctions={}
+
 for name in variables.keys():
-  stringExpression = variables[name]["expression"]
-  variables[name]["expression"] = lambda event, IJ: eval(stringExpression)
+  print variables[name]["expression"]
+  variableFunctions[name]=eval("lambda event, IJ: "+variables[name]["expression"])
   

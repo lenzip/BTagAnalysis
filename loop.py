@@ -52,7 +52,11 @@ activeBranches.extend([
 "PFMuon_nOutHit",
 "PFMuon_nMatched",
 "PFMuon_chi2",
-"PFMuon_chi2Tk"]
+"PFMuon_chi2Tk",
+'nPFMuon',
+'PFMuon_pt',
+'PFMuon_eta',
+'PFMuon_phi']
 )
 
 cutsFile = options.cutsFile
@@ -101,6 +105,7 @@ for branch in activeBranches:
 
 
 i=0
+passed=0
 for event in chain:
   try:
     i=i+1
@@ -123,6 +128,7 @@ for event in chain:
       muon=Muon(event,IM)
       if (muon.fourMomentum.Pt()>5. and abs(muon.fourMomentum.Eta()<2.4)):
         muons.append(muon)
+        
 # at least one jet matching an identified muon    
     matchedMuon=False
     for muon in muons:
@@ -132,15 +138,18 @@ for event in chain:
            matchedMuon=True
            break
     if not matchedMuon: continue
+
+    passed +=1
 # loop over jets, apply jet specific categorization and fill plots   
     for IJ in range(nJet):
       for cut in cuts.keys():
         if cutFunctions[cut](event, IJ):
           for variable in variables.keys():
-            histos[variable][cut].Fill(variables[variable]["expression"](event, IJ))
+            #print variable, variableFunctions[variable](event,IJ)
+            histos[variable][cut].Fill(variableFunctions[variable](event, IJ))
   except KeyboardInterrupt:
     print "\nInterrupted"
     break
-
 print "\n"
+print "Total events processed", i, "; passed", passed
 outFile.Write()          

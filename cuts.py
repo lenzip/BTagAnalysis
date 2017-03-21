@@ -71,15 +71,11 @@ for ipt in range(len(ptbins)-1):
 cutFunctions={}
 for cut in cuts.keys():
   #print stringcut
-  cutFunctions[cut]=lambda event,IJ: eval(cuts[cut])
+  cutFunctions[cut]=eval("lambda event,IJ:"+cuts[cut])
   #cuts[cut]=lambda event,IJ: eval(stringcut)
   #print cut, cuts[cut]
 
 
-
-def passTrigger(event,index):
-  bitIdx = index/32
-  return event.BitTrigger[bitIdx] & ( 1 << (index - bitIdx*32) )
 
 eventSelString = eventsel
 eventsel=lambda event: eval(eventSelString)
