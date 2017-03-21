@@ -86,20 +86,27 @@ for branch in activeBranches:
 
 
 i=0
-
 for event in chain:
-  i=i+1
-  if (i%10==0):
-    sys.stdout.write("\rprocessing event %d" %i)
-    sys.stdout.flush()
-    #print "processing event ", i
-  if not (eventsel(event)): continue
-  nJet=event.nJet
-  for IJ in range(nJet):
-    for cut in cuts.keys():
-      if cuts[cut](event, IJ):
-        for variable in variables.keys():
-          histos[variable][cut].Fill(variables[variable]["expression"](event, IJ))
+  try:
+    i=i+1
+    if (i%10==0):
+      sys.stdout.write("\rprocessing event %d" %i)
+      sys.stdout.flush()
+      #print "processing event ", i
+    #print event.nJet, eventsel(event)  
+    if not (eventsel(event)): continue
+    nJet=event.nJet
+    for IJ in range(nJet):
+      #print "IJ", IJ
+      for cut in cuts.keys():
+        #print "cut", cut, event.Jet_pt[IJ], event.Jet_eta[IJ], (cutFunctions[cut])(event, IJ), cutFunctions[cut]
+        if cutFunctions[cut](event, IJ):
+          #print cut, event.Jet_pt
+          for variable in variables.keys():
+            histos[variable][cut].Fill(variables[variable]["expression"](event, IJ))
+  except KeyboardInterrupt:
+    print "\nInterrupted"
+    break
 
-          
+print "\n"
 outFile.Write()          

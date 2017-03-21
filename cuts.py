@@ -1,11 +1,12 @@
 # global event selection
-eventsel="(event.nJet>=7)"
+eventsel="(event.nJet>=2)"
 
 cuts={}
 
 
 #pt bins for the sf calculation
 ptbins=[20., 30., 50., 70., 100., 140., 200., 300., 670., 1000.]
+#ptbins=[20.,1000.]
 
 # algorithms for which SF are to be computed and corresponding working points
 # the algorithm name must match the branch name in the BTagAnalyzer output, i.e. Jet_<algo>
@@ -18,7 +19,6 @@ wps={
 # flavor names
 flavors=["l","b","c"]
 
-
 # store the list of branches to activate 
 # this is very importnt to speed up data access
 activeBranches.extend([
@@ -28,6 +28,7 @@ activeBranches.extend([
 "Jet_flavour"
 ]
 )
+
 
 for algo in algos:
   activeBranches.append("Jet_"+algo)
@@ -39,8 +40,13 @@ for ipt in range(len(ptbins)-1):
   
   baseCutName = "ptbin_"+str(ptmin)+"-"+str(ptmax)
   
-  cuts[baseCutName] = "(event.Jet_pt[IJ]>"+ptmin+" and event.Jet_pt[IJ]<"+ptmax+")"+ \
-                               "*(abs(event.Jet_eta[IJ])<2.4)"
+  cuts[baseCutName] = "((event.Jet_pt[IJ]>"+ptmin+" and event.Jet_pt[IJ]<"+ptmax+")"+ \
+                               " and (abs(event.Jet_eta[IJ])<2.4))"
+  
+  for algo in algos:
+    for wp in wps[algo].keys():
+      baseCutNameAndTagger=baseCutName+"_"+algo+wp
+      cuts[baseCutNameAndTagger] = cuts[baseCutName] + "*(event.Jet_"+algo+"[IJ]>"+str(wps[algo][wp])+ ")"
                                
   for flavor in flavors:
     if flavor == "l":
@@ -61,11 +67,12 @@ for ipt in range(len(ptbins)-1):
 # now transform the strings representing each cut in a 
 # lambda function of the event and of the Jet number (IJ)
 # (to avoid the need of doing eval at every event)
+cutFunctions={}
 for cut in cuts.keys():
-  stringcut=cuts[cut]
   #print stringcut
-  cuts[cut] = lambda event, IJ: eval(stringcut)
-  #print cut, cuts[cut]i
+  cutFunctions[cut]=lambda event,IJ: eval(cuts[cut])
+  #cuts[cut]=lambda event,IJ: eval(stringcut)
+  #print cut, cuts[cut]
 
 eventSelString = eventsel
 eventsel=lambda event: eval(eventSelString)
