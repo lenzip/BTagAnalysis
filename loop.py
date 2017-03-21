@@ -6,6 +6,7 @@ import os.path
 import sys
 from muon import *
 from jet import *
+from prescale import *
 
 def skim(tree, eventSel):
   mylist = TEventList("mylist") 
@@ -27,7 +28,9 @@ def book(outFileName, variables, cuts):
 
   return outFile, histos    
     
-
+def passTrigger(event,trigIdx):
+  bitIdx = trigIdx/32 ;
+  return ( event.BitTrigger[bitIdx] & ( 1 << (trigIdx - bitIdx*32) ) )
 
 
 usage="usage: %prog [options] inputList outputFile"
@@ -36,6 +39,7 @@ parser = OptionParser(usage=usage)
 parser.add_option("-t", action="store", help="tree name from BTagAnalyzer (default=btagana/ttree)", default="btagana/ttree", dest="tree")
 parser.add_option("-c", action="store", help="cuts file name (default cuts.py)", default="cuts.py", dest="cutsFile")
 parser.add_option("-v", action="store", help="variables file name (default variables.py)", default="variables.py", dest="variablesFile")
+parser.add_option("-d", action="store_true", help="if it is data apply trigger (default false (i.e. MC))", default=False, dest="isData")
 
 (options, args) = parser.parse_args()
 if len(args) != 2:
@@ -56,7 +60,9 @@ activeBranches.extend([
 'nPFMuon',
 'PFMuon_pt',
 'PFMuon_eta',
-'PFMuon_phi']
+'PFMuon_phi',
+'nBitTrigger',
+'BitTrigger']
 )
 
 cutsFile = options.cutsFile
@@ -115,6 +121,7 @@ for event in chain:
 
 # global event selection    
     if not (eventsel(event)): continue
+
 # prepare lists with jets and leptons    
     nJet=event.nJet
     nPFMuon=event.nPFMuon
@@ -138,6 +145,16 @@ for event in chain:
            matchedMuon=True
            break
     if not matchedMuon: continue
+# trigger selection    
+    if options.isData:
+      triggers=[]
+      for itrig in range(30, 36):
+        if passTrigger(event, itrig):
+          triggers.append(itrig)
+      if len(triggers) == 0: continue
+
+      #sort from lowest prescale to highest prescale
+      triggers.sort(reverse=True)
 
     passed +=1
 # loop over jets, apply jet specific categorization and fill plots   

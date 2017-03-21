@@ -78,4 +78,4 @@ for cut in cuts.keys():
 
 
 eventSelString = eventsel
-eventsel=lambda event: eval(eventSelString)
+eventsel=eval("lambda event: " + eventSelString)

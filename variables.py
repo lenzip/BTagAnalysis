@@ -22,6 +22,5 @@ activeBranches.extend([
 variableFunctions={}
 
 for name in variables.keys():
-  print variables[name]["expression"]
   variableFunctions[name]=eval("lambda event, IJ: "+variables[name]["expression"])
   
