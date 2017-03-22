@@ -19,6 +19,7 @@ class Pileup:
     self.mcHist.SetNameTitle("mcPU", "mcPU")
     
     mcTree.Draw("nPUtrue >> mcPU")
+    self.mcHist.Scale(1./self.mcHist.Integral())
     self.ratio = self.dataHist.Clone()
     self.ratio.Divide(self.mcHist)
 
