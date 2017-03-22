@@ -8,8 +8,8 @@ class CrossSection:
       self.data[linesplit[0]]['xsec'] = float(linesplit[1])
       self.data[linesplit[0]]['filter'] = float(linesplit[2])
       self.data[linesplit[0]]['events'] = float(linesplit[3])
-      self.data[linesplit[0]]['mcLumi'] = self.data[linesplit[0]]['events']/self.data[linesplit[0]]['filter']/self.data[linesplit[0]]['xsec']
-
+      self.data[linesplit[0]]['mcLumi'] = self.data[linesplit[0]]['events']/(self.data[linesplit[0]]['filter']*self.data[linesplit[0]]['xsec'])
+    print self.data
       
   def getWeight(self, chain, dataLumi):
     filename = chain.GetFile().GetName()
