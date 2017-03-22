@@ -157,9 +157,10 @@ if __name__ == "__main__":
         weight = weight*mcweight
         npv = event.nPV
         npu = event.nPUtrue
-        weight = weight*pileup.getWeight(npu)
-        weight = weight*crossSection.getWeight(chain, options.lumi*1000.)
         # PU weight
+        weight = weight*pileup.getWeight(npu)
+        # xsec weight
+        weight = weight*crossSection.getWeight(chain, options.lumi*1000.)
 
       i=i+1
       if (i%10==0):
