@@ -30,11 +30,14 @@ class Prescales:
         if lumi-int(ls)>0 and lumi-int(ls)<distance:
           distance = lumi-int(ls)
           closest = ls
-      return prescaleTable[closest]    
+      return prescaleTable[closest]      
 
     else:
       print "this run was not found for this trigger"
       return 1
+
+  def getPrescaleWeight(self, run, lumi):
+    return 1./self.getPrescale(run, lumi)
 
    
 
