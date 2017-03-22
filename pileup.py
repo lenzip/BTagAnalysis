@@ -1,11 +1,15 @@
+from ROOT import *
+
 class Pileup:
   # initialize from a sed of data histograms and corresponding weights 
   # i.e. weight the different periods with data luminosity
   def __init__(self, dataHistos, dataLumis, mcTree):
-    self.dataHist = dataHistos[0].Clone()
+    file0 = TFile(dataHistos[0])
+    self.dataHist = file0.Get("pileup").Clone()
     self.dataHist.Scale(dataLumis[0])
     for i in range(1, len(dataLumis)):
-      h = dataHistos[i]
+      filei=TFile(dataHistos[i])
+      h = filei.Get("pileup")
       h.Scale(dataLumis[i])
       self.dataHist.Add(h)
     

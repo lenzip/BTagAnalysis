@@ -7,6 +7,7 @@ import sys
 from muon import *
 from jet import *
 from prescale import *
+from pileup import *
 
 def skim(tree, eventSel):
   mylist = TEventList("mylist") 
@@ -133,7 +134,14 @@ if __name__ == "__main__":
     prescaleTables["33"] = Prescales("data/prescalesHLT_BTagMu_DiJet110_Mu5.txt")
     prescaleTables["34"] = Prescales("data/prescalesHLT_BTagMu_DiJet170_Mu5.txt")
     prescaleTables["35"] = Prescales("data/prescalesHLT_BTagMu_Jet300_Mu5.txt")
-    
+ 
+  else:
+    pileup = Pileup(["data/PileupHistogram_Full2016_271036-278808_69p2mb_Rereco.root",
+                     "data/PileupHistogram_Full2016_278820-284044_69p2mb_Rereco.root"],
+                     [0.1, 0.9],
+                     chain)
+
+
 
   i=0
   passed=0
@@ -146,6 +154,7 @@ if __name__ == "__main__":
         weight = weight*mcweight
         npv = event.nPV
         npu = event.nPUtrue
+        weight = weight*pileup.getWeight(npu)
         # PU weight
 
       i=i+1
