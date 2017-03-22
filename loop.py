@@ -8,6 +8,7 @@ from muon import *
 from jet import *
 from prescale import *
 from pileup import *
+from crossSection import *
 
 def skim(tree, eventSel):
   mylist = TEventList("mylist") 
@@ -47,6 +48,7 @@ if __name__ == "__main__":
   parser.add_option("-c", action="store", help="cuts file name (default cuts.py)", default="cuts.py", dest="cutsFile")
   parser.add_option("-v", action="store", help="variables file name (default variables.py)", default="variables.py", dest="variablesFile")
   parser.add_option("-d", action="store_true", help="if it is data apply trigger (default false (i.e. MC))", default=False, dest="isData")
+  parser.add_option("-l", action="store", help="data luminosity in fb-1 (default=35.9)", default=35.9, dest="lumi")
 
   (options, args) = parser.parse_args()
   if len(args) != 2:
@@ -140,6 +142,7 @@ if __name__ == "__main__":
                      "data/PileupHistogram_Full2016_278820-284044_69p2mb_Rereco.root"],
                      [0.1, 0.9],
                      chain)
+    crossSection = CrossSection("data/xsectionFilter.txt")                 
 
 
 
@@ -155,6 +158,7 @@ if __name__ == "__main__":
         npv = event.nPV
         npu = event.nPUtrue
         weight = weight*pileup.getWeight(npu)
+        weight = weight*crossSection.getWeight(chain, options.lumi*1000.)
         # PU weight
 
       i=i+1
