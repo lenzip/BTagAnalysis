@@ -163,7 +163,7 @@ if __name__ == "__main__":
         weight = weight*crossSection.getWeight(chain, options.lumi*1000.)
 
       i=i+1
-      if (i%10==0):
+      if (i%1000==0):
         sys.stdout.write("\rprocessing event %d" %i)
         sys.stdout.flush()
 
