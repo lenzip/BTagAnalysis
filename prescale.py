@@ -37,14 +37,14 @@ class Prescales:
       return 1
 
   def getPrescaleWeight(self, run, lumi):
-    return 1./self.getPrescale(run, lumi)
+    return self.getPrescale(run, lumi)
 
    
 
 
 
 if __name__ == "__main__":
-  prescale=Prescales('data/prescalesHLT_BTagMu_DiJet110_Mu5.txt')
+  prescale=Prescales('data/HLT_BTagMu_DiJet110_Mu5.csv')
   a=prescale.data['283685']
   print a
   print prescale.getPrescale(283685, 56)

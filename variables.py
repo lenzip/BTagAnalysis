@@ -1,10 +1,10 @@
 variables={}
 
 variables["JP"] = {
-  "expression": "event.Jet_Proba[IJ]",
-  "xmin": -10,
-  "xmax":  10,
-  "nbins":  100
+  "expression": "min(event.Jet_Proba[IJ], 1.99)",
+  "xmin": 0,
+  "xmax":  2,
+  "nbins":  20 
 }          
 
 variables["PT"] = {

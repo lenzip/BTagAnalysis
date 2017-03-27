@@ -7,7 +7,7 @@ mcDirOut="root://xrootd-cms.infn.it///store/user/lenzip/BTag/14Mar/"
 dataSubdir1=$(gfal-ls $dataDir | grep BTagMu)
 mcSubdir1=$(gfal-ls $mcDir | grep MuEnriched)
 
-nFilesDATA=10
+nFilesDATA=5
 outDir="lists/"
 
 mkdir $outDir

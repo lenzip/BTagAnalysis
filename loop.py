@@ -197,7 +197,7 @@ if __name__ == "__main__":
       if options.isData:
         triggers=[]
         for itrig in range(30, 36):
-          if passTrigger(event, itrig):
+          if passTrigger(event, itrig) and itrig != 34: ##removed 170 for the moment as it was not available for the whole period
             triggers.append(itrig)
         if len(triggers) == 0: continue
 
