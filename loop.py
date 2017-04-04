@@ -40,8 +40,9 @@ def passTrigger(event,trigIdx):
 #######################################
 ########   MAIN PROGRAM  ##############
 #######################################
+
 if __name__ == "__main__":
-  usage="usage: %prog [options] inputList outputFile"
+  usage="usage: %prog [opts] inputList outputFile"
     
   parser = OptionParser(usage=usage)
   parser.add_option("-t", action="store", help="tree name from BTagAnalyzer (default=btagana/ttree)", default="btagana/ttree", dest="tree")
@@ -50,7 +51,7 @@ if __name__ == "__main__":
   parser.add_option("-d", action="store_true", help="if it is data apply trigger (default false (i.e. MC))", default=False, dest="isData")
   parser.add_option("-l", action="store", help="data luminosity in fb-1 (default=35.9)", default=35.9, dest="lumi")
 
-  (options, args) = parser.parse_args()
+  (opts, args) = parser.parse_args()
   if len(args) != 2:
     print parser.print_help() 
     sys.exit(1)
@@ -82,7 +83,7 @@ if __name__ == "__main__":
   'nPV']
   )
 
-  cutsFile = options.cutsFile
+  cutsFile = opts.cutsFile
 
   if os.path.exists(cutsFile) :
     handle = open(cutsFile,'r')
@@ -92,7 +93,7 @@ if __name__ == "__main__":
     print "!!! ERROR file ", cutsFile, " does not exist."
     sys.exit(1)
 
-  variablesFile = options.variablesFile  
+  variablesFile = opts.variablesFile  
   if os.path.exists(variablesFile) :
     handle = open(variablesFile,'r')
     exec(handle)
@@ -106,7 +107,7 @@ if __name__ == "__main__":
   outputFile=args[1]
   print "creating chain..."
   # create a chain with all files in the list
-  chain = TChain(options.tree)
+  chain = TChain(opts.tree)
   for line in fileList:
     chain.Add(line)
   print "...done"
@@ -128,7 +129,7 @@ if __name__ == "__main__":
 
 
   # prepare prescale tables
-  if options.isData:
+  if opts.isData:
     prescaleTables={}
     prescaleTables["30"] = Prescales("data/prescalesHLT_BTagMu_DiJet20_Mu5.txt")
     prescaleTables["31"] = Prescales("data/prescalesHLT_BTagMu_DiJet40_Mu5.txt")
@@ -144,15 +145,15 @@ if __name__ == "__main__":
                      chain)
     crossSection = CrossSection("data/xsectionFilter.txt")                 
 
-
+  
 
   i=0
   passed=0
   for event in chain:
     try:
-  # event weight  
+      # event weight  
       weight=1.
-      if (not options.isData):
+      if (not opts.isData):
         mcweight = event.mcweight 
         weight = weight*mcweight
         npv = event.nPV
@@ -160,54 +161,76 @@ if __name__ == "__main__":
         # PU weight
         weight = weight*pileup.getWeight(npu)
         # xsec weight
-        weight = weight*crossSection.getWeight(chain, options.lumi*1000.)
+        weight = weight*crossSection.getWeight(chain, opts.lumi*1000.)
 
       i=i+1
       if (i%1000==0):
         sys.stdout.write("\rprocessing event %d" %i)
         sys.stdout.flush()
 
-  # global event selection    
+      # global event selection    
       if not (eventsel(event)): continue
-
-  # prepare lists with jets and leptons    
+      # prepare lists with jets and leptons    
       nJet=event.nJet
       nPFMuon=event.nPFMuon
       jets=[]
       for IJ in range(nJet):
         jet=Jet(event,IJ)
-        if (jet.fourMomentum.Pt()>30. and abs(jet.fourMomentum.Eta()<2.4)):
+        if (jet.fourMomentum.Pt()>20. and abs(jet.fourMomentum.Eta()<2.4)):
           jets.append(jet)
       muons=[]
       for IM in range(nPFMuon):
         muon=Muon(event,IM)
         if (muon.fourMomentum.Pt()>5. and abs(muon.fourMomentum.Eta()<2.4)):
           muons.append(muon)
-          
-  # at least one jet matching an identified muon    
-      matchedMuon=False
-      for muon in muons:
-        if not muon.passMuId(): continue
-        for jet in jets:
-          if muon.match(jet):
-             matchedMuon=True
-             break
-      if not matchedMuon: continue
-  # trigger selection    
-      if options.isData:
-        triggers=[]
-        for itrig in range(30, 36):
-          if passTrigger(event, itrig) and itrig != 34: ##removed 170 for the moment as it was not available for the whole period
-            triggers.append(itrig)
-        if len(triggers) == 0: continue
 
-        #sort from lowest prescale to highest prescale
-        triggers.sort(reverse=True)
+      # the following is needed to decide how to 
+      # assign pt bins to Triggers
+      nJets=[0, 0, 0, 0, 0] 
+      nMuJets=[0, 0, 0, 0, 0]
+      atLeastOneMatchedMuon=False
+      for jet in jets:
+        matched=False
+        for muon in muons:
+          if muon.passMuId() and muon.match(jet):
+            atLeastOneMatchedMuon = True
+            matched = True
+            break
+            
+        if (jet.fourMomentum.Pt()>30. and jet.fourMomentum.Pt()<50): nJets[0]=nJets[0]+1
+        if (jet.fourMomentum.Pt()>50. and jet.fourMomentum.Pt()<80): nJets[1]=nJets[1]+1
+        if (jet.fourMomentum.Pt()>80. and jet.fourMomentum.Pt()<120): nJets[2]=nJets[2]+1
+        if (jet.fourMomentum.Pt()>120. and jet.fourMomentum.Pt()<320): nJets[3]=nJets[3]+1
+        if (jet.fourMomentum.Pt()>320.) : nJets[4]=nJets[4]+1
+        
+        if (jet.fourMomentum.Pt()>30. and jet.fourMomentum.Pt()<50 and matched): nMuJets[0]=nMuJets[0]+1 
+        if (jet.fourMomentum.Pt()>50. and jet.fourMomentum.Pt()<80 and matched): nMuJets[1]=nMuJets[1]+1
+        if (jet.fourMomentum.Pt()>80. and jet.fourMomentum.Pt()<120 and matched): nMuJets[2]=nMuJets[2]+1
+        if (jet.fourMomentum.Pt()>120. and jet.fourMomentum.Pt()<320 and matched): nMuJets[3]=nMuJets[3]+1
+        if (jet.fourMomentum.Pt()>320. and matched) : nMuJets[4]=nMuJets[4]+1 
+        
+      if not atLeastOneMatchedMuon: continue
+      # trigger selection    
+      triggers=[]
+      for itrig in range(30, 36):
+        if passTrigger(event, itrig) and itrig != 34: ##removed 170 for the moment as it was not available for the whole period
+          triggers.append(itrig)
+      if len(triggers) == 0: continue
+      triggerPtBin=0
+      if ( nJets[0] >= 2 and nMuJets[0] >= 1 )  : triggerPtBin=30
+      if ( nJets[1] >= 2 and nMuJets[1] >= 1 )  : triggerPtBin=31
+      if ( nJets[2] >= 2 and nMuJets[2] >= 1 )  : triggerPtBin=32
+      if ( nJets[3] >= 2 and nMuJets[3] >= 1 ): triggerPtBin=33
+      if ( nJets[4] > 0 and nMuJets[4] >= 1 ) : triggerPtBin=35
+
+
+      if triggerPtBin not in triggers: continue
+      if opts.isData:
         #get the prescale weight from the first trigger in the list
-        weight = weight*prescaleTables[str(triggers[0])].getPrescaleWeight(event.Run, event.LumiBlock)
+        weight = weight*prescaleTables[str(triggerPtBin)].getPrescaleWeight(event.Run, event.LumiBlock)
 
       passed +=1
-  # loop over jets, apply jet specific categorization and fill plots   
+      # loop over jets, apply jet specific categorization and fill plots   
       for IJ in range(nJet):
         for cut in cuts.keys():
           if cutFunctions[cut](event, IJ):

@@ -25,12 +25,16 @@ class Prescales:
     if str(run) in self.data.keys():
       prescaleTable = self.data[str(run)]
       distance=999999
-      closest="0"
+      closest="1"
       for ls in prescaleTable.keys():
         if lumi-int(ls)>0 and lumi-int(ls)<distance:
           distance = lumi-int(ls)
           closest = ls
-      return prescaleTable[closest]      
+      if closest != "0":    
+        return prescaleTable[closest]      
+      else:
+        print "Warning: prescale table requested for ls 0. This should not happen. Run", run, "lumi", lumi, "file", self.csvFile 
+        return 1.
 
     else:
       print "this run was not found for this trigger"

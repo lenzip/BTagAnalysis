@@ -8,10 +8,10 @@ variables["JP"] = {
 }          
 
 variables["PT"] = {
-  "expression": "event.Jet_pt[IJ]",
-  "xmin": 0,
-  "xmax": 1000,
-  "nbins": 1000
+  "expression": "min(event.Jet_pt[IJ], 599)",
+  "xmin": 20,
+  "xmax": 600,
+  "nbins": 60
 }
 
 activeBranches.extend([
