@@ -121,7 +121,7 @@ if __name__ == "__main__":
   print "booking histos..."
   outFile, histos = book(outputFile, variables, cuts)
   print "...done"
-  
+
   # disable all branches, then reenable only the used ones
   chain.SetBranchStatus("*", 0)
   for branch in activeBranches:
@@ -137,16 +137,13 @@ if __name__ == "__main__":
     prescaleTables["33"] = Prescales("data/prescalesHLT_BTagMu_DiJet110_Mu5.txt")
     prescaleTables["34"] = Prescales("data/prescalesHLT_BTagMu_DiJet170_Mu5.txt")
     prescaleTables["35"] = Prescales("data/prescalesHLT_BTagMu_Jet300_Mu5.txt")
- 
+
   else:
     pileup = Pileup(["data/PileupHistogram_Full2016_271036-278808_69p2mb_Rereco.root",
                      "data/PileupHistogram_Full2016_278820-284044_69p2mb_Rereco.root"],
                      [0.1, 0.9],
                      chain)
     crossSection = CrossSection("data/xsectionFilter.txt")                 
-
-  
-
   i=0
   passed=0
   for event in chain:
