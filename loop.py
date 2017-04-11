@@ -261,4 +261,4 @@ if __name__ == "__main__":
   print "Total events processed", i, "; passed", passed
   outFile.Write()
 
-  print passedFile
+  #print passedFile
