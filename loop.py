@@ -117,7 +117,7 @@ if __name__ == "__main__":
   # create a chain with all files in the list
   chain = TChain(opzioni.tree)
   for line in fileList:
-    chain.Add(line)
+    chain.Add(line.rstrip('\n'))
   print "...done"
 
   #skim the chain according to the gloval event selection
