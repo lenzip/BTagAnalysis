@@ -10,10 +10,10 @@ ptbins=[20., 30., 50., 70., 100., 140., 200., 300., 670., 1000.]
 
 # algorithms for which SF are to be computed and corresponding working points
 # the algorithm name must match the branch name in the BTagAnalyzer output, i.e. Jet_<algo>
-algos = ["cMVAv2"]
+algos = ["CombIVF"]
 wps={
-"cMVAv2":
-  {"L": -0.715, "M": 0.185, "T": 0.875},
+"CombIVF":
+  {"L": 0.5426, "M":  0.8484, "T":  0.9535},
 }
 
 # flavor names
@@ -42,8 +42,10 @@ for ipt in range(len(ptbins)-1):
   baseCutName = "ptbin_"+str(ptmin)+"-"+str(ptmax)
   
   cuts[baseCutName] = "((event.Jet_pt[IJ]>"+ptmin+" and event.Jet_pt[IJ]<"+ptmax+")"+ \
-                               " and (abs(event.Jet_eta[IJ])<2.4))"
+                               " and (abs(event.Jet_eta[IJ])<2.4) and (event.Jet_Proba[IJ] != 0))"
   
+  cuts[baseCutName+"_JP0"] = cuts[baseCutName] + "*(event.Jet_Proba[IJ]==0)"
+
   for algo in algos:
     for wp in wps[algo].keys():
       baseCutNameAndTagger=baseCutName+"_"+algo+wp
@@ -63,7 +65,9 @@ for ipt in range(len(ptbins)-1):
     for algo in algos:
       for wp in wps[algo].keys():
         baseCutNameAndFlavorAndTagger=baseCutNameAndFlavor+"_"+algo+wp
-        cuts[baseCutNameAndFlavorAndTagger] = cuts[baseCutNameAndFlavor] + "*(event.Jet_"+algo+"[IJ]>"+str(wps[algo][wp])+ ")"                          
+        cuts[baseCutNameAndFlavorAndTagger] = cuts[baseCutNameAndFlavor] + "*(event.Jet_"+algo+"[IJ]>"+str(wps[algo][wp])+ ")"                         
+        baseCutNameAndFlavorAndTaggerFail = baseCutNameAndFlavorAndTagger+"_Fail"
+        cuts[baseCutNameAndFlavorAndTaggerFail] = cuts[baseCutNameAndFlavor] + "*(event.Jet_"+algo+"[IJ]<="+str(wps[algo][wp])+ ")"
 
 # now transform the strings representing each cut in a 
 # lambda function of the event and of the Jet number (IJ)

@@ -13,10 +13,12 @@ class Muon:
     self.nMatched = event.PFMuon_nMatched[index]
     self.chi2 = event.PFMuon_chi2[index]
     self.chi2Tk = event.PFMuon_chi2Tk[index]
+    self.IdxJet = event.PFMuon_IdxJet[index]
+    self.index = index
 
   def passMuId(self):
     if (self.fourMomentum.Pt() < 5): return False
-    if (abs(self.fourMomentum.Eta() > 2.4)): return False
+    if (abs(self.fourMomentum.Eta()) > 2.4): return False
     if (self.isGlobal == 0): return False
     if (self.nMuHit==0): return False
     if (self.nTkHit<11): return False
@@ -28,6 +30,9 @@ class Muon:
     return True
 
   def match(self, jet):
-    if self.fourMomentum.DeltaR(jet.fourMomentum) < 0.4:
+    if self.fourMomentum.DeltaR(jet.fourMomentum) < 0.4 and self.IdxJet == jet.index:
+      #print "muon", self.index, "matching with jet", jet.index
+      #self.fourMomentum.Print()
+      #jet.fourMomentum.Print()
       return True
     return False  

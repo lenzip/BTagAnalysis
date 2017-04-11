@@ -26,6 +26,7 @@ def book(outFileName, variables, cuts):
     for cutname in cuts.keys():
       hname = varname+"__"+cutname
       h = TH1F(hname, hname, variables[varname]['nbins'], variables[varname]['xmin'], variables[varname]['xmax'])
+      h.Sumw2()
       histos[varname][cutname] = h
 
   return outFile, histos    
@@ -70,20 +71,26 @@ if __name__ == "__main__":
   "PFMuon_nMatched",
   "PFMuon_chi2",
   "PFMuon_chi2Tk",
+  "PFMuon_IdxJet",
   'nPFMuon',
   'PFMuon_pt',
   'PFMuon_eta',
   'PFMuon_phi',
+  'Jet_pt',
+  'Jet_phi',
+  'Jet_eta',
   'nBitTrigger',
   'BitTrigger',
   'Run',
   'LumiBlock',
+  'Evt',
   'mcweight',
   'nPUtrue',
   'nPV']
   )
 
   cutsFile = opts.cutsFile
+  passedFile=""
 
   if os.path.exists(cutsFile) :
     handle = open(cutsFile,'r')
@@ -148,6 +155,8 @@ if __name__ == "__main__":
   passed=0
   for event in chain:
     try:
+      #if event.Evt != 615322131 and event.Evt != 637075692:
+      #  continue
       # event weight  
       weight=1.
       if (not opts.isData):
@@ -167,14 +176,17 @@ if __name__ == "__main__":
 
       # global event selection    
       if not (eventsel(event)): continue
+      #print "passed global sel"
       # prepare lists with jets and leptons    
       nJet=event.nJet
       nPFMuon=event.nPFMuon
       jets=[]
       for IJ in range(nJet):
         jet=Jet(event,IJ)
-        if (jet.fourMomentum.Pt()>20. and abs(jet.fourMomentum.Eta()<2.4)):
+        if (jet.fourMomentum.Pt()>20. and abs(jet.fourMomentum.Eta())<2.4):# and jet.Jet_Proba>0):
           jets.append(jet)
+      #for jet in jets:
+      #  print jet.index, jet.fourMomentum.Pt(),jet.fourMomentum.Eta(),jet.Jet_Proba
       muons=[]
       for IM in range(nPFMuon):
         muon=Muon(event,IM)
@@ -194,39 +206,48 @@ if __name__ == "__main__":
             matched = True
             break
             
-        if (jet.fourMomentum.Pt()>30. and jet.fourMomentum.Pt()<50): nJets[0]=nJets[0]+1
+        if (jet.fourMomentum.Pt()>20. and jet.fourMomentum.Pt()<50): nJets[0]=nJets[0]+1
         if (jet.fourMomentum.Pt()>50. and jet.fourMomentum.Pt()<80): nJets[1]=nJets[1]+1
         if (jet.fourMomentum.Pt()>80. and jet.fourMomentum.Pt()<120): nJets[2]=nJets[2]+1
         if (jet.fourMomentum.Pt()>120. and jet.fourMomentum.Pt()<320): nJets[3]=nJets[3]+1
         if (jet.fourMomentum.Pt()>320.) : nJets[4]=nJets[4]+1
         
-        if (jet.fourMomentum.Pt()>30. and jet.fourMomentum.Pt()<50 and matched): nMuJets[0]=nMuJets[0]+1 
+        if (jet.fourMomentum.Pt()>20. and jet.fourMomentum.Pt()<50 and matched): nMuJets[0]=nMuJets[0]+1 
         if (jet.fourMomentum.Pt()>50. and jet.fourMomentum.Pt()<80 and matched): nMuJets[1]=nMuJets[1]+1
         if (jet.fourMomentum.Pt()>80. and jet.fourMomentum.Pt()<120 and matched): nMuJets[2]=nMuJets[2]+1
         if (jet.fourMomentum.Pt()>120. and jet.fourMomentum.Pt()<320 and matched): nMuJets[3]=nMuJets[3]+1
         if (jet.fourMomentum.Pt()>320. and matched) : nMuJets[4]=nMuJets[4]+1 
         
       if not atLeastOneMatchedMuon: continue
+      #print "at east one matched muon"
       # trigger selection    
       triggers=[]
       for itrig in range(30, 36):
         if passTrigger(event, itrig) and itrig != 34: ##removed 170 for the moment as it was not available for the whole period
           triggers.append(itrig)
       if len(triggers) == 0: continue
-      triggerPtBin=0
-      if ( nJets[0] >= 2 and nMuJets[0] >= 1 )  : triggerPtBin=30
-      if ( nJets[1] >= 2 and nMuJets[1] >= 1 )  : triggerPtBin=31
-      if ( nJets[2] >= 2 and nMuJets[2] >= 1 )  : triggerPtBin=32
-      if ( nJets[3] >= 2 and nMuJets[3] >= 1 ): triggerPtBin=33
-      if ( nJets[4] > 0 and nMuJets[4] >= 1 ) : triggerPtBin=35
+      triggerPtBins=[]
+      if ( nJets[0] >= 2 and nMuJets[0] >= 1 )  : triggerPtBins.append(30)
+      if ( nJets[1] >= 2 and nMuJets[1] >= 1 )  : triggerPtBins.append(31)
+      if ( nJets[2] >= 2 and nMuJets[2] >= 1 )  : triggerPtBins.append(32)
+      if ( nJets[3] >= 2 and nMuJets[3] >= 1 )  : triggerPtBins.append(33)
+      if ( nJets[4] > 0 and nMuJets[4] >= 1 )   : triggerPtBins.append(35)
+      #print nJets
+      #print nMuJets
 
-
-      if triggerPtBin not in triggers: continue
+      #find matches between triggers that actually fired and pt bins
+      matches=set(triggers).intersection(triggerPtBins)
+      matches=list(matches)
+      #print triggers, triggerPtBins, matches
+      if len(matches)==0: continue
+      #print "triggered"
       if opts.isData:
         #get the prescale weight from the first trigger in the list
-        weight = weight*prescaleTables[str(triggerPtBin)].getPrescaleWeight(event.Run, event.LumiBlock)
+        matchesSorted=matches.sort(reverse=True)
+        weight = weight*prescaleTables[str(matchesSorted[0])].getPrescaleWeight(event.Run, event.LumiBlock)
 
       passed +=1
+      passedFile += "%6d %6d %10d  %+2d  %+4.2f %+4.2f %+4.2f \n" % (event.Run, event.LumiBlock, event.Evt , event.nJet, jets[0].fourMomentum.Pt(), jets[0].fourMomentum.Eta(), jets[0].fourMomentum.Phi());
       # loop over jets, apply jet specific categorization and fill plots   
       for IJ in range(nJet):
         for cut in cuts.keys():
@@ -238,4 +259,6 @@ if __name__ == "__main__":
       break
   print "\n"
   print "Total events processed", i, "; passed", passed
-  outFile.Write()          
+  outFile.Write()
+
+  print passedFile

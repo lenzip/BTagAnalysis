@@ -5,3 +5,5 @@ class Jet:
     l4 = TLorentzVector()
     l4.SetPtEtaPhiM(event.Jet_pt[index], event.Jet_eta[index], event.Jet_phi[index], 0)
     self.fourMomentum = l4
+    self.index = index
+    self.Jet_Proba = event.Jet_Proba[index]
