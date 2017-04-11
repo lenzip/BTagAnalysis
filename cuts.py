@@ -50,6 +50,8 @@ for ipt in range(len(ptbins)-1):
     for wp in wps[algo].keys():
       baseCutNameAndTagger=baseCutName+"_"+algo+wp
       cuts[baseCutNameAndTagger] = cuts[baseCutName] + "*(event.Jet_"+algo+"[IJ]>"+str(wps[algo][wp])+ ")"
+      baseCutNameAndTaggerFail=baseCutNameAndTagger+"_Fail"
+      cuts[baseCutNameAndTaggerFail] = cuts[baseCutName] + "*(event.Jet_"+algo+"[IJ]<="+str(wps[algo][wp])+ ")"
                                
   for flavor in flavors:
     if flavor == "l":
