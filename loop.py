@@ -43,7 +43,7 @@ def passTrigger(event,trigIdx):
 #######################################
 
 if __name__ == "__main__":
-  usage="usage: %prog [opts] inputList outputFile"
+  usage="usage: %prog [opzioni] inputList outputFile"
     
   parser = OptionParser(usage=usage)
   parser.add_option("-t", action="store", help="tree name from BTagAnalyzer (default=btagana/ttree)", default="btagana/ttree", dest="tree")
@@ -52,7 +52,8 @@ if __name__ == "__main__":
   parser.add_option("-d", action="store_true", help="if it is data apply trigger (default false (i.e. MC))", default=False, dest="isData")
   parser.add_option("-l", action="store", help="data luminosity in fb-1 (default=35.9)", default=35.9, dest="lumi")
 
-  (opts, args) = parser.parse_args()
+
+  (opzioni, args) = parser.parse_args()
   if len(args) != 2:
     print parser.print_help() 
     sys.exit(1)
@@ -89,7 +90,7 @@ if __name__ == "__main__":
   'nPV']
   )
 
-  cutsFile = opts.cutsFile
+  cutsFile = opzioni.cutsFile
   passedFile=""
 
   if os.path.exists(cutsFile) :
@@ -100,7 +101,7 @@ if __name__ == "__main__":
     print "!!! ERROR file ", cutsFile, " does not exist."
     sys.exit(1)
 
-  variablesFile = opts.variablesFile  
+  variablesFile = opzioni.variablesFile  
   if os.path.exists(variablesFile) :
     handle = open(variablesFile,'r')
     exec(handle)
@@ -114,7 +115,7 @@ if __name__ == "__main__":
   outputFile=args[1]
   print "creating chain..."
   # create a chain with all files in the list
-  chain = TChain(opts.tree)
+  chain = TChain(opzioni.tree)
   for line in fileList:
     chain.Add(line)
   print "...done"
@@ -136,7 +137,7 @@ if __name__ == "__main__":
 
 
   # prepare prescale tables
-  if opts.isData:
+  if opzioni.isData:
     prescaleTables={}
     prescaleTables["30"] = Prescales("data/prescalesHLT_BTagMu_DiJet20_Mu5.txt")
     prescaleTables["31"] = Prescales("data/prescalesHLT_BTagMu_DiJet40_Mu5.txt")
@@ -157,9 +158,10 @@ if __name__ == "__main__":
     try:
       #if event.Evt != 615322131 and event.Evt != 637075692:
       #  continue
-      # event weight  
+      # event weight
+      
       weight=1.
-      if (not opts.isData):
+      if (not opzioni.isData):
         mcweight = event.mcweight 
         weight = weight*mcweight
         npv = event.nPV
@@ -167,7 +169,7 @@ if __name__ == "__main__":
         # PU weight
         weight = weight*pileup.getWeight(npu)
         # xsec weight
-        weight = weight*crossSection.getWeight(chain, opts.lumi*1000.)
+        weight = weight*crossSection.getWeight(chain, opzioni.lumi*1000.)
 
       i=i+1
       if (i%1000==0):
@@ -241,10 +243,13 @@ if __name__ == "__main__":
       #print triggers, triggerPtBins, matches
       if len(matches)==0: continue
       #print "triggered"
-      if opts.isData:
+      #print puppapuppa
+      if opzioni.isData:
         #get the prescale weight from the first trigger in the list
-        matchesSorted=matches.sort(reverse=True)
-        weight = weight*prescaleTables[str(matchesSorted[0])].getPrescaleWeight(event.Run, event.LumiBlock)
+        #print ">>>>", matches
+        matches.sort(reverse=True)
+        #print "<<<<", matches
+        weight = weight*prescaleTables[str(matches[0])].getPrescaleWeight(event.Run, event.LumiBlock)
 
       passed +=1
       passedFile += "%6d %6d %10d  %+2d  %+4.2f %+4.2f %+4.2f \n" % (event.Run, event.LumiBlock, event.Evt , event.nJet, jets[0].fourMomentum.Pt(), jets[0].fourMomentum.Eta(), jets[0].fourMomentum.Phi());
