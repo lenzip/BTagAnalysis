@@ -42,9 +42,9 @@ for ipt in range(len(ptbins)-1):
   baseCutName = "ptbin_"+str(ptmin)+"-"+str(ptmax)
   
   cuts[baseCutName] = "((event.Jet_pt[IJ]>"+ptmin+" and event.Jet_pt[IJ]<"+ptmax+")"+ \
-                               " and (abs(event.Jet_eta[IJ])<2.4) and (event.Jet_Proba[IJ] != 0))"
+                               " and (abs(event.Jet_eta[IJ])<2.4) and (event.Jet_Proba[IJ] > 0))"
   
-  cuts[baseCutName+"_JP0"] = cuts[baseCutName] + "*(event.Jet_Proba[IJ]==0)"
+  cuts[baseCutName+"_JP0"] = cuts[baseCutName] + "*(event.Jet_Proba[IJ]<=0)"
 
   for algo in algos:
     for wp in wps[algo].keys():
