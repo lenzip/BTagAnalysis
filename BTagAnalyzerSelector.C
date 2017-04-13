@@ -163,7 +163,7 @@ void BTagAnalyzerSelector::GluonSplitting(int ij)
   gluonSplittingWeightDo[ij] = sfDo;
 
 }
-/*
+
 // b fragmentation sys
 void BTagAnalyzerSelector::bFrag(int ij)
 {
@@ -226,7 +226,7 @@ void BTagAnalyzerSelector::bFrag(int ij)
   }
    
 }
-
+/*
 // c->D fragmentation sys
 float BTagAnalyzerSelector::cdFrag(int ij,int flavch)
 {       
