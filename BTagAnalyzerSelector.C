@@ -27,7 +27,9 @@
 #include "TLorentzVector.h"
 #include <TH2.h>
 #include <TStyle.h>
+#include <iostream>
 
+using namespace std;
 
 void BTagAnalyzerSelector::Begin(TTree * /*tree*/)
 {
@@ -70,12 +72,14 @@ Bool_t BTagAnalyzerSelector::Process(Long64_t entry)
    // The return value is currently not used.
    cleanForNewEvent();
    fChain->GetEntry(entry);
-
+   //cout << "njets "<< nJet  << endl;
+  
    for (int ij = 0; ij < nJet; ++ij){
       GluonSplitting(ij);     
    }
 
-   fillNewBranches(); 
+   newTree->Fill(); 
+   //fillNewBranches(); 
 
    return kTRUE;
 }
@@ -101,7 +105,13 @@ void BTagAnalyzerSelector::GluonSplitting(int ij)
 {
   float sfUp = 1.;
   float sfDo = 1.;
-  int flavch = Jet_flavour[ij];
+  int flavch = 0;
+  int jFlavour = abs(Jet_flavour[ij]);
+  if( jFlavour == 5 )  flavch = 1;
+  if( jFlavour == 4 )  flavch = 2;
+  if( jFlavour == 1 || jFlavour == 21 )  flavch = 3;
+  if( jFlavour == 0 ) flavch = 3;
+
   float drMin = 0.4;   
    
   bool GSPc = false, GSPb = false;

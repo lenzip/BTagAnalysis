@@ -137,8 +137,10 @@ if __name__ == "__main__":
     systHelper.Init(chain)
     for iEvent in range(chain.GetEntries()):
       systHelper.Process(iEvent)
-    
+    chain.AddFriend(systHelper.getHelperTree())
     print "...done"
+
+
 
   #skim the chain according to the gloval event selection
   #print "skimming..."
@@ -204,7 +206,6 @@ if __name__ == "__main__":
       nPFMuon=event.nPFMuon
       jets=[]
       for IJ in range(nJet):
-        print event.gluonSplittingWeightUp[IJ], event.gluonSplittingWeightDo[IJ]
         jet=Jet(event,IJ)
         if (jet.fourMomentum.Pt()>20. and abs(jet.fourMomentum.Eta())<2.4):# and jet.Jet_Proba>0):
           jets.append(jet)

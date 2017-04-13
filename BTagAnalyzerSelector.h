@@ -283,6 +283,8 @@ public :
    Float_t         TagVarCSV_trackEtaRel[22];   //[nTrkEtaRelTagVarCSV]
 
    //new branches to add
+   TTree* newTree;
+
    Float_t         gluonSplittingWeightUp[100];
    Float_t         gluonSplittingWeightDo[100];
 
@@ -570,6 +572,7 @@ public :
    void cleanForNewEvent();
    void fillNewBranches();
    void GluonSplitting(int ij);
+   TTree* getHelperTree() {return newTree;}
 
    ClassDef(BTagAnalyzerSelector,0);
 };
@@ -853,9 +856,10 @@ void BTagAnalyzerSelector::Init(TTree *tree)
    fChain->SetBranchAddress("TagVarCSV_trackEtaRel", TagVarCSV_trackEtaRel, &b_TagVarCSV_trackEtaRel);
 
 
-   //Add branches 
-   b_gluonSplittingWeightUp = fChain->Branch("gluonSplittingWeightUp", gluonSplittingWeightUp, "gluonSplittingWeightUp[nJet]/F");
-   b_gluonSplittingWeightDo = fChain->Branch("gluonSplittingWeightDo", gluonSplittingWeightDo, "gluonSplittingWeightDo[nJet]/F");
+   //Add branches
+   newTree = new TTree("helper", "helper");
+   b_gluonSplittingWeightUp = newTree->Branch("gluonSplittingWeightUp", gluonSplittingWeightUp, "gluonSplittingWeightUp[100]/F");
+   b_gluonSplittingWeightDo = newTree->Branch("gluonSplittingWeightDo", gluonSplittingWeightDo, "gluonSplittingWeightDo[100]/F");
 }
 void BTagAnalyzerSelector::cleanForNewEvent(){
   for (unsigned int i = 0; i < 100; ++i){
