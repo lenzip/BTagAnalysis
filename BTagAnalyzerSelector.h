@@ -19,6 +19,10 @@
 
 class BTagAnalyzerSelector : public TSelector {
 public :
+
+   // data members needed for computing systematics
+   float BTemplateCorrections[100][20][2];
+
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
 
    // Declaration of leaf types
@@ -287,6 +291,11 @@ public :
 
    Float_t         gluonSplittingWeightUp[100];
    Float_t         gluonSplittingWeightDo[100];
+   Float_t         bFragmentationWeightUp[100];
+   Float_t         bFragmentationWeightDo[100];
+   Float_t         cdFragmentationWeightUp[100];
+   Float_t         cdFragmentationWeightDo[100];
+      
 
    // List of branches
    TBranch        *b_nBitTrigger;   //!
@@ -552,9 +561,15 @@ public :
    //new branches to add
    TBranch        *b_gluonSplittingWeightUp;
    TBranch        *b_gluonSplittingWeightDo;
+   TBranch        *b_bFragmentationWeightUp;
+   TBranch        *b_bFragmentationWeightDo;
+   TBranch        *b_cdFragmentationWeightUp;
+   TBranch        *b_cdFragmentationWeightDo;
+      
 
 
-   BTagAnalyzerSelector(TTree * /*tree*/ =0) : fChain(0) { }
+
+   BTagAnalyzerSelector(TTree* tree = 0); 
    virtual ~BTagAnalyzerSelector() { }
    virtual Int_t   Version() const { return 2; }
    virtual void    Begin(TTree *tree);
@@ -570,8 +585,9 @@ public :
    virtual void    SlaveTerminate();
    virtual void    Terminate();
    void cleanForNewEvent();
-   void fillNewBranches();
    void GluonSplitting(int ij);
+   void bFrag(int ij);
+   void cdFrag(int ij);
    TTree* getHelperTree() {return newTree;}
 
    ClassDef(BTagAnalyzerSelector,0);
@@ -860,17 +876,21 @@ void BTagAnalyzerSelector::Init(TTree *tree)
    newTree = new TTree("helper", "helper");
    b_gluonSplittingWeightUp = newTree->Branch("gluonSplittingWeightUp", gluonSplittingWeightUp, "gluonSplittingWeightUp[100]/F");
    b_gluonSplittingWeightDo = newTree->Branch("gluonSplittingWeightDo", gluonSplittingWeightDo, "gluonSplittingWeightDo[100]/F");
+   b_bFragmentationWeightUp = newTree->Branch("bFragmentationWeightUp", bFragmentationWeightUp, "bFragmentationWeightUp[100]/F");
+   b_bFragmentationWeightDo = newTree->Branch("bFragmentationWeightDo", bFragmentationWeightDo, "bFragmentationWeightDo[100]/F");
+   b_cdFragmentationWeightUp = newTree->Branch("cdFragmentationWeightUp", cdFragmentationWeightUp, "cdFragmentationWeightUp[100]/F");
+   b_cdFragmentationWeightDo = newTree->Branch("cdFragmentationWeightDo", cdFragmentationWeightDo, "cdFragmentationWeightDo[100]/F");
+
 }
 void BTagAnalyzerSelector::cleanForNewEvent(){
   for (unsigned int i = 0; i < 100; ++i){
     gluonSplittingWeightUp[i] = -9999;
     gluonSplittingWeightDo[i] = -9999;
+    bFragmentationWeightUp[i] = -9999;
+    bFragmentationWeightDo[i] = -9999;
+    cdFragmentationWeightUp[i] = -9999;
+    cdFragmentationWeightDo[i] = -9999;
   }
-}
-
-void BTagAnalyzerSelector::fillNewBranches(){
-  b_gluonSplittingWeightUp->Fill();
-  b_gluonSplittingWeightDo->Fill();
 }
 
 Bool_t BTagAnalyzerSelector::Notify()

@@ -28,8 +28,48 @@
 #include <TH2.h>
 #include <TStyle.h>
 #include <iostream>
+#include <fstream>
 
 using namespace std;
+
+BTagAnalyzerSelector::BTagAnalyzerSelector(TTree * tree) : fChain(0){
+  int nPtRelPtBins = 15;
+  TString PtRelPtBin[] = {
+     "Pt2030", "Pt3040", "Pt4050", "Pt5060", "Pt6070"
+     , "Pt7080", "Pt80100", "Pt100120", "Pt120160", "Pt160210"
+     , "Pt210260", "Pt260320", "Pt320400", "Pt400500", "Pt500" 
+  };
+  
+  for( int ptb=0;ptb<nPtRelPtBins;ptb++ ){      
+     for(int ib=0;ib<100;ib++ ) {
+        BTemplateCorrections[ib][ptb][0] = 1.;
+        BTemplateCorrections[ib][ptb][1] = 1.;
+     }
+     
+     std::ifstream MnusCorrectionsFile;
+     MnusCorrectionsFile.open("data/PtRel/EnergyFraction_" + PtRelPtBin[ptb] + "_m5.txt");
+     while( MnusCorrectionsFile )
+       {
+        float xBin, efcorr;
+        MnusCorrectionsFile >> xBin >> efcorr;
+        if ( efcorr > 4. ) efcorr = 1.;
+        int ib = int(xBin/0.02);
+        BTemplateCorrections[ib][ptb][0] = efcorr;
+       }
+     
+     std::ifstream PlusCorrectionsFile; 
+     PlusCorrectionsFile.open("data/PtRel/EnergyFraction_" + PtRelPtBin[ptb] + "_p5.txt");
+     while( PlusCorrectionsFile )
+       {
+        float xBin, efcorr;
+        PlusCorrectionsFile >> xBin >> efcorr;
+        if ( efcorr > 4. ) efcorr = 1.;
+        int ib = int(xBin/0.02);
+        BTemplateCorrections[ib][ptb][1] = efcorr;
+       }
+  }
+}
+
 
 void BTagAnalyzerSelector::Begin(TTree * /*tree*/)
 {
@@ -75,7 +115,9 @@ Bool_t BTagAnalyzerSelector::Process(Long64_t entry)
    //cout << "njets "<< nJet  << endl;
   
    for (int ij = 0; ij < nJet; ++ij){
-      GluonSplitting(ij);     
+      GluonSplitting(ij);    
+      bFrag(ij);
+      cdFrag(ij);
    }
 
    newTree->Fill(); 
@@ -131,8 +173,8 @@ void BTagAnalyzerSelector::GluonSplitting(int ij)
          {
          TLorentzVector D;
          D.SetPtEtaPhiM(DHadron_pT[k], DHadron_eta[k], DHadron_phi[k], 0.);
-      double dRqj = jet.DeltaR(D);
-      if( dRqj < 0.4 ) ndHadronsFound++;
+         double dRqj = jet.DeltaR(D);
+         if( dRqj < 0.4 ) ndHadronsFound++;
          }
        
        if( ndHadronsFound >= 2 ) GSPc = 1;
@@ -145,8 +187,8 @@ void BTagAnalyzerSelector::GluonSplitting(int ij)
          {
          TLorentzVector B;
          B.SetPtEtaPhiM(BHadron_pT[k], BHadron_eta[k], BHadron_phi[k], 0.);
-      double dRqj = jet.DeltaR(B);;
-      if( dRqj < 0.4 ) nbHadronsFound++;
+         double dRqj = jet.DeltaR(B);;
+         if( dRqj < 0.4 ) nbHadronsFound++;
          }
        
        if( nbHadronsFound >= 2 ) GSPb = 1;
@@ -167,14 +209,27 @@ void BTagAnalyzerSelector::GluonSplitting(int ij)
 // b fragmentation sys
 void BTagAnalyzerSelector::bFrag(int ij)
 {
-  float sf = 1.;        
-  int flavch = Jet_flavour[ij];
+  float sfUp = 1.;       
+  float sfDo = 1.;
+  int flavch = 0;
+  
+  int jFlavour = abs(Jet_flavour[ij]);
+  if( jFlavour == 5 )  flavch = 1;
+  if( jFlavour == 4 )  flavch = 2;
+  if( jFlavour == 1 || jFlavour == 21 )  flavch = 3;
+  if( jFlavour == 0 ) flavch = 3;
+ 
+
   float drMin = 0.4;   
   float jPT = Jet_pt[ij];
   float jeta = Jet_eta[ij];
   float jphi = Jet_phi[ij];
   float WeightBFrag = 1.;
   float EnergyFraction = 0.; 
+  
+  TLorentzVector jet;
+  jet.SetPtEtaPhiM(jPT, jeta, jphi, 0.); 
+
   int iB = -1, iptBin = 0, efbin = -1;
   if( flavch == 1  )  {
        if( jPT > 500 ) iptBin = 14;
@@ -194,47 +249,59 @@ void BTagAnalyzerSelector::bFrag(int ij)
        else                 iptBin =  0;
        
        float B_Mass = 0.;
-       for( int ib=0;ib<nBHadrons;ib++ )
-         {
-      float drB = helper->DeltaR(jeta,
-               jphi,
-               BHadron_eta[ib], 
-               BHadron_phi[ib]);
+       for( int ib=0;ib<nBHadrons;ib++ ){
+         
+          TLorentzVector B;
+          B.SetPtEtaPhiM(BHadron_pT[ib], BHadron_eta[ib], BHadron_phi[ib], BHadron_mass[ib]);
+          float drB = jet.DeltaR(B);
       
-      if( drB < drMin )
-        {
-           if( BHadron_mass[ib] > B_Mass ) 
-       {
-          B_Mass = BHadron_mass[ib];
-          iB = ib;
-       }                                 
-        }                           
-         }
+          if( drB < drMin ){
+              if( BHadron_mass[ib] > B_Mass ) 
+              {
+                B_Mass = BHadron_mass[ib];
+                iB = ib;
+              }                                 
+          }                           
+       }
        
-       if( iB >= 0 ) 
-         {
-      EnergyFraction = BHadron_pT[iB]/Jet_genpt[ij];
-      efbin = int( EnergyFraction / 0.02 );
-      if( efbin >= 0 && efbin < 100 ) 
-        {
-           if( isys == SYS_BFRAG_DOWN ) WeightBFrag = BTemplateCorrections[efbin][iptBin][0];
-           if( isys == SYS_BFRAG_UP ) WeightBFrag = BTemplateCorrections[efbin][iptBin][1];
-        }                           
-         }
+       if( iB >= 0 ){
+          EnergyFraction = BHadron_pT[iB]/Jet_genpt[ij];
+          efbin = int( EnergyFraction / 0.02 );
+          if( efbin >= 0 && efbin < 100 ) 
+            {
+              sfUp *= BTemplateCorrections[efbin][iptBin][1];
+              sfDo *= BTemplateCorrections[efbin][iptBin][0];
+            }                           
+       }
           
-       sf *= WeightBFrag;
   }
-   
+  
+  bFragmentationWeightUp[ij] = sfUp;
+  bFragmentationWeightDo[ij] = sfDo;
+
 }
-/*
+
 // c->D fragmentation sys
-float BTagAnalyzerSelector::cdFrag(int ij,int flavch)
+void BTagAnalyzerSelector::cdFrag(int ij)
 {       
-  float sf = 1.;
+  float sfUp = 1.;
+  float sfDo = 1.;
+
+  int flavch = 0;
 
   float drMin = 0.4;   
   float jeta = Jet_eta[ij];
   float jphi = Jet_phi[ij];
+  float jpt  = Jet_pt[ij];
+
+  int jFlavour = abs(Jet_flavour[ij]);
+  if( jFlavour == 5 )  flavch = 1;
+  if( jFlavour == 4 )  flavch = 2;
+  if( jFlavour == 1 || jFlavour == 21 )  flavch = 3;
+  if( jFlavour == 0 ) flavch = 3;
+
+  TLorentzVector jet;
+  jet.SetPtEtaPhiM(jpt, jeta, jphi, 0.);
 
   if( flavch == 2 ||
       flavch == 1 )
@@ -242,40 +309,34 @@ float BTagAnalyzerSelector::cdFrag(int ij,int flavch)
        bool isDplusMu = false, isDzeroMu = false, isDsubsMu = false;
        
        int ndaughters = 0;
-       for( int k=0;k<nDHadrons;k++ )
-         {
-      double dR = helper->DeltaR(DHadron_eta[k], 
-               DHadron_phi[k], 
-               jeta,
-               jphi);
-      if( dR > drMin ) continue;
-      bool isSemiMu = false;
-      int nd = DHadron_nDaughters[k];
-      for( int kk=0;kk<nd;kk++ )
-        {
+       for( int k=0;k<nDHadrons;k++ ){
+         TLorentzVector D;
+         D.SetPtEtaPhiM(DHadron_pT[k], DHadron_eta[k], DHadron_phi[k], 0.);
+         double dR = jet.DeltaR(D); 
+         if( dR > drMin ) continue;
+         bool isSemiMu = false;
+         int nd = DHadron_nDaughters[k];
+         for( int kk=0;kk<nd;kk++ ){
            if( abs(DHadron_DaughtersPdgID[kk+ndaughters]) == 13 ) isSemiMu = true;
-        }
-      
-      ndaughters += nd;
-      
-      if( !isSemiMu ) continue;
-      if( abs(DHadron_pdgID[k]) == 411 ) isDplusMu = true;
-      if( abs(DHadron_pdgID[k]) == 421 ) isDzeroMu = true;
-      if( abs(DHadron_pdgID[k]) == 431 ) isDsubsMu = true;
          }
+      
+         ndaughters += nd;
+      
+         if( !isSemiMu ) continue;
+         if( abs(DHadron_pdgID[k]) == 411 ) isDplusMu = true;
+         if( abs(DHadron_pdgID[k]) == 421 ) isDzeroMu = true;
+         if( abs(DHadron_pdgID[k]) == 431 ) isDsubsMu = true;
+       }
        
        // weight for D->mu decay: Pythia vs PDG2013
-       if( isys == SYS_CDFRAG_DOWN )
-         {                          
-      if( isDplusMu ) sf *= 0.176 / 0.172;
-      if( isDzeroMu ) sf *= 0.067 / 0.077;
-      if( isDsubsMu ) sf *= 0.067 / 0.080;
-         }                     
+       if( isDplusMu ) sfDo *= 0.176 / 0.172;
+       if( isDzeroMu ) sfDo *= 0.067 / 0.077;
+       if( isDsubsMu ) sfDo *= 0.067 / 0.080;
    }
-   
-   return sf;
+   cdFragmentationWeightUp[ij] = sfUp;
+   cdFragmentationWeightDo[ij] = sfDo;  
 }
-
+/*
 // c fragmentation sys
 float BTagAnalyzerSelector::cFrag(int ij,int flavch)
 {
