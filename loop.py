@@ -90,6 +90,12 @@ if __name__ == "__main__":
   'nPV']
   )
 
+  if (not opzioni.isData):
+    activeBranches.extend([
+      'gluonSplittingWeightUp',
+      'gluonSplittingWeightDo',
+    ])
+
   cutsFile = opzioni.cutsFile
   passedFile=""
 
@@ -119,6 +125,20 @@ if __name__ == "__main__":
   for line in fileList:
     chain.Add(line.rstrip('\n'))
   print "...done"
+
+  if not opzioni.isData:
+    print "this is MC, adding systematic variations to the tree..."
+    try:
+      gROOT.LoadMacro('BTagAnalyzerSelector.C++g')
+    except RuntimeError:
+      gROOT.LoadMacro('BTagAnalyzerSelector.C++g')
+
+    systHelper = BTagAnalyzerSelector()
+    systHelper.Init(chain)
+    for iEvent in range(chain.GetEntries()):
+      systHelper.Process(iEvent)
+    
+    print "...done"
 
   #skim the chain according to the gloval event selection
   #print "skimming..."
@@ -159,7 +179,7 @@ if __name__ == "__main__":
       #if event.Evt != 615322131 and event.Evt != 637075692:
       #  continue
       # event weight
-      
+     
       weight=1.
       if (not opzioni.isData):
         mcweight = event.mcweight 
@@ -184,6 +204,7 @@ if __name__ == "__main__":
       nPFMuon=event.nPFMuon
       jets=[]
       for IJ in range(nJet):
+        print event.gluonSplittingWeightUp[IJ], event.gluonSplittingWeightDo[IJ]
         jet=Jet(event,IJ)
         if (jet.fourMomentum.Pt()>20. and abs(jet.fourMomentum.Eta())<2.4):# and jet.Jet_Proba>0):
           jets.append(jet)
