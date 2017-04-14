@@ -112,16 +112,16 @@ Bool_t BTagAnalyzerSelector::Process(Long64_t entry)
    // The return value is currently not used.
    cleanForNewEvent();
    fChain->GetEntry(entry);
-   //cout << "njets "<< nJet  << endl;
   
    for (int ij = 0; ij < nJet; ++ij){
       GluonSplitting(ij);    
       bFrag(ij);
       cdFrag(ij);
+      cFrag(ij);
+      Ks(ij);
    }
 
    newTree->Fill(); 
-   //fillNewBranches(); 
 
    return kTRUE;
 }
@@ -336,87 +336,101 @@ void BTagAnalyzerSelector::cdFrag(int ij)
    cdFragmentationWeightUp[ij] = sfUp;
    cdFragmentationWeightDo[ij] = sfDo;  
 }
-/*
-// c fragmentation sys
-float BTagAnalyzerSelector::cFrag(int ij,int flavch)
-{
-  float sf = 1.;
 
-  float drMin = 0.4;   
+// c fragmentation sys
+void BTagAnalyzerSelector::cFrag(int ij)
+{
+
+  float sfUp = 1.;
+  float sfDo = 1.;
+
+  int flavch = 0;
+
+  float drMin = 0.4;
   float jeta = Jet_eta[ij];
   float jphi = Jet_phi[ij];
-  if( flavch == 2 )
-    {
+  float jpt  = Jet_pt[ij];
+
+  int jFlavour = abs(Jet_flavour[ij]);
+  if( jFlavour == 5 )  flavch = 1;
+  if( jFlavour == 4 )  flavch = 2;
+  if( jFlavour == 1 || jFlavour == 21 )  flavch = 3;
+  if( jFlavour == 0 ) flavch = 3;
+
+  TLorentzVector jet;
+  jet.SetPtEtaPhiM(jpt, jeta, jphi, 0.); 
+
+  if( flavch == 2 ){
        bool hasCquark = 0;
-       for( int c=0;c<ncQuarks;c++ )
-         {
-      double dRc = helper->DeltaR(cQuark_eta[c], 
-                cQuark_phi[c], 
-                jeta,
-                jphi);
-      if( dRc < drMin ) hasCquark = 1;
-         }
+       for( int c=0;c<ncQuarks;c++ ){
+          TLorentzVector C;
+          C.SetPtEtaPhiM(cQuark_pT[c], cQuark_eta[c],cQuark_phi[c], 0.);
+          double dRc = jet.DeltaR(C); 
+          if( dRc < drMin ) hasCquark = 1;
+       }
        
-       if( hasCquark )
-         {                               
-      bool isDplus = false, isDzero = false, isDsubs = false, isDbary = false;
-      for( int k=0;k<nDHadrons;k++ )
-        {
-           double dR = helper->DeltaR(DHadron_eta[k], 
-              DHadron_phi[k], 
-              jeta, 
-              jphi);
-           if( dR > drMin ) continue;
+       if( hasCquark ){                               
+          bool isDplus = false, isDzero = false, isDsubs = false, isDbary = false;
+          for( int k=0;k<nDHadrons;k++ ){
+            TLorentzVector D;
+            D.SetPtEtaPhiM(DHadron_pT[k], DHadron_eta[k], DHadron_phi[k], DHadron_mass[k]);
+            double dR = jet.DeltaR(D); 
+            if( dR > drMin ) continue;
            
-           if( abs(DHadron_pdgID[k]) == 411 ) isDplus = true;
-           if( abs(DHadron_pdgID[k]) == 421 ) isDzero = true;
-           if( abs(DHadron_pdgID[k]) == 431 ) isDsubs = true;
-           if((abs(DHadron_pdgID[k])/1000)%10 == 4 ) isDbary = true;
-        }                      
+            if( abs(DHadron_pdgID[k]) == 411 ) isDplus = true;
+            if( abs(DHadron_pdgID[k]) == 421 ) isDzero = true;
+            if( abs(DHadron_pdgID[k]) == 431 ) isDsubs = true;
+            if((abs(DHadron_pdgID[k])/1000)%10 == 4 ) isDbary = true;
+          }                      
       
-      // weight for c->D fragmentation rate: Pythia6(!) vs PDG2008
-      if( isys == SYS_CFRAG_DOWN )
-        {
+           // weight for c->D fragmentation rate: Pythia6(!) vs PDG2008
            // DB
-           if( isDplus ) sf *= 1.37; // PDG2008(0.246+-0.020)
-           if( isDzero ) sf *= 0.91; // PDG2008(0.565+-0.032)
-           if( isDsubs ) sf *= 0.67; // PDG2008(0.080+-0.017)
+           if( isDplus ) sfDo *= 1.37; // PDG2008(0.246+-0.020)
+           if( isDzero ) sfDo *= 0.91; // PDG2008(0.565+-0.032)
+           if( isDsubs ) sfDo *= 0.67; // PDG2008(0.080+-0.017)
            // 0.185072, 0.58923, 0.115961
-        }                      
          }                          
-    }
-   
-   return sf;
+   }
+   cFragmentationWeightUp[ij] = sfUp;
+   cFragmentationWeightDo[ij] = sfDo;   
 }
 
 // K0s Lambda sys
-float BTagAnalyzerSelector::Ks(int ij,int flavch)
+void BTagAnalyzerSelector::Ks(int ij)
 {       
-  float sf = 1.;
+  float sfUp = 1.;
+  float sfDo = 1.;
    
+  int flavch = 0; 
   float jeta = Jet_eta[ij];
   float jphi = Jet_phi[ij];
+  float jpt  = Jet_pt[ij];
+
+  int jFlavour = abs(Jet_flavour[ij]);
+  if( jFlavour == 5 )  flavch = 1;
+  if( jFlavour == 4 )  flavch = 2;
+  if( jFlavour == 1 || jFlavour == 21 )  flavch = 3;
+  if( jFlavour == 0 ) flavch = 3;
+
+  TLorentzVector jet;
+  jet.SetPtEtaPhiM(jpt, jeta, jphi, 0.);
+
   int nK0s = 0, nLambda = 0;
   if( flavch == 3 )
     {
-       for( int k=0;k<nGenV0;k++ )
-         {
-      double dR = helper->DeltaR(GenV0_eta[k], 
-               GenV0_phi[k], 
-               jeta,
-               jphi);
-      if( dR > 0.3 ) continue;
-      int pdgid = abs(GenV0_pdgID[k]);
-      if( pdgid == 310 )  nK0s++;
-      if( pdgid == 3122 ) nLambda++;
-         }
-       if( isys == SYS_KSL_UP )
-         {                          
-      if( nK0s > 0 )    sf *= 1.3;
-      if( nLambda > 0 ) sf *= 1.5;
-         }
+       for( int k=0;k<nGenV0;k++ ){
+         TLorentzVector V0;
+         V0.SetPtEtaPhiM(GenV0_pT[k], GenV0_eta[k], GenV0_phi[k], 0.);
+         double dR = jet.DeltaR(V0); 
+         if( dR > 0.3 ) continue;
+         int pdgid = abs(GenV0_pdgID[k]);
+         if( pdgid == 310 )  nK0s++;
+         if( pdgid == 3122 ) nLambda++;
+       }
+       if( nK0s > 0 )    sfUp *= 1.3;
+       if( nLambda > 0 ) sfUp *= 1.5;
     }
-   
-   return sf;
+  v0WeightUp[ij] = sfUp;
+  v0WeightDo[ij] = sfDo;   
 }
-*/
+

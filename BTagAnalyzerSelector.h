@@ -295,6 +295,10 @@ public :
    Float_t         bFragmentationWeightDo[100];
    Float_t         cdFragmentationWeightUp[100];
    Float_t         cdFragmentationWeightDo[100];
+   Float_t         cFragmentationWeightUp[100];
+   Float_t         cFragmentationWeightDo[100];
+   Float_t         v0WeightUp[100];
+   Float_t         v0WeightDo[100];
       
 
    // List of branches
@@ -565,7 +569,10 @@ public :
    TBranch        *b_bFragmentationWeightDo;
    TBranch        *b_cdFragmentationWeightUp;
    TBranch        *b_cdFragmentationWeightDo;
-      
+   TBranch        *b_cFragmentationWeightUp;
+   TBranch        *b_cFragmentationWeightDo;
+   TBranch        *b_v0WeightUp;
+   TBranch        *b_v0WeightDo;
 
 
 
@@ -588,6 +595,8 @@ public :
    void GluonSplitting(int ij);
    void bFrag(int ij);
    void cdFrag(int ij);
+   void cFrag(int ij);
+   void Ks(int ij);
    TTree* getHelperTree() {return newTree;}
 
    ClassDef(BTagAnalyzerSelector,0);
@@ -880,6 +889,10 @@ void BTagAnalyzerSelector::Init(TTree *tree)
    b_bFragmentationWeightDo = newTree->Branch("bFragmentationWeightDo", bFragmentationWeightDo, "bFragmentationWeightDo[100]/F");
    b_cdFragmentationWeightUp = newTree->Branch("cdFragmentationWeightUp", cdFragmentationWeightUp, "cdFragmentationWeightUp[100]/F");
    b_cdFragmentationWeightDo = newTree->Branch("cdFragmentationWeightDo", cdFragmentationWeightDo, "cdFragmentationWeightDo[100]/F");
+   b_cFragmentationWeightUp = newTree->Branch("cFragmentationWeightUp", cFragmentationWeightUp, "cFragmentationWeightUp[100]/F");
+   b_cFragmentationWeightDo = newTree->Branch("cFragmentationWeightDo", cFragmentationWeightDo, "cFragmentationWeightDo[100]/F");
+   b_v0WeightUp = newTree->Branch("v0WeightUp", v0WeightUp, "v0WeightUp[100]/F");
+   b_v0WeightDo = newTree->Branch("v0WeightDo", v0WeightDo, "v0WeightDo[100]/F");
 
 }
 void BTagAnalyzerSelector::cleanForNewEvent(){
@@ -890,6 +903,10 @@ void BTagAnalyzerSelector::cleanForNewEvent(){
     bFragmentationWeightDo[i] = -9999;
     cdFragmentationWeightUp[i] = -9999;
     cdFragmentationWeightDo[i] = -9999;
+    cFragmentationWeightUp[i] = -9999;
+    cFragmentationWeightDo[i] = -9999;
+    v0WeightUp[i] = -9999;
+    v0WeightDo[i] = -9999;
   }
 }
 

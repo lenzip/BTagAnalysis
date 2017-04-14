@@ -94,7 +94,14 @@ if __name__ == "__main__":
     activeBranches.extend([
       'gluonSplittingWeightUp',
       'gluonSplittingWeightDo',
-    ])
+      'bFragmentationWeightUp',
+      'bFragmentationWeightDo',
+      'cdFragmentationWeightUp',
+      'cdFragmentationWeightDo',
+      'cFragmentationWeightUp',
+      'cFragmentationWeightDo',
+      'v0WeightUp',
+      'v0WeightDo',])
 
   cutsFile = opzioni.cutsFile
   passedFile=""
@@ -205,7 +212,13 @@ if __name__ == "__main__":
       nJet=event.nJet
       nPFMuon=event.nPFMuon
       jets=[]
+      print "This event has", nJet, "jets"
       for IJ in range(nJet):
+        print "gluonSplitting  (Up,Do)", event.gluonSplittingWeightUp[IJ], event.gluonSplittingWeightDo[IJ]  
+        print "bFragmentation  (Up,Do)", event.bFragmentationWeightUp[IJ], event.bFragmentationWeightDo[IJ]  
+        print "cdFragmentation (Up,Do)", event.cdFragmentationWeightUp[IJ], event.cdFragmentationWeightDo[IJ] 
+        print "cFragmentation  (Up,Do)", event.cFragmentationWeightUp[IJ], event.cFragmentationWeightDo[IJ]    
+        print "v0              (Up,Do)", event.v0WeightUp[IJ], event.v0WeightDo[IJ]  
         jet=Jet(event,IJ)
         if (jet.fourMomentum.Pt()>20. and abs(jet.fourMomentum.Eta())<2.4):# and jet.Jet_Proba>0):
           jets.append(jet)
