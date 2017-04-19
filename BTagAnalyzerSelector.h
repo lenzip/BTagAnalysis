@@ -12,6 +12,10 @@
 #include <TChain.h>
 #include <TFile.h>
 #include <TSelector.h>
+//#include "CondFormats/JetMETObjects/interface/JetCorrectorParameters.h"
+#include "CondFormats/JetMETObjects/interface/JetCorrectionUncertainty.h"
+
+#define NMAX 500
 
 // Header file for the classes stored in the TTree if any.
 
@@ -21,13 +25,18 @@ class BTagAnalyzerSelector : public TSelector {
 public :
 
    // data members needed for computing systematics
-   float BTemplateCorrections[100][20][2];
+   float BTemplateCorrections[NMAX][20][2];
+   JetCorrectionUncertainty* jesTotal;
+   double cJER[NMAX];
+   double cJER_down[NMAX];
+   double cJER_up[NMAX];
+
 
    TTree          *fChain;   //!pointer to the analyzed TTree or TChain
 
    // Declaration of leaf types
    Int_t           nBitTrigger;
-   Int_t           BitTrigger[2];   //[nBitTrigger]
+   Int_t           BitTrigger[NMAX];   //[nBitTrigger]
    Int_t           Run;
    Int_t           Evt;
    Int_t           LumiBlock;
@@ -40,266 +49,270 @@ public :
    Float_t         GenPVz;
    Float_t         nPUtrue;
    Int_t           nPU;
-   Int_t           PU_bunch[82];   //[nPU]
-   Float_t         PU_z[82];   //[nPU]
-   Float_t         PU_sumpT_low[82];   //[nPU]
-   Float_t         PU_sumpT_high[82];   //[nPU]
-   Int_t           PU_ntrks_low[82];   //[nPU]
-   Int_t           PU_ntrks_high[82];   //[nPU]
+   Int_t           PU_bunch[NMAX];   //[nPU]
+   Float_t         PU_z[NMAX];   //[nPU]
+   Float_t         PU_sumpT_low[NMAX];   //[nPU]
+   Float_t         PU_sumpT_high[NMAX];   //[nPU]
+   Int_t           PU_ntrks_low[NMAX];   //[nPU]
+   Int_t           PU_ntrks_high[NMAX];   //[nPU]
    Int_t           ncQuarks;
-   Float_t         cQuark_pT[1];   //[ncQuarks]
-   Float_t         cQuark_eta[1];   //[ncQuarks]
-   Float_t         cQuark_phi[1];   //[ncQuarks]
-   Int_t           cQuark_pdgID[1];   //[ncQuarks]
-   Int_t           cQuark_status[1];   //[ncQuarks]
-   Int_t           cQuark_fromGSP[1];   //[ncQuarks]
+   Float_t         cQuark_pT[NMAX];   //[ncQuarks]
+   Float_t         cQuark_eta[NMAX];   //[ncQuarks]
+   Float_t         cQuark_phi[NMAX];   //[ncQuarks]
+   Int_t           cQuark_pdgID[NMAX];   //[ncQuarks]
+   Int_t           cQuark_status[NMAX];   //[ncQuarks]
+   Int_t           cQuark_fromGSP[NMAX];   //[ncQuarks]
    Int_t           nbQuarks;
-   Float_t         bQuark_pT[1];   //[nbQuarks]
-   Float_t         bQuark_eta[1];   //[nbQuarks]
-   Float_t         bQuark_phi[1];   //[nbQuarks]
-   Int_t           bQuark_pdgID[1];   //[nbQuarks]
-   Int_t           bQuark_status[1];   //[nbQuarks]
-   Int_t           bQuark_fromGSP[1];   //[nbQuarks]
+   Float_t         bQuark_pT[NMAX];   //[nbQuarks]
+   Float_t         bQuark_eta[NMAX];   //[nbQuarks]
+   Float_t         bQuark_phi[NMAX];   //[nbQuarks]
+   Int_t           bQuark_pdgID[NMAX];   //[nbQuarks]
+   Int_t           bQuark_status[NMAX];   //[nbQuarks]
+   Int_t           bQuark_fromGSP[NMAX];   //[nbQuarks]
    Int_t           nBHadrons;
-   Float_t         BHadron_pT[12];   //[nBHadrons]
-   Float_t         BHadron_eta[12];   //[nBHadrons]
-   Float_t         BHadron_phi[12];   //[nBHadrons]
-   Float_t         BHadron_mass[12];   //[nBHadrons]
-   Int_t           BHadron_pdgID[12];   //[nBHadrons]
-   Int_t           BHadron_mother[12];   //[nBHadrons]
-   Int_t           BHadron_hasBdaughter[12];   //[nBHadrons]
-   Float_t         BHadron_SVx[12];   //[nBHadrons]
-   Float_t         BHadron_SVy[12];   //[nBHadrons]
-   Float_t         BHadron_SVz[12];   //[nBHadrons]
-   Int_t           BHadron_nCharged[12];   //[nBHadrons]
-   Int_t           BHadron_DHadron1[12];   //[nBHadrons]
-   Int_t           BHadron_DHadron2[12];   //[nBHadrons]
+   Float_t         BHadron_pT[NMAX];   //[nBHadrons]
+   Float_t         BHadron_eta[NMAX];   //[nBHadrons]
+   Float_t         BHadron_phi[NMAX];   //[nBHadrons]
+   Float_t         BHadron_mass[NMAX];   //[nBHadrons]
+   Int_t           BHadron_pdgID[NMAX];   //[nBHadrons]
+   Int_t           BHadron_mother[NMAX];   //[nBHadrons]
+   Int_t           BHadron_hasBdaughter[NMAX];   //[nBHadrons]
+   Float_t         BHadron_SVx[NMAX];   //[nBHadrons]
+   Float_t         BHadron_SVy[NMAX];   //[nBHadrons]
+   Float_t         BHadron_SVz[NMAX];   //[nBHadrons]
+   Int_t           BHadron_nCharged[NMAX];   //[nBHadrons]
+   Int_t           BHadron_DHadron1[NMAX];   //[nBHadrons]
+   Int_t           BHadron_DHadron2[NMAX];   //[nBHadrons]
    Int_t           nDHadrons;
    Int_t           nDaughters;
-   Float_t         DHadron_pT[15];   //[nDHadrons]
-   Float_t         DHadron_eta[15];   //[nDHadrons]
-   Float_t         DHadron_phi[15];   //[nDHadrons]
-   Int_t           DHadron_pdgID[15];   //[nDHadrons]
-   Float_t         DHadron_mass[15];   //[nDHadrons]
-   Float_t         DHadron_SVx[15];   //[nDHadrons]
-   Float_t         DHadron_SVy[15];   //[nDHadrons]
-   Float_t         DHadron_SVz[15];   //[nDHadrons]
-   Int_t           DHadron_nDaughters[15];   //[nDHadrons]
-   Int_t           DHadron_DaughtersPdgID[16];   //[nDaughters]
-   Int_t           DHadron_nChargedDaughters[15];   //[nDHadrons]
-   Int_t           DHadron_nCharged[15];   //[nDHadrons]
+   Float_t         DHadron_pT[NMAX];   //[nDHadrons]
+   Float_t         DHadron_eta[NMAX];   //[nDHadrons]
+   Float_t         DHadron_phi[NMAX];   //[nDHadrons]
+   Int_t           DHadron_pdgID[NMAX];   //[nDHadrons]
+   Float_t         DHadron_mass[NMAX];   //[nDHadrons]
+   Float_t         DHadron_SVx[NMAX];   //[nDHadrons]
+   Float_t         DHadron_SVy[NMAX];   //[nDHadrons]
+   Float_t         DHadron_SVz[NMAX];   //[nDHadrons]
+   Int_t           DHadron_nDaughters[NMAX];   //[nDHadrons]
+   Int_t           DHadron_DaughtersPdgID[NMAX];   //[nDaughters]
+   Int_t           DHadron_nChargedDaughters[NMAX];   //[nDHadrons]
+   Int_t           DHadron_nCharged[NMAX];   //[nDHadrons]
    Int_t           nGenlep;
-   Float_t         Genlep_pT[6];   //[nGenlep]
-   Float_t         Genlep_eta[6];   //[nGenlep]
-   Float_t         Genlep_phi[6];   //[nGenlep]
-   Int_t           Genlep_pdgID[6];   //[nGenlep]
-   Int_t           Genlep_status[6];   //[nGenlep]
-   Int_t           Genlep_mother[6];   //[nGenlep]
+   Float_t         Genlep_pT[NMAX];   //[nGenlep]
+   Float_t         Genlep_eta[NMAX];   //[nGenlep]
+   Float_t         Genlep_phi[NMAX];   //[nGenlep]
+   Int_t           Genlep_pdgID[NMAX];   //[nGenlep]
+   Int_t           Genlep_status[NMAX];   //[nGenlep]
+   Int_t           Genlep_mother[NMAX];   //[nGenlep]
    Int_t           nGenquark;
-   Float_t         Genquark_pT[2];   //[nGenquark]
-   Float_t         Genquark_eta[2];   //[nGenquark]
-   Float_t         Genquark_phi[2];   //[nGenquark]
-   Int_t           Genquark_pdgID[2];   //[nGenquark]
-   Int_t           Genquark_mother[2];   //[nGenquark]
+   Float_t         Genquark_pT[NMAX];   //[nGenquark]
+   Float_t         Genquark_eta[NMAX];   //[nGenquark]
+   Float_t         Genquark_phi[NMAX];   //[nGenquark]
+   Int_t           Genquark_pdgID[NMAX];   //[nGenquark]
+   Int_t           Genquark_mother[NMAX];   //[nGenquark]
    Int_t           nGenPruned;
-   Float_t         GenPruned_pT[43];   //[nGenPruned]
-   Float_t         GenPruned_eta[43];   //[nGenPruned]
-   Float_t         GenPruned_phi[43];   //[nGenPruned]
-   Float_t         GenPruned_mass[43];   //[nGenPruned]
-   Int_t           GenPruned_pdgID[43];   //[nGenPruned]
-   Int_t           GenPruned_status[43];   //[nGenPruned]
-   Int_t           GenPruned_mother[43];   //[nGenPruned]
+   Float_t         GenPruned_pT[NMAX];   //[nGenPruned]
+   Float_t         GenPruned_eta[NMAX];   //[nGenPruned]
+   Float_t         GenPruned_phi[NMAX];   //[nGenPruned]
+   Float_t         GenPruned_mass[NMAX];   //[nGenPruned]
+   Int_t           GenPruned_pdgID[NMAX];   //[nGenPruned]
+   Int_t           GenPruned_status[NMAX];   //[nGenPruned]
+   Int_t           GenPruned_mother[NMAX];   //[nGenPruned]
    Int_t           nGenV0;
-   Float_t         GenV0_pT[2];   //[nGenV0]
-   Float_t         GenV0_eta[2];   //[nGenV0]
-   Float_t         GenV0_phi[2];   //[nGenV0]
-   Int_t           GenV0_pdgID[2];   //[nGenV0]
-   Float_t         GenV0_SVx[2];   //[nGenV0]
-   Float_t         GenV0_SVy[2];   //[nGenV0]
-   Float_t         GenV0_SVz[2];   //[nGenV0]
-   Int_t           GenV0_nCharged[2];   //[nGenV0]
+   Float_t         GenV0_pT[NMAX];   //[nGenV0]
+   Float_t         GenV0_eta[NMAX];   //[nGenV0]
+   Float_t         GenV0_phi[NMAX];   //[nGenV0]
+   Int_t           GenV0_pdgID[NMAX];   //[nGenV0]
+   Float_t         GenV0_SVx[NMAX];   //[nGenV0]
+   Float_t         GenV0_SVy[NMAX];   //[nGenV0]
+   Float_t         GenV0_SVz[NMAX];   //[nGenV0]
+   Int_t           GenV0_nCharged[NMAX];   //[nGenV0]
    Int_t           nJet;
-   Float_t         Jet_pt[10];   //[nJet]
-   Float_t         Jet_uncorrpt[10];   //[nJet]
-   Float_t         Jet_genpt[10];   //[nJet]
-   Float_t         Jet_residual[10];   //[nJet]
-   Float_t         Jet_area[10];   //[nJet]
-   Float_t         Jet_jes[10];   //[nJet]
-   Float_t         Jet_eta[10];   //[nJet]
-   Float_t         Jet_phi[10];   //[nJet]
-   Float_t         Jet_mass[10];   //[nJet]
-   Int_t           Jet_ntracks[10];   //[nJet]
-   Int_t           Jet_nseltracks[10];   //[nJet]
-   Int_t           Jet_flavour[10];   //[nJet]
-   Int_t           Jet_flavourCleaned[10];   //[nJet]
-   Int_t           Jet_partonFlavour[10];   //[nJet]
-   Int_t           Jet_hadronFlavour[10];   //[nJet]
-   Int_t           Jet_nbHadrons[10];   //[nJet]
-   Int_t           Jet_ncHadrons[10];   //[nJet]
-   Float_t         Jet_Ip2N[10];   //[nJet]
-   Float_t         Jet_Ip2P[10];   //[nJet]
-   Float_t         Jet_Ip3N[10];   //[nJet]
-   Float_t         Jet_Ip3P[10];   //[nJet]
-   Float_t         Jet_DeepCSVBDisc[10];   //[nJet]
-   Float_t         Jet_DeepCSVBDiscN[10];   //[nJet]
-   Float_t         Jet_DeepCSVBDiscP[10];   //[nJet]
-   Float_t         Jet_DeepCSVCvsLDisc[10];   //[nJet]
-   Float_t         Jet_DeepCSVCvsLDiscN[10];   //[nJet]
-   Float_t         Jet_DeepCSVCvsLDiscP[10];   //[nJet]
-   Float_t         Jet_DeepCSVCvsBDisc[10];   //[nJet]
-   Float_t         Jet_DeepCSVCvsBDiscN[10];   //[nJet]
-   Float_t         Jet_DeepCSVCvsBDiscP[10];   //[nJet]
-   Float_t         Jet_DeepCSVb[10];   //[nJet]
-   Float_t         Jet_DeepCSVc[10];   //[nJet]
-   Float_t         Jet_DeepCSVl[10];   //[nJet]
-   Float_t         Jet_DeepCSVbb[10];   //[nJet]
-   Float_t         Jet_DeepCSVcc[10];   //[nJet]
-   Float_t         Jet_DeepCSVbN[10];   //[nJet]
-   Float_t         Jet_DeepCSVcN[10];   //[nJet]
-   Float_t         Jet_DeepCSVlN[10];   //[nJet]
-   Float_t         Jet_DeepCSVbbN[10];   //[nJet]
-   Float_t         Jet_DeepCSVccN[10];   //[nJet]
-   Float_t         Jet_DeepCSVbP[10];   //[nJet]
-   Float_t         Jet_DeepCSVcP[10];   //[nJet]
-   Float_t         Jet_DeepCSVlP[10];   //[nJet]
-   Float_t         Jet_DeepCSVbbP[10];   //[nJet]
-   Float_t         Jet_DeepCSVccP[10];   //[nJet]
-   Float_t         Jet_ProbaN[10];   //[nJet]
-   Float_t         Jet_ProbaP[10];   //[nJet]
-   Float_t         Jet_Proba[10];   //[nJet]
-   Float_t         Jet_BprobN[10];   //[nJet]
-   Float_t         Jet_BprobP[10];   //[nJet]
-   Float_t         Jet_Bprob[10];   //[nJet]
-   Float_t         Jet_SvxN[10];   //[nJet]
-   Float_t         Jet_Svx[10];   //[nJet]
-   Float_t         Jet_SvxNHP[10];   //[nJet]
-   Float_t         Jet_SvxHP[10];   //[nJet]
-   Float_t         Jet_CombSvxN[10];   //[nJet]
-   Float_t         Jet_CombSvxP[10];   //[nJet]
-   Float_t         Jet_CombSvx[10];   //[nJet]
-   Float_t         Jet_CombIVF[10];   //[nJet]
-   Float_t         Jet_CombIVF_P[10];   //[nJet]
-   Float_t         Jet_CombIVF_N[10];   //[nJet]
-   Float_t         Jet_SoftMuN[10];   //[nJet]
-   Float_t         Jet_SoftMuP[10];   //[nJet]
-   Float_t         Jet_SoftMu[10];   //[nJet]
-   Float_t         Jet_SoftElN[10];   //[nJet]
-   Float_t         Jet_SoftElP[10];   //[nJet]
-   Float_t         Jet_SoftEl[10];   //[nJet]
-   Float_t         Jet_cMVA[10];   //[nJet]
-   Float_t         Jet_cMVAv2[10];   //[nJet]
-   Float_t         Jet_cMVAv2N[10];   //[nJet]
-   Float_t         Jet_cMVAv2P[10];   //[nJet]
-   Int_t           Jet_hist1[10];   //[nJet]
-   Int_t           Jet_hist2[10];   //[nJet]
-   Int_t           Jet_hist3[10];   //[nJet]
-   Int_t           Jet_histJet[10];   //[nJet]
-   Int_t           Jet_histSvx[10];   //[nJet]
-   Int_t           Jet_SV_multi[10];   //[nJet]
-   Int_t           Jet_nSM[10];   //[nJet]
-   Int_t           Jet_nSE[10];   //[nJet]
-   Int_t           Jet_looseID[10];   //[nJet]
-   Int_t           Jet_tightID[10];   //[nJet]
-   Float_t         Jet_trackSip2dSig_AboveBottom_0[10];   //[nJet]
-   Float_t         Jet_trackSip2dSig_AboveBottom_1[10];   //[nJet]
-   Int_t           Jet_nFirstSE[10];   //[nJet]
-   Int_t           Jet_nLastSE[10];   //[nJet]
+   Float_t         Jet_pt[NMAX];   //[nJet]
+   Float_t         Jet_uncorrpt[NMAX];   //[nJet]
+   Float_t         Jet_genpt[NMAX];   //[nJet]
+   Float_t         Jet_residual[NMAX];   //[nJet]
+   Float_t         Jet_area[NMAX];   //[nJet]
+   Float_t         Jet_jes[NMAX];   //[nJet]
+   Float_t         Jet_eta[NMAX];   //[nJet]
+   Float_t         Jet_phi[NMAX];   //[nJet]
+   Float_t         Jet_mass[NMAX];   //[nJet]
+   Int_t           Jet_ntracks[NMAX];   //[nJet]
+   Int_t           Jet_nseltracks[NMAX];   //[nJet]
+   Int_t           Jet_flavour[NMAX];   //[nJet]
+   Int_t           Jet_flavourCleaned[NMAX];   //[nJet]
+   Int_t           Jet_partonFlavour[NMAX];   //[nJet]
+   Int_t           Jet_hadronFlavour[NMAX];   //[nJet]
+   Int_t           Jet_nbHadrons[NMAX];   //[nJet]
+   Int_t           Jet_ncHadrons[NMAX];   //[nJet]
+   Float_t         Jet_Ip2N[NMAX];   //[nJet]
+   Float_t         Jet_Ip2P[NMAX];   //[nJet]
+   Float_t         Jet_Ip3N[NMAX];   //[nJet]
+   Float_t         Jet_Ip3P[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVBDisc[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVBDiscN[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVBDiscP[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVCvsLDisc[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVCvsLDiscN[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVCvsLDiscP[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVCvsBDisc[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVCvsBDiscN[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVCvsBDiscP[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVb[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVc[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVl[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVbb[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVcc[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVbN[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVcN[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVlN[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVbbN[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVccN[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVbP[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVcP[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVlP[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVbbP[NMAX];   //[nJet]
+   Float_t         Jet_DeepCSVccP[NMAX];   //[nJet]
+   Float_t         Jet_ProbaN[NMAX];   //[nJet]
+   Float_t         Jet_ProbaP[NMAX];   //[nJet]
+   Float_t         Jet_Proba[NMAX];   //[nJet]
+   Float_t         Jet_BprobN[NMAX];   //[nJet]
+   Float_t         Jet_BprobP[NMAX];   //[nJet]
+   Float_t         Jet_Bprob[NMAX];   //[nJet]
+   Float_t         Jet_SvxN[NMAX];   //[nJet]
+   Float_t         Jet_Svx[NMAX];   //[nJet]
+   Float_t         Jet_SvxNHP[NMAX];   //[nJet]
+   Float_t         Jet_SvxHP[NMAX];   //[nJet]
+   Float_t         Jet_CombSvxN[NMAX];   //[nJet]
+   Float_t         Jet_CombSvxP[NMAX];   //[nJet]
+   Float_t         Jet_CombSvx[NMAX];   //[nJet]
+   Float_t         Jet_CombIVF[NMAX];   //[nJet]
+   Float_t         Jet_CombIVF_P[NMAX];   //[nJet]
+   Float_t         Jet_CombIVF_N[NMAX];   //[nJet]
+   Float_t         Jet_SoftMuN[NMAX];   //[nJet]
+   Float_t         Jet_SoftMuP[NMAX];   //[nJet]
+   Float_t         Jet_SoftMu[NMAX];   //[nJet]
+   Float_t         Jet_SoftElN[NMAX];   //[nJet]
+   Float_t         Jet_SoftElP[NMAX];   //[nJet]
+   Float_t         Jet_SoftEl[NMAX];   //[nJet]
+   Float_t         Jet_cMVA[NMAX];   //[nJet]
+   Float_t         Jet_cMVAv2[NMAX];   //[nJet]
+   Float_t         Jet_cMVAv2N[NMAX];   //[nJet]
+   Float_t         Jet_cMVAv2P[NMAX];   //[nJet]
+   Int_t           Jet_hist1[NMAX];   //[nJet]
+   Int_t           Jet_hist2[NMAX];   //[nJet]
+   Int_t           Jet_hist3[NMAX];   //[nJet]
+   Int_t           Jet_histJet[NMAX];   //[nJet]
+   Int_t           Jet_histSvx[NMAX];   //[nJet]
+   Int_t           Jet_SV_multi[NMAX];   //[nJet]
+   Int_t           Jet_nSM[NMAX];   //[nJet]
+   Int_t           Jet_nSE[NMAX];   //[nJet]
+   Int_t           Jet_looseID[NMAX];   //[nJet]
+   Int_t           Jet_tightID[NMAX];   //[nJet]
+   Float_t         Jet_trackSip2dSig_AboveBottom_0[NMAX];   //[nJet]
+   Float_t         Jet_trackSip2dSig_AboveBottom_1[NMAX];   //[nJet]
+   Int_t           Jet_nFirstSE[NMAX];   //[nJet]
+   Int_t           Jet_nLastSE[NMAX];   //[nJet]
    Int_t           nPFElectron;
-   Int_t           PFElectron_IdxJet[5];   //[nPFElectron]
-   Float_t         PFElectron_pt[5];   //[nPFElectron]
-   Float_t         PFElectron_eta[5];   //[nPFElectron]
-   Float_t         PFElectron_phi[5];   //[nPFElectron]
-   Float_t         PFElectron_ptrel[5];   //[nPFElectron]
-   Float_t         PFElectron_deltaR[5];   //[nPFElectron]
-   Float_t         PFElectron_ratio[5];   //[nPFElectron]
-   Float_t         PFElectron_ratioRel[5];   //[nPFElectron]
-   Float_t         PFElectron_IP[5];   //[nPFElectron]
-   Float_t         PFElectron_IP2D[5];   //[nPFElectron]
-   Int_t           Jet_nFirstSM[10];   //[nJet]
-   Int_t           Jet_nLastSM[10];   //[nJet]
+   Int_t           PFElectron_IdxJet[NMAX];   //[nPFElectron]
+   Float_t         PFElectron_pt[NMAX];   //[nPFElectron]
+   Float_t         PFElectron_eta[NMAX];   //[nPFElectron]
+   Float_t         PFElectron_phi[NMAX];   //[nPFElectron]
+   Float_t         PFElectron_ptrel[NMAX];   //[nPFElectron]
+   Float_t         PFElectron_deltaR[NMAX];   //[nPFElectron]
+   Float_t         PFElectron_ratio[NMAX];   //[nPFElectron]
+   Float_t         PFElectron_ratioRel[NMAX];   //[nPFElectron]
+   Float_t         PFElectron_IP[NMAX];   //[nPFElectron]
+   Float_t         PFElectron_IP2D[NMAX];   //[nPFElectron]
+   Int_t           Jet_nFirstSM[NMAX];   //[nJet]
+   Int_t           Jet_nLastSM[NMAX];   //[nJet]
    Int_t           nPFMuon;
-   Int_t           PFMuon_IdxJet[5];   //[nPFMuon]
-   Int_t           PFMuon_nMuHit[5];   //[nPFMuon]
-   Int_t           PFMuon_nTkHit[5];   //[nPFMuon]
-   Int_t           PFMuon_nPixHit[5];   //[nPFMuon]
-   Int_t           PFMuon_nOutHit[5];   //[nPFMuon]
-   Int_t           PFMuon_nTkLwM[5];   //[nPFMuon]
-   Int_t           PFMuon_nPixLwM[5];   //[nPFMuon]
-   Int_t           PFMuon_nMatched[5];   //[nPFMuon]
-   Float_t         PFMuon_chi2[5];   //[nPFMuon]
-   Float_t         PFMuon_chi2Tk[5];   //[nPFMuon]
-   Int_t           PFMuon_isGlobal[5];   //[nPFMuon]
-   Int_t           PFMuon_hist[5];   //[nPFMuon]
-   Float_t         PFMuon_pt[5];   //[nPFMuon]
-   Float_t         PFMuon_eta[5];   //[nPFMuon]
-   Float_t         PFMuon_phi[5];   //[nPFMuon]
-   Float_t         PFMuon_ptrel[5];   //[nPFMuon]
-   Float_t         PFMuon_deltaR[5];   //[nPFMuon]
-   Float_t         PFMuon_ratio[5];   //[nPFMuon]
-   Float_t         PFMuon_ratioRel[5];   //[nPFMuon]
-   Float_t         PFMuon_IP[5];   //[nPFMuon]
-   Float_t         PFMuon_IP2D[5];   //[nPFMuon]
-   Float_t         PFMuon_IPsig[5];   //[nPFMuon]
-   Float_t         PFMuon_IP2Dsig[5];   //[nPFMuon]
-   Float_t         PFMuon_dz[5];   //[nPFMuon]
-   Int_t           PFMuon_GoodQuality[5];   //[nPFMuon]
-   Int_t           Jet_nFirstTrkTagVarCSV[10];   //[nJet]
-   Int_t           Jet_nLastTrkTagVarCSV[10];   //[nJet]
-   Int_t           Jet_nFirstTrkEtaRelTagVarCSV[10];   //[nJet]
-   Int_t           Jet_nLastTrkEtaRelTagVarCSV[10];   //[nJet]
-   Float_t         TagVarCSV_trackJetPt[10];   //[nJet]
-   Float_t         TagVarCSV_jetNTracks[10];   //[nJet]
-   Float_t         TagVarCSV_jetNTracksEtaRel[10];   //[nJet]
-   Float_t         TagVarCSV_trackSumJetEtRatio[10];   //[nJet]
-   Float_t         TagVarCSV_trackSumJetDeltaR[10];   //[nJet]
-   Float_t         TagVarCSV_trackSip2dValAboveCharm[10];   //[nJet]
-   Float_t         TagVarCSV_trackSip2dSigAboveCharm[10];   //[nJet]
-   Float_t         TagVarCSV_trackSip3dValAboveCharm[10];   //[nJet]
-   Float_t         TagVarCSV_trackSip3dSigAboveCharm[10];   //[nJet]
-   Float_t         TagVarCSV_vertexCategory[10];   //[nJet]
-   Float_t         TagVarCSV_jetNSecondaryVertices[10];   //[nJet]
-   Float_t         TagVarCSV_vertexMass[10];   //[nJet]
-   Float_t         TagVarCSV_vertexNTracks[10];   //[nJet]
-   Float_t         TagVarCSV_vertexEnergyRatio[10];   //[nJet]
-   Float_t         TagVarCSV_vertexJetDeltaR[10];   //[nJet]
-   Float_t         TagVarCSV_flightDistance2dVal[10];   //[nJet]
-   Float_t         TagVarCSV_flightDistance2dSig[10];   //[nJet]
-   Float_t         TagVarCSV_flightDistance3dVal[10];   //[nJet]
-   Float_t         TagVarCSV_flightDistance3dSig[10];   //[nJet]
+   Int_t           PFMuon_IdxJet[NMAX];   //[nPFMuon]
+   Int_t           PFMuon_nMuHit[NMAX];   //[nPFMuon]
+   Int_t           PFMuon_nTkHit[NMAX];   //[nPFMuon]
+   Int_t           PFMuon_nPixHit[NMAX];   //[nPFMuon]
+   Int_t           PFMuon_nOutHit[NMAX];   //[nPFMuon]
+   Int_t           PFMuon_nTkLwM[NMAX];   //[nPFMuon]
+   Int_t           PFMuon_nPixLwM[NMAX];   //[nPFMuon]
+   Int_t           PFMuon_nMatched[NMAX];   //[nPFMuon]
+   Float_t         PFMuon_chi2[NMAX];   //[nPFMuon]
+   Float_t         PFMuon_chi2Tk[NMAX];   //[nPFMuon]
+   Int_t           PFMuon_isGlobal[NMAX];   //[nPFMuon]
+   Int_t           PFMuon_hist[NMAX];   //[nPFMuon]
+   Float_t         PFMuon_pt[NMAX];   //[nPFMuon]
+   Float_t         PFMuon_eta[NMAX];   //[nPFMuon]
+   Float_t         PFMuon_phi[NMAX];   //[nPFMuon]
+   Float_t         PFMuon_ptrel[NMAX];   //[nPFMuon]
+   Float_t         PFMuon_deltaR[NMAX];   //[nPFMuon]
+   Float_t         PFMuon_ratio[NMAX];   //[nPFMuon]
+   Float_t         PFMuon_ratioRel[NMAX];   //[nPFMuon]
+   Float_t         PFMuon_IP[NMAX];   //[nPFMuon]
+   Float_t         PFMuon_IP2D[NMAX];   //[nPFMuon]
+   Float_t         PFMuon_IPsig[NMAX];   //[nPFMuon]
+   Float_t         PFMuon_IP2Dsig[NMAX];   //[nPFMuon]
+   Float_t         PFMuon_dz[NMAX];   //[nPFMuon]
+   Int_t           PFMuon_GoodQuality[NMAX];   //[nPFMuon]
+   Int_t           Jet_nFirstTrkTagVarCSV[NMAX];   //[nJet]
+   Int_t           Jet_nLastTrkTagVarCSV[NMAX];   //[nJet]
+   Int_t           Jet_nFirstTrkEtaRelTagVarCSV[NMAX];   //[nJet]
+   Int_t           Jet_nLastTrkEtaRelTagVarCSV[NMAX];   //[nJet]
+   Float_t         TagVarCSV_trackJetPt[NMAX];   //[nJet]
+   Float_t         TagVarCSV_jetNTracks[NMAX];   //[nJet]
+   Float_t         TagVarCSV_jetNTracksEtaRel[NMAX];   //[nJet]
+   Float_t         TagVarCSV_trackSumJetEtRatio[NMAX];   //[nJet]
+   Float_t         TagVarCSV_trackSumJetDeltaR[NMAX];   //[nJet]
+   Float_t         TagVarCSV_trackSip2dValAboveCharm[NMAX];   //[nJet]
+   Float_t         TagVarCSV_trackSip2dSigAboveCharm[NMAX];   //[nJet]
+   Float_t         TagVarCSV_trackSip3dValAboveCharm[NMAX];   //[nJet]
+   Float_t         TagVarCSV_trackSip3dSigAboveCharm[NMAX];   //[nJet]
+   Float_t         TagVarCSV_vertexCategory[NMAX];   //[nJet]
+   Float_t         TagVarCSV_jetNSecondaryVertices[NMAX];   //[nJet]
+   Float_t         TagVarCSV_vertexMass[NMAX];   //[nJet]
+   Float_t         TagVarCSV_vertexNTracks[NMAX];   //[nJet]
+   Float_t         TagVarCSV_vertexEnergyRatio[NMAX];   //[nJet]
+   Float_t         TagVarCSV_vertexJetDeltaR[NMAX];   //[nJet]
+   Float_t         TagVarCSV_flightDistance2dVal[NMAX];   //[nJet]
+   Float_t         TagVarCSV_flightDistance2dSig[NMAX];   //[nJet]
+   Float_t         TagVarCSV_flightDistance3dVal[NMAX];   //[nJet]
+   Float_t         TagVarCSV_flightDistance3dSig[NMAX];   //[nJet]
    Int_t           nTrkTagVarCSV;
    Int_t           nTrkEtaRelTagVarCSV;
-   Float_t         TagVarCSV_trackMomentum[42];   //[nTrkTagVarCSV]
-   Float_t         TagVarCSV_trackEta[42];   //[nTrkTagVarCSV]
-   Float_t         TagVarCSV_trackPhi[42];   //[nTrkTagVarCSV]
-   Float_t         TagVarCSV_trackPtRel[42];   //[nTrkTagVarCSV]
-   Float_t         TagVarCSV_trackPPar[42];   //[nTrkTagVarCSV]
-   Float_t         TagVarCSV_trackDeltaR[42];   //[nTrkTagVarCSV]
-   Float_t         TagVarCSV_trackPtRatio[42];   //[nTrkTagVarCSV]
-   Float_t         TagVarCSV_trackPParRatio[42];   //[nTrkTagVarCSV]
-   Float_t         TagVarCSV_trackSip2dVal[42];   //[nTrkTagVarCSV]
-   Float_t         TagVarCSV_trackSip2dSig[42];   //[nTrkTagVarCSV]
-   Float_t         TagVarCSV_trackSip3dVal[42];   //[nTrkTagVarCSV]
-   Float_t         TagVarCSV_trackSip3dSig[42];   //[nTrkTagVarCSV]
-   Float_t         TagVarCSV_trackDecayLenVal[42];   //[nTrkTagVarCSV]
-   Float_t         TagVarCSV_trackDecayLenSig[42];   //[nTrkTagVarCSV]
-   Float_t         TagVarCSV_trackJetDistVal[42];   //[nTrkTagVarCSV]
-   Float_t         TagVarCSV_trackJetDistSig[42];   //[nTrkTagVarCSV]
-   Float_t         TagVarCSV_trackEtaRel[22];   //[nTrkEtaRelTagVarCSV]
+   Float_t         TagVarCSV_trackMomentum[NMAX];   //[nTrkTagVarCSV]
+   Float_t         TagVarCSV_trackEta[NMAX];   //[nTrkTagVarCSV]
+   Float_t         TagVarCSV_trackPhi[NMAX];   //[nTrkTagVarCSV]
+   Float_t         TagVarCSV_trackPtRel[NMAX];   //[nTrkTagVarCSV]
+   Float_t         TagVarCSV_trackPPar[NMAX];   //[nTrkTagVarCSV]
+   Float_t         TagVarCSV_trackDeltaR[NMAX];   //[nTrkTagVarCSV]
+   Float_t         TagVarCSV_trackPtRatio[NMAX];   //[nTrkTagVarCSV]
+   Float_t         TagVarCSV_trackPParRatio[NMAX];   //[nTrkTagVarCSV]
+   Float_t         TagVarCSV_trackSip2dVal[NMAX];   //[nTrkTagVarCSV]
+   Float_t         TagVarCSV_trackSip2dSig[NMAX];   //[nTrkTagVarCSV]
+   Float_t         TagVarCSV_trackSip3dVal[NMAX];   //[nTrkTagVarCSV]
+   Float_t         TagVarCSV_trackSip3dSig[NMAX];   //[nTrkTagVarCSV]
+   Float_t         TagVarCSV_trackDecayLenVal[NMAX];   //[nTrkTagVarCSV]
+   Float_t         TagVarCSV_trackDecayLenSig[NMAX];   //[nTrkTagVarCSV]
+   Float_t         TagVarCSV_trackJetDistVal[NMAX];   //[nTrkTagVarCSV]
+   Float_t         TagVarCSV_trackJetDistSig[NMAX];   //[nTrkTagVarCSV]
+   Float_t         TagVarCSV_trackEtaRel[NMAX];   //[nTrkEtaRelTagVarCSV]
 
    //new branches to add
    TTree* newTree;
 
-   Float_t         gluonSplittingWeightUp[100];
-   Float_t         gluonSplittingWeightDo[100];
-   Float_t         bFragmentationWeightUp[100];
-   Float_t         bFragmentationWeightDo[100];
-   Float_t         cdFragmentationWeightUp[100];
-   Float_t         cdFragmentationWeightDo[100];
-   Float_t         cFragmentationWeightUp[100];
-   Float_t         cFragmentationWeightDo[100];
-   Float_t         v0WeightUp[100];
-   Float_t         v0WeightDo[100];
-      
+   Float_t         gluonSplittingWeightUp[NMAX];
+   Float_t         gluonSplittingWeightDo[NMAX];
+   Float_t         bFragmentationWeightUp[NMAX];
+   Float_t         bFragmentationWeightDo[NMAX];
+   Float_t         cdFragmentationWeightUp[NMAX];
+   Float_t         cdFragmentationWeightDo[NMAX];
+   Float_t         cFragmentationWeightUp[NMAX];
+   Float_t         cFragmentationWeightDo[NMAX];
+   Float_t         v0WeightUp[NMAX];
+   Float_t         v0WeightDo[NMAX];
+   Float_t         Jet_ptJERUp[NMAX];
+   Float_t         Jet_ptJERDo[NMAX];
+   Float_t         Jet_ptJESUp[NMAX];
+   Float_t         Jet_ptJESDo[NMAX];
+   Int_t           Evt_new;
 
    // List of branches
    TBranch        *b_nBitTrigger;   //!
@@ -573,6 +586,11 @@ public :
    TBranch        *b_cFragmentationWeightDo;
    TBranch        *b_v0WeightUp;
    TBranch        *b_v0WeightDo;
+   TBranch        *b_Jet_ptJERUp;
+   TBranch        *b_Jet_ptJERDo;
+   TBranch        *b_Jet_ptJESUp;
+   TBranch        *b_Jet_ptJESDo;
+   TBranch        *b_Evt_new;
 
 
 
@@ -597,6 +615,7 @@ public :
    void cdFrag(int ij);
    void cFrag(int ij);
    void Ks(int ij);
+   void JEC(int ij);
    TTree* getHelperTree() {return newTree;}
 
    ClassDef(BTagAnalyzerSelector,0);
@@ -880,23 +899,28 @@ void BTagAnalyzerSelector::Init(TTree *tree)
    fChain->SetBranchAddress("TagVarCSV_trackJetDistSig", TagVarCSV_trackJetDistSig, &b_TagVarCSV_trackJetDistSig);
    fChain->SetBranchAddress("TagVarCSV_trackEtaRel", TagVarCSV_trackEtaRel, &b_TagVarCSV_trackEtaRel);
 
-
+/*
    //Add branches
    newTree = new TTree("helper", "helper");
-   b_gluonSplittingWeightUp = newTree->Branch("gluonSplittingWeightUp", gluonSplittingWeightUp, "gluonSplittingWeightUp[100]/F");
-   b_gluonSplittingWeightDo = newTree->Branch("gluonSplittingWeightDo", gluonSplittingWeightDo, "gluonSplittingWeightDo[100]/F");
-   b_bFragmentationWeightUp = newTree->Branch("bFragmentationWeightUp", bFragmentationWeightUp, "bFragmentationWeightUp[100]/F");
-   b_bFragmentationWeightDo = newTree->Branch("bFragmentationWeightDo", bFragmentationWeightDo, "bFragmentationWeightDo[100]/F");
-   b_cdFragmentationWeightUp = newTree->Branch("cdFragmentationWeightUp", cdFragmentationWeightUp, "cdFragmentationWeightUp[100]/F");
-   b_cdFragmentationWeightDo = newTree->Branch("cdFragmentationWeightDo", cdFragmentationWeightDo, "cdFragmentationWeightDo[100]/F");
-   b_cFragmentationWeightUp = newTree->Branch("cFragmentationWeightUp", cFragmentationWeightUp, "cFragmentationWeightUp[100]/F");
-   b_cFragmentationWeightDo = newTree->Branch("cFragmentationWeightDo", cFragmentationWeightDo, "cFragmentationWeightDo[100]/F");
-   b_v0WeightUp = newTree->Branch("v0WeightUp", v0WeightUp, "v0WeightUp[100]/F");
-   b_v0WeightDo = newTree->Branch("v0WeightDo", v0WeightDo, "v0WeightDo[100]/F");
-
+   b_gluonSplittingWeightUp = newTree->Branch("gluonSplittingWeightUp", gluonSplittingWeightUp, "gluonSplittingWeightUp[500]/F");
+   b_gluonSplittingWeightDo = newTree->Branch("gluonSplittingWeightDo", gluonSplittingWeightDo, "gluonSplittingWeightDo[500]/F");
+   b_bFragmentationWeightUp = newTree->Branch("bFragmentationWeightUp", bFragmentationWeightUp, "bFragmentationWeightUp[500]/F");
+   b_bFragmentationWeightDo = newTree->Branch("bFragmentationWeightDo", bFragmentationWeightDo, "bFragmentationWeightDo[500]/F");
+   b_cdFragmentationWeightUp = newTree->Branch("cdFragmentationWeightUp", cdFragmentationWeightUp, "cdFragmentationWeightUp[500]/F");
+   b_cdFragmentationWeightDo = newTree->Branch("cdFragmentationWeightDo", cdFragmentationWeightDo, "cdFragmentationWeightDo[500]/F");
+   b_cFragmentationWeightUp = newTree->Branch("cFragmentationWeightUp", cFragmentationWeightUp, "cFragmentationWeightUp[500]/F");
+   b_cFragmentationWeightDo = newTree->Branch("cFragmentationWeightDo", cFragmentationWeightDo, "cFragmentationWeightDo[500]/F");
+   b_v0WeightUp = newTree->Branch("v0WeightUp", v0WeightUp, "v0WeightUp[500]/F");
+   b_v0WeightDo = newTree->Branch("v0WeightDo", v0WeightDo, "v0WeightDo[500]/F");
+   b_Jet_ptJERUp = newTree->Branch("Jet_ptJERUp", Jet_ptJERUp, "Jet_ptJERUp[500]/F");
+   b_Jet_ptJERDo = newTree->Branch("Jet_ptJERDo", Jet_ptJERDo, "Jet_ptJERDo[500]/F");
+   b_Jet_ptJESUp = newTree->Branch("Jet_ptJESUp", Jet_ptJESUp, "Jet_ptJESUp[500]/F");
+   b_Jet_ptJESDo = newTree->Branch("Jet_ptJESDo", Jet_ptJESDo, "Jet_ptJESDo[500]/F");
+   b_Evt_new     = newTree->Branch("b_Evt_new", &Evt_new, "Evt_new/I");
+*/
 }
 void BTagAnalyzerSelector::cleanForNewEvent(){
-  for (unsigned int i = 0; i < 100; ++i){
+  for (unsigned int i = 0; i < NMAX; ++i){
     gluonSplittingWeightUp[i] = -9999;
     gluonSplittingWeightDo[i] = -9999;
     bFragmentationWeightUp[i] = -9999;
@@ -907,6 +931,10 @@ void BTagAnalyzerSelector::cleanForNewEvent(){
     cFragmentationWeightDo[i] = -9999;
     v0WeightUp[i] = -9999;
     v0WeightDo[i] = -9999;
+    Jet_ptJERUp[i] = -9999;
+    Jet_ptJERDo[i] = -9999;
+    Jet_ptJESUp[i] = -9999;
+    Jet_ptJESDo[i] = -9999;
   }
 }
 

@@ -33,6 +33,49 @@
 using namespace std;
 
 BTagAnalyzerSelector::BTagAnalyzerSelector(TTree * tree) : fChain(0){
+  newTree = new TTree("helper", "helper");
+  b_gluonSplittingWeightUp = newTree->Branch("gluonSplittingWeightUp", gluonSplittingWeightUp, "gluonSplittingWeightUp[500]/F");
+  b_gluonSplittingWeightDo = newTree->Branch("gluonSplittingWeightDo", gluonSplittingWeightDo, "gluonSplittingWeightDo[500]/F");
+  b_bFragmentationWeightUp = newTree->Branch("bFragmentationWeightUp", bFragmentationWeightUp, "bFragmentationWeightUp[500]/F");
+  b_bFragmentationWeightDo = newTree->Branch("bFragmentationWeightDo", bFragmentationWeightDo, "bFragmentationWeightDo[500]/F");
+  b_cdFragmentationWeightUp = newTree->Branch("cdFragmentationWeightUp", cdFragmentationWeightUp, "cdFragmentationWeightUp[500]/F");
+  b_cdFragmentationWeightDo = newTree->Branch("cdFragmentationWeightDo", cdFragmentationWeightDo, "cdFragmentationWeightDo[500]/F");
+  b_cFragmentationWeightUp = newTree->Branch("cFragmentationWeightUp", cFragmentationWeightUp, "cFragmentationWeightUp[500]/F");
+  b_cFragmentationWeightDo = newTree->Branch("cFragmentationWeightDo", cFragmentationWeightDo, "cFragmentationWeightDo[500]/F");
+  b_v0WeightUp = newTree->Branch("v0WeightUp", v0WeightUp, "v0WeightUp[500]/F");
+  b_v0WeightDo = newTree->Branch("v0WeightDo", v0WeightDo, "v0WeightDo[500]/F");
+  b_Jet_ptJERUp = newTree->Branch("Jet_ptJERUp", Jet_ptJERUp, "Jet_ptJERUp[500]/F");
+  b_Jet_ptJERDo = newTree->Branch("Jet_ptJERDo", Jet_ptJERDo, "Jet_ptJERDo[500]/F");
+  b_Jet_ptJESUp = newTree->Branch("Jet_ptJESUp", Jet_ptJESUp, "Jet_ptJESUp[500]/F");
+  b_Jet_ptJESDo = newTree->Branch("Jet_ptJESDo", Jet_ptJESDo, "Jet_ptJESDo[500]/F");
+  b_Evt_new     = newTree->Branch("b_Evt_new", &Evt_new, "Evt_new/I");
+ 
+
+
+  //JES and JER
+  //jesTotal = new JetCorrectionUncertainty(*(new JetCorrectorParameters("data/Summer16_23Sep2016V5_MC_UncertaintySources_AK4PFchs.txt", "Total")));
+  jesTotal = new JetCorrectionUncertainty("data/Summer16_23Sep2016V4_MC_Uncertainty_AK4PFchs.txt");
+
+   // JER taken from https://twiki.cern.ch/twiki/bin/view/CMS/JetResolution
+   
+   cJER[0] = 1.052; // 0.0-0.5
+   cJER[1] = 1.057; // 0.5-1.1
+   cJER[2] = 1.096; // 1.1-1.7
+   cJER[3] = 1.134; // 1.7-2.3
+   cJER[4] = 1.288; // 2.3-5.0
+   
+   cJER_down[0] = 0.990;
+   cJER_down[1] = 1.001;
+   cJER_down[2] = 1.032;
+   cJER_down[3] = 1.042;
+   cJER_down[4] = 1.089;
+
+   cJER_up[0] = 1.115;
+   cJER_up[1] = 1.114;
+   cJER_up[2] = 1.161;
+   cJER_up[3] = 1.228;
+   cJER_up[4] = 1.488; 
+
   int nPtRelPtBins = 15;
   TString PtRelPtBin[] = {
      "Pt2030", "Pt3040", "Pt4050", "Pt5060", "Pt6070"
@@ -112,13 +155,15 @@ Bool_t BTagAnalyzerSelector::Process(Long64_t entry)
    // The return value is currently not used.
    cleanForNewEvent();
    fChain->GetEntry(entry);
-  
+ 
+   Evt_new = Evt; 
    for (int ij = 0; ij < nJet; ++ij){
       GluonSplitting(ij);    
       bFrag(ij);
       cdFrag(ij);
       cFrag(ij);
       Ks(ij);
+      JEC(ij);
    }
 
    newTree->Fill(); 
@@ -433,4 +478,59 @@ void BTagAnalyzerSelector::Ks(int ij)
   v0WeightUp[ij] = sfUp;
   v0WeightDo[ij] = sfDo;   
 }
+
+void  BTagAnalyzerSelector::JEC(int ij)
+{       
+  float jeta = 0;
+  float jphi = 0;
+  float jm = 0;
+  float jpt = 0;
+   
+  jeta = Jet_eta[ij];
+  jphi = Jet_phi[ij];
+  jm = Jet_mass[ij];
+  jpt = Jet_pt[ij];
+   
+  int etaIdx = -1;
+  if( fabs(jeta) >= 0. && fabs(jeta) < 0.5 ) etaIdx = 0;
+  if( fabs(jeta) >= 0.5 && fabs(jeta) < 1.1 ) etaIdx = 1;
+  if( fabs(jeta) >= 1.1 && fabs(jeta) < 1.7 ) etaIdx = 2;
+  if( fabs(jeta) >= 1.7 && fabs(jeta) < 2.3 ) etaIdx = 3;
+  if( fabs(jeta) >= 2.3 && fabs(jeta) < 5.0 ) etaIdx = 4;
+  
+  double jpt_c = jpt;
+  double jpt_c_down = jpt;
+  double jpt_c_up = jpt;
+  if( etaIdx >= 0 ){
+      double genpt = 0;
+      genpt = Jet_genpt[ij];
+      if( genpt >= 0. ) {
+        jpt_c = genpt + cJER[etaIdx]*(jpt-genpt);
+      
+        double jpt_c_down = genpt + cJER_down[etaIdx]*(jpt-genpt);
+        double jpt_c_up = genpt + cJER_up[etaIdx]*(jpt-genpt);
+      
+        if( jpt_c < 0. ) jpt_c = 0.;
+        if( jpt_c_down < 0. ) jpt_c_down = 0.;
+        if( jpt_c_up < 0. ) jpt_c_up = 0.;
+
+      }
+  
+      //jpt = jpt_c;
+   }  
+
+   Jet_ptJERUp[ij] = jpt_c_up;
+   Jet_ptJERDo[ij] = jpt_c_down;
+   
+   // JES
+   jesTotal->setJetPt(jpt);
+   jesTotal->setJetEta(jeta);
+   double uncert = jesTotal->getUncertainty(true);
+  
+   Jet_ptJESUp[ij] = jpt*(1.+uncert);
+   Jet_ptJESDo[ij] = jpt*(1.-uncert);
+
+  
+}
+
 

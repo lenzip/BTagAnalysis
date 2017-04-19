@@ -100,8 +100,14 @@ if __name__ == "__main__":
       'cdFragmentationWeightDo',
       'cFragmentationWeightUp',
       'cFragmentationWeightDo',
+      'Evt_new',
       'v0WeightUp',
-      'v0WeightDo',])
+      'v0WeightDo',
+      'Jet_ptJERUp',
+      'Jet_ptJERDo',
+      'Jet_ptJESUp',
+      'Jet_ptJESDo',
+          ])
 
   cutsFile = opzioni.cutsFile
   passedFile=""
@@ -132,32 +138,64 @@ if __name__ == "__main__":
   for line in fileList:
     chain.Add(line.rstrip('\n'))
   print "...done"
+  fileList.seek(0)
 
   if not opzioni.isData:
     print "this is MC, adding systematic variations to the tree..."
+    cmssw_base = os.getenv('CMSSW_BASE')
+    gSystem.AddIncludePath("-I"+cmssw_base+"/interface/");
+    gSystem.Load("libFWCoreFWLite.so");
     try:
       gROOT.LoadMacro('BTagAnalyzerSelector.C++g')
     except RuntimeError:
       gROOT.LoadMacro('BTagAnalyzerSelector.C++g')
-
-    systHelper = BTagAnalyzerSelector()
+    print "Starting pre-processing"   
+    ihelper = 0
+    helperChain = TChain("helper")
+    helperFiles = []
+    for filename in fileList:
+      helpername = "helper"+str(ihelper)+".root"
+      helperFile = TFile(helpername, "recreate")
+      helperFile.cd()
+      systHelper = BTagAnalyzerSelector()
+      print "processing tree", filename
+      thisFile = TFile.Open(filename.rstrip('\n'))
+      thisTree = thisFile.Get(opzioni.tree)
+      systHelper.Init(thisTree)
+      for iEvent in range(thisTree.GetEntries()):
+        systHelper.Process(iEvent)
+      helperFile.cd()
+      systHelper.getHelperTree().Write()
+      helperFile.Close()
+      helperFiles.append(helpername)
+      ihelper += 1 
+    for helper in helperFiles:  
+      helperChain.Add(helper)
+    '''
     systHelper.Init(chain)
+    ipre=0
     for iEvent in range(chain.GetEntries()):
+      #print iEvent, systHelper.GetEntry(iEvent)
+      #print iEvent
+      if (ipre%1000==0):
+        sys.stdout.write("\rpre-processing event %d/%d" %(ipre, chain.GetEntries()))
+        sys.stdout.flush()
+      ipre = ipre+1  
       systHelper.Process(iEvent)
-    chain.AddFriend(systHelper.getHelperTree())
+    '''
+    print chain.GetEntries(), helperChain.GetEntries()
+    chain.AddFriend(helperChain)
     print "...done"
-
-
-
-  #skim the chain according to the gloval event selection
-  #print "skimming..."
-  #skim(chain, eventsel)
-  #print "...done"
 
   # book histos
   print "booking histos..."
   outFile, histos = book(outputFile, variables, cuts)
   print "...done"
+
+  #skim the chain according to the gloval event selection
+  #print "skimming..."
+  #skim(chain, eventsel)
+  #print "...done"
 
   # disable all branches, then reenable only the used ones
   chain.SetBranchStatus("*", 0)
@@ -212,13 +250,16 @@ if __name__ == "__main__":
       nJet=event.nJet
       nPFMuon=event.nPFMuon
       jets=[]
-      print "This event has", nJet, "jets"
+      print "This event has", nJet, "jets", event.Evt#, event.Evt_new
       for IJ in range(nJet):
         print "gluonSplitting  (Up,Do)", event.gluonSplittingWeightUp[IJ], event.gluonSplittingWeightDo[IJ]  
         print "bFragmentation  (Up,Do)", event.bFragmentationWeightUp[IJ], event.bFragmentationWeightDo[IJ]  
         print "cdFragmentation (Up,Do)", event.cdFragmentationWeightUp[IJ], event.cdFragmentationWeightDo[IJ] 
         print "cFragmentation  (Up,Do)", event.cFragmentationWeightUp[IJ], event.cFragmentationWeightDo[IJ]    
-        print "v0              (Up,Do)", event.v0WeightUp[IJ], event.v0WeightDo[IJ]  
+        print "v0              (Up,Do)", event.v0WeightUp[IJ], event.v0WeightDo[IJ] 
+        print "pt                     ", event.Jet_pt[IJ]
+        print "pt JER          (Up,Do)", event.Jet_ptJERUp[IJ], event.Jet_ptJERDo[IJ]
+        print "pt JES          (Up,Do)", event.Jet_ptJESUp[IJ], event.Jet_ptJESDo[IJ]
         jet=Jet(event,IJ)
         if (jet.fourMomentum.Pt()>20. and abs(jet.fourMomentum.Eta())<2.4):# and jet.Jet_Proba>0):
           jets.append(jet)
