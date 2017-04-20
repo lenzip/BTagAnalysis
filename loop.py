@@ -238,6 +238,11 @@ if __name__ == "__main__":
         # xsec weight
         weight = weight*crossSection.getWeight(chain, opzioni.lumi*1000.)
 
+        #just to be sure, check the main tree and the helper one are in sync
+        if event.Evt != event.Evt_new:
+          print "main tree and helper tree are out of sync. Big Problem. Ending now."
+          sys.exit(1)
+
       i=i+1
       if (i%1000==0):
         sys.stdout.write("\rprocessing event %d" %i)

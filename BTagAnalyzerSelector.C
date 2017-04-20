@@ -507,8 +507,8 @@ void  BTagAnalyzerSelector::JEC(int ij)
       if( genpt >= 0. ) {
         jpt_c = genpt + cJER[etaIdx]*(jpt-genpt);
       
-        double jpt_c_down = genpt + cJER_down[etaIdx]*(jpt-genpt);
-        double jpt_c_up = genpt + cJER_up[etaIdx]*(jpt-genpt);
+        jpt_c_down = genpt + cJER_down[etaIdx]*(jpt-genpt);
+        jpt_c_up = genpt + cJER_up[etaIdx]*(jpt-genpt);
       
         if( jpt_c < 0. ) jpt_c = 0.;
         if( jpt_c_down < 0. ) jpt_c_down = 0.;
@@ -518,6 +518,7 @@ void  BTagAnalyzerSelector::JEC(int ij)
   
       //jpt = jpt_c;
    }  
+    
 
    Jet_ptJERUp[ij] = jpt_c_up;
    Jet_ptJERDo[ij] = jpt_c_down;
