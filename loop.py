@@ -245,7 +245,7 @@ if __name__ == "__main__":
 
       i=i+1
       if (i%1000==0):
-        sys.stdout.write("\rprocessing event %d" %i)
+        sys.stdout.write("\rprocessing event %d/%d" %(i, chain.GetEntries()))
         sys.stdout.flush()
 
       # global event selection    
@@ -255,16 +255,16 @@ if __name__ == "__main__":
       nJet=event.nJet
       nPFMuon=event.nPFMuon
       jets=[]
-      print "This event has", nJet, "jets", event.Evt#, event.Evt_new
+      #print "This event has", nJet, "jets", event.Evt#, event.Evt_new
       for IJ in range(nJet):
-        print "gluonSplitting  (Up,Do)", event.gluonSplittingWeightUp[IJ], event.gluonSplittingWeightDo[IJ]  
-        print "bFragmentation  (Up,Do)", event.bFragmentationWeightUp[IJ], event.bFragmentationWeightDo[IJ]  
-        print "cdFragmentation (Up,Do)", event.cdFragmentationWeightUp[IJ], event.cdFragmentationWeightDo[IJ] 
-        print "cFragmentation  (Up,Do)", event.cFragmentationWeightUp[IJ], event.cFragmentationWeightDo[IJ]    
-        print "v0              (Up,Do)", event.v0WeightUp[IJ], event.v0WeightDo[IJ] 
-        print "pt                     ", event.Jet_pt[IJ]
-        print "pt JER          (Up,Do)", event.Jet_ptJERUp[IJ], event.Jet_ptJERDo[IJ]
-        print "pt JES          (Up,Do)", event.Jet_ptJESUp[IJ], event.Jet_ptJESDo[IJ]
+        #print "gluonSplitting  (Up,Do)", event.gluonSplittingWeightUp[IJ], event.gluonSplittingWeightDo[IJ]  
+        #print "bFragmentation  (Up,Do)", event.bFragmentationWeightUp[IJ], event.bFragmentationWeightDo[IJ]  
+        #print "cdFragmentation (Up,Do)", event.cdFragmentationWeightUp[IJ], event.cdFragmentationWeightDo[IJ] 
+        #print "cFragmentation  (Up,Do)", event.cFragmentationWeightUp[IJ], event.cFragmentationWeightDo[IJ]    
+        #print "v0              (Up,Do)", event.v0WeightUp[IJ], event.v0WeightDo[IJ] 
+        #print "pt                     ", event.Jet_pt[IJ]
+        #print "pt JER          (Up,Do)", event.Jet_ptJERUp[IJ], event.Jet_ptJERDo[IJ]
+        #print "pt JES          (Up,Do)", event.Jet_ptJESUp[IJ], event.Jet_ptJESDo[IJ]
         jet=Jet(event,IJ)
         if (jet.fourMomentum.Pt()>20. and abs(jet.fourMomentum.Eta())<2.4):# and jet.Jet_Proba>0):
           jets.append(jet)
