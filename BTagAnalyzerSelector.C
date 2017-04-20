@@ -48,7 +48,7 @@ BTagAnalyzerSelector::BTagAnalyzerSelector(TTree * tree) : fChain(0){
   b_Jet_ptJERDo = newTree->Branch("Jet_ptJERDo", Jet_ptJERDo, "Jet_ptJERDo[500]/F");
   b_Jet_ptJESUp = newTree->Branch("Jet_ptJESUp", Jet_ptJESUp, "Jet_ptJESUp[500]/F");
   b_Jet_ptJESDo = newTree->Branch("Jet_ptJESDo", Jet_ptJESDo, "Jet_ptJESDo[500]/F");
-  b_Evt_new     = newTree->Branch("b_Evt_new", &Evt_new, "Evt_new/I");
+  b_Evt_new     = newTree->Branch("Evt_new", &Evt_new, "Evt_new/I");
  
 
 
