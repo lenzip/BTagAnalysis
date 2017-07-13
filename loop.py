@@ -10,6 +10,8 @@ from prescale import *
 from pileup import *
 from crossSection import *
 
+import copy
+
 def skim(tree, eventSel):
   mylist = TEventList("mylist") 
   tree.Draw(">> mylist", eventSel)
@@ -17,7 +19,7 @@ def skim(tree, eventSel):
   print "total chain entries:", tree.GetEntries()
   mylist.Print()
 
-def book(outFileName, variables, cuts):
+def bookamelo(outFileName, variables, cuts, systematics):
   outFile = TFile(outFileName, "recreate")
   outFile.cd()
   histos={}
@@ -27,7 +29,15 @@ def book(outFileName, variables, cuts):
       hname = varname+"__"+cutname
       h = TH1F(hname, hname, variables[varname]['nbins'], variables[varname]['xmin'], variables[varname]['xmax'])
       h.Sumw2()
-      histos[varname][cutname] = h
+      histos[varname][cutname] = {}
+      histos[varname][cutname]['central'] = h
+      for systematic in systematics:
+        hnameup = hname+"_"+systematic+"_up"
+        hnamedo = hname+"_"+systematic+"_do"
+        hup = TH1F(hnameup, hnameup, variables[varname]['nbins'], variables[varname]['xmin'], variables[varname]['xmax'])
+        histos[varname][cutname][systematic+"_up"] = hup 
+        hdo = TH1F(hnamedo, hnamedo, variables[varname]['nbins'], variables[varname]['xmin'], variables[varname]['xmax'])
+        histos[varname][cutname][systematic+"_do"] = hdo 
 
   return outFile, histos    
     
@@ -49,6 +59,7 @@ if __name__ == "__main__":
   parser.add_option("-t", action="store", help="tree name from BTagAnalyzer (default=btagana/ttree)", default="btagana/ttree", dest="tree")
   parser.add_option("-c", action="store", help="cuts file name (default cuts.py)", default="cuts.py", dest="cutsFile")
   parser.add_option("-v", action="store", help="variables file name (default variables.py)", default="variables.py", dest="variablesFile")
+  parser.add_option("-s", action="store", help="systematics file name (default systematics.py)", default="systematics.py", dest="systematicsFile")
   parser.add_option("-d", action="store_true", help="if it is data apply trigger (default false (i.e. MC))", default=False, dest="isData")
   parser.add_option("-l", action="store", help="data luminosity in fb-1 (default=35.9)", default=35.9, dest="lumi")
 
@@ -129,6 +140,54 @@ if __name__ == "__main__":
     print "!!! ERROR file ", variablesFile, " does not exist."
     sys.exit(1)
 
+  weightSystematics = []
+  shapeSystematics = []
+  systematicsFile = opzioni.systematicsFile
+  if os.path.exists(systematicsFile) :
+    handle = open(systematicsFile,'r')
+    exec(handle)
+    handle.close()
+  else:
+    print "!!! ERROR file ", systematicsFile, " does not exist."
+    sys.exit(1)
+  allSystematics = []
+  allSystematics.extend(weightSystematics)
+  allSystematics.extend(shapeSystematics)
+
+  weightSystematicsFunctionsUp = {}
+  weightSystematicsFunctionsDo = {}
+  for syst in weightSystematics:
+    weightSystematicsFunctionsUp[syst] = eval('lambda event, IJ: event.'+syst+"WeightUp[IJ]")
+    weightSystematicsFunctionsDo[syst] = eval('lambda event, IJ: event.'+syst+"WeightDo[IJ]")
+  
+  cutsUp = {}
+  cutFunctionsUp = {}
+  cutsDo = {}
+  cutFunctionsDo = {}
+  variablesUp = {}
+  variableFunctionsUp = {}
+  variablesDo = {}
+  variableFunctionsDo = {}
+
+  for syst in shapeSystematics:
+    cutsUp[syst] = copy.deepcopy(cuts)
+    cutFunctionsUp[syst] = copy.deepcopy(cutFunctions)
+    cutsDo[syst] = copy.deepcopy(cuts)
+    cutFunctionsDo[syst] = copy.deepcopy(cutFunctions)
+    for cut in cuts:
+      cutsUp[syst][cut] = cutsUp[syst][cut].replace('Jet_pt', 'Jet_pt'+syst+"Up")
+      cutFunctionsUp[syst][cut]=eval("lambda event,IJ:"+cutsUp[syst][cut])
+      cutsDo[syst][cut] = cutsDo[syst][cut].replace('Jet_pt', 'Jet_pt'+syst+"Do")
+      cutFunctionsDo[syst][cut]=eval("lambda event,IJ:"+cutsDo[syst][cut])
+    variablesUp[syst] = copy.deepcopy(variables)  
+    variableFunctionsUp[syst] = copy.deepcopy(variableFunctions)
+    variablesDo[syst] = copy.deepcopy(variables)
+    variableFunctionsDo[syst] = copy.deepcopy(variableFunctions)
+    for variable in variables:
+      variablesUp[syst][variable]['expression'] = variablesUp[syst][variable]['expression'].replace('Jet_pt', 'Jet_pt'+syst+"Up")
+      variableFunctionsUp[syst][variable]=eval("lambda event,IJ:"+variablesUp[syst][variable]['expression'])
+      variablesDo[syst][variable]['expression'] = variablesDo[syst][variable]['expression'].replace('Jet_pt', 'Jet_pt'+syst+"Do")
+      variableFunctionsDo[syst][variable]=eval("lambda event,IJ:"+variablesDo[syst][variable]['expression'])
 
   fileList=open(args[0])
   outputFile=args[1]
@@ -140,6 +199,7 @@ if __name__ == "__main__":
   print "...done"
   fileList.seek(0)
 
+  print bookamelo
   if not opzioni.isData:
     print "this is MC, adding systematic variations to the tree..."
     cmssw_base = os.getenv('CMSSW_BASE')
@@ -187,9 +247,10 @@ if __name__ == "__main__":
     chain.AddFriend(helperChain)
     print "...done"
 
+  print bookamelo
   # book histos
   print "booking histos..."
-  outFile, histos = book(outputFile, variables, cuts)
+  outFile, histos = bookamelo(outputFile, variables, cuts, allSystematics)
   print "...done"
 
   #skim the chain according to the gloval event selection
@@ -324,7 +385,6 @@ if __name__ == "__main__":
       #print triggers, triggerPtBins, matches
       if len(matches)==0: continue
       #print "triggered"
-      #print puppapuppa
       if opzioni.isData:
         #get the prescale weight from the first trigger in the list
         #print ">>>>", matches
@@ -339,7 +399,18 @@ if __name__ == "__main__":
         for cut in cuts.keys():
           if cutFunctions[cut](event, IJ):
             for variable in variables.keys():
-              histos[variable][cut].Fill(variableFunctions[variable](event, IJ), weight)
+              histos[variable][cut]['central'].Fill(variableFunctions[variable](event, IJ), weight)
+              for syst in weightSystematics:
+                weightup = weightSystematicsFunctionsUp[syst](event, IJ)
+                weightdo = weightSystematicsFunctionsDo[syst](event, IJ)
+                print weightup,weightdo
+                histos[variable][cut][syst+'_up'].Fill(variableFunctions[variable](event, IJ), weight*weightup)
+                histos[variable][cut][syst+'_do'].Fill(variableFunctions[variable](event, IJ), weight*weightdo)
+          for syst in shapeSystematics:
+            if cutFunctionsUp[syst][cut](event, IJ):
+              histos[variable][cut][syst+'_up'].Fill(variableFunctionsUp[syst][variable](event, IJ), weight)
+            if cutFunctionsDo[syst][cut](event, IJ):  
+              histos[variable][cut][syst+'_do'].Fill(variableFunctionsDo[syst][variable](event, IJ), weight)
     except KeyboardInterrupt:
       print "\nInterrupted"
       break
