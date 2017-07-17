@@ -400,17 +400,20 @@ if __name__ == "__main__":
           if cutFunctions[cut](event, IJ):
             for variable in variables.keys():
               histos[variable][cut]['central'].Fill(variableFunctions[variable](event, IJ), weight)
-              for syst in weightSystematics:
-                weightup = weightSystematicsFunctionsUp[syst](event, IJ)
-                weightdo = weightSystematicsFunctionsDo[syst](event, IJ)
-                print weightup,weightdo
-                histos[variable][cut][syst+'_up'].Fill(variableFunctions[variable](event, IJ), weight*weightup)
-                histos[variable][cut][syst+'_do'].Fill(variableFunctions[variable](event, IJ), weight*weightdo)
-          for syst in shapeSystematics:
-            if cutFunctionsUp[syst][cut](event, IJ):
-              histos[variable][cut][syst+'_up'].Fill(variableFunctionsUp[syst][variable](event, IJ), weight)
-            if cutFunctionsDo[syst][cut](event, IJ):  
-              histos[variable][cut][syst+'_do'].Fill(variableFunctionsDo[syst][variable](event, IJ), weight)
+              if not opzioni.isData:
+                for syst in weightSystematics:
+                  weightup = weightSystematicsFunctionsUp[syst](event, IJ)
+                  weightdo = weightSystematicsFunctionsDo[syst](event, IJ)
+                  histos[variable][cut][syst+'_up'].Fill(variableFunctions[variable](event, IJ), weight*weightup)
+                  histos[variable][cut][syst+'_do'].Fill(variableFunctions[variable](event, IJ), weight*weightdo)
+          if not opzioni.isData:      
+            for syst in shapeSystematics:
+              if cutFunctionsUp[syst][cut](event, IJ):
+                for variable in variables.keys():
+                  histos[variable][cut][syst+'_up'].Fill(variableFunctionsUp[syst][variable](event, IJ), weight)
+              if cutFunctionsDo[syst][cut](event, IJ):  
+                for variable in variables.keys():
+                  histos[variable][cut][syst+'_do'].Fill(variableFunctionsDo[syst][variable](event, IJ), weight)
     except KeyboardInterrupt:
       print "\nInterrupted"
       break
