@@ -8,6 +8,7 @@ dataSubdir1=$(gfal-ls $dataDir | grep BTagMu)
 mcSubdir1=$(gfal-ls $mcDir | grep MuEnriched)
 
 nFilesDATA=5
+nFilesMC=2
 outDir="lists/"
 
 mkdir $outDir
@@ -58,7 +59,7 @@ for dir1 in $mcSubdir1; do
       done 
     done  
   done
-  split -a 5 -l ${nFilesDATA} -d /tmp/tempMC.txt /tmp/${dir1}_
+  split -a 5 -l ${nFilesMC} -d /tmp/tempMC.txt /tmp/${dir1}_
   lsfi=$(ls /tmp/${dir1}_*)
   jid=0
   for fil in $lsfi; do
