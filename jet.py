@@ -7,3 +7,8 @@ class Jet:
     self.fourMomentum = l4
     self.index = index
     self.Jet_Proba = event.Jet_Proba[index]
+
+  def printMe(self):
+    print "jet pt", self.fourMomentum.Pt()
+    print "jet eta", self.fourMomentum.Eta()
+    print "jet JP", self.Jet_Proba

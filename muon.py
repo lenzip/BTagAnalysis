@@ -29,6 +29,18 @@ class Muon:
     if (self.chi2Tk>10): return False
     return True
 
+  def printMe(self):
+    print "muon pt", self.fourMomentum.Pt()
+    print "muon eta", self.fourMomentum.Eta()
+    print "muon isGlobal", self.isGlobal
+    print "muon nMuHit", self.nMuHit
+    print "muon nTkHit", self.nTkHit
+    print "muon nPixHit", self.nPixHit
+    print "muon nOutHit", self.nOutHit
+    print "muon nMatched", self.nMatched
+    print "muon chi2", self.chi2
+    print "muon chi2Tk", self.chi2Tk
+
   def match(self, jet):
     if self.fourMomentum.DeltaR(jet.fourMomentum) < 0.4 and self.IdxJet == jet.index:
       #print "muon", self.index, "matching with jet", jet.index

@@ -7,10 +7,12 @@ class Pileup:
     self.files=[]
     self.files.append(TFile(dataHistos[0]))
     self.dataHist = self.files[0].Get("pileup").Clone()
+    self.dataHist.Scale(1./self.dataHist.Integral())
     self.dataHist.Scale(dataLumis[0])
     for i in range(1, len(dataLumis)):
       self.files.append(TFile(dataHistos[i]))
       h = self.files[i].Get("pileup")
+      h.Scale(1./h.Integral())  
       h.Scale(dataLumis[i])
       self.dataHist.Add(h)
     

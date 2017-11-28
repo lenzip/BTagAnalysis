@@ -284,7 +284,7 @@ if __name__ == "__main__":
   passed=0
   for event in chain:
     try:
-      #if event.Evt != 615322131 and event.Evt != 637075692:
+      #if event.Evt != 1614523636 :
       #  continue
       # event weight
      
@@ -327,10 +327,10 @@ if __name__ == "__main__":
         #print "pt JER          (Up,Do)", event.Jet_ptJERUp[IJ], event.Jet_ptJERDo[IJ]
         #print "pt JES          (Up,Do)", event.Jet_ptJESUp[IJ], event.Jet_ptJESDo[IJ]
         jet=Jet(event,IJ)
-        if (jet.fourMomentum.Pt()>20. and abs(jet.fourMomentum.Eta())<2.4):# and jet.Jet_Proba>0):
+        if (jet.fourMomentum.Pt()>20. and abs(jet.fourMomentum.Eta())<2.4):# and jet.Jet_Proba > 0.):
           jets.append(jet)
       #for jet in jets:
-      #  print jet.index, jet.fourMomentum.Pt(),jet.fourMomentum.Eta(),jet.Jet_Proba
+      # print jet.index, jet.fourMomentum.Pt(),jet.fourMomentum.Eta(),jet.Jet_Proba
       muons=[]
       for IM in range(nPFMuon):
         muon=Muon(event,IM)
@@ -342,12 +342,17 @@ if __name__ == "__main__":
       nJets=[0, 0, 0, 0, 0] 
       nMuJets=[0, 0, 0, 0, 0]
       atLeastOneMatchedMuon=False
+      jetsWithMatchedMuons=[]
       for jet in jets:
+        #jet.printMe()
         matched=False
         for muon in muons:
           if muon.passMuId() and muon.match(jet):
+            #muon.printMe()
+            #print "matched"
             atLeastOneMatchedMuon = True
             matched = True
+            jetsWithMatchedMuons.append(jet)
             break
             
         if (jet.fourMomentum.Pt()>20. and jet.fourMomentum.Pt()<50): nJets[0]=nJets[0]+1
@@ -363,6 +368,9 @@ if __name__ == "__main__":
         if (jet.fourMomentum.Pt()>320. and matched) : nMuJets[4]=nMuJets[4]+1 
         
       if not atLeastOneMatchedMuon: continue
+      #for jet in jetsWithMatchedMuons:
+      #  print jet.index, jet.fourMomentum.Pt(),jet.fourMomentum.Eta(),jet.Jet_Proba,event.Jet_flavour[jet.index]
+
       #print "at east one matched muon"
       # trigger selection    
       triggers=[]
@@ -393,27 +401,30 @@ if __name__ == "__main__":
         weight = weight*prescaleTables[str(matches[0])].getPrescaleWeight(event.Run, event.LumiBlock)
 
       passed +=1
-      passedFile += "%6d %6d %10d  %+2d  %+4.2f %+4.2f %+4.2f \n" % (event.Run, event.LumiBlock, event.Evt , event.nJet, jets[0].fourMomentum.Pt(), jets[0].fourMomentum.Eta(), jets[0].fourMomentum.Phi());
+      #passedFile += "%6d %6d %10d  %+2d  %+4.2f %+4.2f %+4.2f \n" % (event.Run, event.LumiBlock, event.Evt , event.nJet, jets[0].fourMomentum.Pt(), jets[0].fourMomentum.Eta(), jets[0].fourMomentum.Phi());
       # loop over jets, apply jet specific categorization and fill plots   
-      for IJ in range(nJet):
+      for jet in jetsWithMatchedMuons:
         for cut in cuts.keys():
-          if cutFunctions[cut](event, IJ):
-            for variable in variables.keys():
-              histos[variable][cut]['central'].Fill(variableFunctions[variable](event, IJ), weight)
+          if cutFunctions[cut](event, jet.index):
+            if cut == "ptbin_20.0-30.0_l_CombIVFM":
+              print cuts[cut]
+              passedFile += "%6d %6d %10d  %+2d  %+4.2f %+4.2f %+4.2f \n" % (event.Run, event.LumiBlock, event.Evt , event.nJet, jet.fourMomentum.Pt(), jet.fourMomentum.Eta(), jet.fourMomentum.Phi())
+            for variable in variables.keys(): 
+              histos[variable][cut]['central'].Fill(variableFunctions[variable](event, jet.index), weight)
               if not opzioni.isData:
                 for syst in weightSystematics:
-                  weightup = weightSystematicsFunctionsUp[syst](event, IJ)
-                  weightdo = weightSystematicsFunctionsDo[syst](event, IJ)
-                  histos[variable][cut][syst+'_up'].Fill(variableFunctions[variable](event, IJ), weight*weightup)
-                  histos[variable][cut][syst+'_do'].Fill(variableFunctions[variable](event, IJ), weight*weightdo)
+                  weightup = weightSystematicsFunctionsUp[syst](event, jet.index)
+                  weightdo = weightSystematicsFunctionsDo[syst](event, jet.index)
+                  histos[variable][cut][syst+'_up'].Fill(variableFunctions[variable](event, jet.index), weight*weightup)
+                  histos[variable][cut][syst+'_do'].Fill(variableFunctions[variable](event, jet.index), weight*weightdo)
           if not opzioni.isData:      
             for syst in shapeSystematics:
-              if cutFunctionsUp[syst][cut](event, IJ):
+              if cutFunctionsUp[syst][cut](event, jet.index):
                 for variable in variables.keys():
-                  histos[variable][cut][syst+'_up'].Fill(variableFunctionsUp[syst][variable](event, IJ), weight)
-              if cutFunctionsDo[syst][cut](event, IJ):  
+                  histos[variable][cut][syst+'_up'].Fill(variableFunctionsUp[syst][variable](event, jet.index), weight)
+              if cutFunctionsDo[syst][cut](event, jet.index):  
                 for variable in variables.keys():
-                  histos[variable][cut][syst+'_do'].Fill(variableFunctionsDo[syst][variable](event, IJ), weight)
+                  histos[variable][cut][syst+'_do'].Fill(variableFunctionsDo[syst][variable](event, jet.index), weight)
     except KeyboardInterrupt:
       print "\nInterrupted"
       break
@@ -421,4 +432,4 @@ if __name__ == "__main__":
   print "Total events processed", i, "; passed", passed
   outFile.Write()
 
-  #print passedFile
+  print passedFile

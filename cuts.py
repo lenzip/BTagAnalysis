@@ -56,13 +56,13 @@ for ipt in range(len(ptbins)-1):
   for flavor in flavors:
     if flavor == "l":
       baseCutNameAndFlavor = baseCutName+"_l"
-      cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*((event.Jet_flavour[IJ] >= 1 and event.Jet_flavour[IJ]<=3) or event.Jet_flavour[IJ] == 21)") 
+      cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*((abs(event.Jet_flavour[IJ]) >= 0 and abs(event.Jet_flavour[IJ])<=3) or event.Jet_flavour[IJ] == 21)") 
     elif flavor == "c":
       baseCutNameAndFlavor = baseCutName+"_c"
-      cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*(event.Jet_flavour[IJ] == 4)")   
+      cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*(abs(event.Jet_flavour[IJ]) == 4)")   
     else:
       baseCutNameAndFlavor = baseCutName+"_b"
-      cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*(event.Jet_flavour[IJ] == 5)") 
+      cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*(abs(event.Jet_flavour[IJ]) == 5)") 
     
     for algo in algos:
       for wp in wps[algo].keys():
