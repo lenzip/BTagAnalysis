@@ -2,7 +2,7 @@
 
 export X509_USER_PROXY=/afs/cern.ch/user/l/lenzip/proxy.proxy
 
-base=/afs/cern.ch/user/l/lenzip/work/BTag2017/CMSSW_8_0_23/work/
+base=/afs/cern.ch/user/l/lenzip/work/BTag2017/CMSSW_9_4_1/work/BTagAnalysis
 
 cd $base
 

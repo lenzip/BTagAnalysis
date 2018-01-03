@@ -1,11 +1,11 @@
 #!/bin/bash
 
-dataDir="srm://maite.iihe.ac.be:8443/pnfs/iihe/cms/store/user/kskovpen/BTV/MORIOND17JPDEF/BTagMu/"
+dataDir="srm://stormfe1.pi.infn.it:8444/srm/managerv2?SFN=/cms/store/user/lenzip/BTagMorion2017/DATA/"
 #dataDirOut="root://xrootd-cms.infn.it///store/user/kskovpen/BTV/MORIOND17JPDEF/BTagMu/"
-dataDirOut="srm://maite.iihe.ac.be:8443/pnfs/iihe/cms/store/user/kskovpen/BTV/MORIOND17JPDEF/BTagMu/"
-mcDir="srm://maite.iihe.ac.be:8443/pnfs/iihe/cms/store/user/kskovpen/BTV/MORIOND17JPDEF/"
+dataDirOut="srm://stormfe1.pi.infn.it:8444/srm/managerv2?SFN=/cms/store/user/lenzip/BTagMorion2017/DATA/"
+mcDir="srm://stormfe1.pi.infn.it:8444/srm/managerv2?SFN=/cms/store/user/lenzip/BTagMorion2017/MC/"
 #mcDirOut="root://xrootd-cms.infn.it///store/user/kskovpen/BTV/MORIOND17JPDEF/"
-mcDirOut="srm://maite.iihe.ac.be:8443/pnfs/iihe/cms/store/user/kskovpen/BTV/MORIOND17JPDEF/"
+mcDirOut="srm://stormfe1.pi.infn.it:8444/srm/managerv2?SFN=/cms/store/user/lenzip/BTagMorion2017/MC/"
 dataSubdir1=$(gfal-ls $dataDir | grep BTagMu)
 mcSubdir1=$(gfal-ls $mcDir | grep MuEnriched)
 
