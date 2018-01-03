@@ -267,12 +267,12 @@ if __name__ == "__main__":
   # prepare prescale tables
   if opzioni.isData:
     prescaleTables={}
-    prescaleTables["30"] = Prescales("data/prescalesHLT_BTagMu_DiJet20_Mu5.txt")
-    prescaleTables["31"] = Prescales("data/prescalesHLT_BTagMu_DiJet40_Mu5.txt")
-    prescaleTables["32"] = Prescales("data/prescalesHLT_BTagMu_DiJet70_Mu5.txt")
-    prescaleTables["33"] = Prescales("data/prescalesHLT_BTagMu_DiJet110_Mu5.txt")
-    prescaleTables["34"] = Prescales("data/prescalesHLT_BTagMu_DiJet170_Mu5.txt")
-    prescaleTables["35"] = Prescales("data/prescalesHLT_BTagMu_Jet300_Mu5.txt")
+    prescaleTables["32"] = Prescales("data/prescalesHLT_BTagMu_AKDiJet20_Mu5.txt")
+    prescaleTables["33"] = Prescales("data/prescalesHLT_BTagMu_AKDiJet40_Mu5.txt")
+    prescaleTables["34"] = Prescales("data/prescalesHLT_BTagMu_AKDiJet70_Mu5.txt")
+    prescaleTables["35"] = Prescales("data/prescalesHLT_BTagMu_AKDiJet110_Mu5.txt")
+    prescaleTables["36"] = Prescales("data/prescalesHLT_BTagMu_AKDiJet170_Mu5.txt")
+    prescaleTables["37"] = Prescales("data/prescalesHLT_BTagMu_AKJet300_Mu5.txt")
 
   else:
     pileup = Pileup(["data/PileupHistogram_Full2017_294927-306462_69p2mb_Rereco.root"],
@@ -338,8 +338,8 @@ if __name__ == "__main__":
 
       # the following is needed to decide how to 
       # assign pt bins to Triggers
-      nJets=[0, 0, 0, 0, 0] 
-      nMuJets=[0, 0, 0, 0, 0]
+      nJets=[0, 0, 0, 0, 0, 0] 
+      nMuJets=[0, 0, 0, 0, 0, 0]
       atLeastOneMatchedMuon=False
       jetsWithMatchedMuons=[]
       for jet in jets:
@@ -357,14 +357,16 @@ if __name__ == "__main__":
         if (jet.fourMomentum.Pt()>20. and jet.fourMomentum.Pt()<50): nJets[0]=nJets[0]+1
         if (jet.fourMomentum.Pt()>50. and jet.fourMomentum.Pt()<80): nJets[1]=nJets[1]+1
         if (jet.fourMomentum.Pt()>80. and jet.fourMomentum.Pt()<120): nJets[2]=nJets[2]+1
-        if (jet.fourMomentum.Pt()>120. and jet.fourMomentum.Pt()<320): nJets[3]=nJets[3]+1
-        if (jet.fourMomentum.Pt()>320.) : nJets[4]=nJets[4]+1
+        if (jet.fourMomentum.Pt()>120. and jet.fourMomentum.Pt()<180): nJets[3]=nJets[3]+1
+        if (jet.fourMomentum.Pt()>180. and jet.fourMomentum.Pt()<320): nJets[4]=nJets[4]+1
+        if (jet.fourMomentum.Pt()>320.) : nJets[5]=nJets[5]+1
         
         if (jet.fourMomentum.Pt()>20. and jet.fourMomentum.Pt()<50 and matched): nMuJets[0]=nMuJets[0]+1 
         if (jet.fourMomentum.Pt()>50. and jet.fourMomentum.Pt()<80 and matched): nMuJets[1]=nMuJets[1]+1
         if (jet.fourMomentum.Pt()>80. and jet.fourMomentum.Pt()<120 and matched): nMuJets[2]=nMuJets[2]+1
-        if (jet.fourMomentum.Pt()>120. and jet.fourMomentum.Pt()<320 and matched): nMuJets[3]=nMuJets[3]+1
-        if (jet.fourMomentum.Pt()>320. and matched) : nMuJets[4]=nMuJets[4]+1 
+        if (jet.fourMomentum.Pt()>120. and jet.fourMomentum.Pt()<180 and matched): nMuJets[3]=nMuJets[3]+1
+        if (jet.fourMomentum.Pt()>180. and jet.fourMomentum.Pt()<320 and matched): nMuJets[4]=nMuJets[4]+1
+        if (jet.fourMomentum.Pt()>320. and matched) : nMuJets[5]=nMuJets[5]+1 
         
       if not atLeastOneMatchedMuon: continue
       #for jet in jetsWithMatchedMuons:
@@ -373,16 +375,17 @@ if __name__ == "__main__":
       #print "at east one matched muon"
       # trigger selection    
       triggers=[]
-      for itrig in range(30, 36):
-        if passTrigger(event, itrig) and itrig != 34: ##removed 170 for the moment as it was not available for the whole period
+      for itrig in range(32, 38):
+        if passTrigger(event, itrig) : #and itrig != 34: ##removed 170 for the moment as it was not available for the whole period
           triggers.append(itrig)
       if len(triggers) == 0: continue
       triggerPtBins=[]
-      if ( nJets[0] >= 2 and nMuJets[0] >= 1 )  : triggerPtBins.append(30)
-      if ( nJets[1] >= 2 and nMuJets[1] >= 1 )  : triggerPtBins.append(31)
-      if ( nJets[2] >= 2 and nMuJets[2] >= 1 )  : triggerPtBins.append(32)
-      if ( nJets[3] >= 2 and nMuJets[3] >= 1 )  : triggerPtBins.append(33)
-      if ( nJets[4] > 0 and nMuJets[4] >= 1 )   : triggerPtBins.append(35)
+      if ( nJets[0] >= 2 and nMuJets[0] >= 1 )  : triggerPtBins.append(32)
+      if ( nJets[1] >= 2 and nMuJets[1] >= 1 )  : triggerPtBins.append(33)
+      if ( nJets[2] >= 2 and nMuJets[2] >= 1 )  : triggerPtBins.append(34)
+      if ( nJets[3] >= 2 and nMuJets[3] >= 1 )  : triggerPtBins.append(35)
+      if ( nJets[4] >= 2 and nMuJets[4] >= 1 )  : triggerPtBins.append(36)
+      if ( nJets[5] > 0  and nMuJets[5] >= 1 )  : triggerPtBins.append(37)
       #print nJets
       #print nMuJets
 
