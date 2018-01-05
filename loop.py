@@ -61,7 +61,7 @@ if __name__ == "__main__":
   parser.add_option("-v", action="store", help="variables file name (default variables.py)", default="variables.py", dest="variablesFile")
   parser.add_option("-s", action="store", help="systematics file name (default systematics.py)", default="systematics.py", dest="systematicsFile")
   parser.add_option("-d", action="store_true", help="if it is data apply trigger (default false (i.e. MC))", default=False, dest="isData")
-  parser.add_option("-l", action="store", help="data luminosity in fb-1 (default=35.9)", default=35.9, dest="lumi")
+  parser.add_option("-l", action="store", help="data luminosity in fb-1 (default=4.235)", default=4.235, dest="lumi")
 
 
   (opzioni, args) = parser.parse_args()
@@ -267,15 +267,15 @@ if __name__ == "__main__":
   # prepare prescale tables
   if opzioni.isData:
     prescaleTables={}
-    prescaleTables["32"] = Prescales("data/prescalesHLT_BTagMu_AKDiJet20_Mu5.txt")
-    prescaleTables["33"] = Prescales("data/prescalesHLT_BTagMu_AKDiJet40_Mu5.txt")
-    prescaleTables["34"] = Prescales("data/prescalesHLT_BTagMu_AKDiJet70_Mu5.txt")
-    prescaleTables["35"] = Prescales("data/prescalesHLT_BTagMu_AKDiJet110_Mu5.txt")
-    prescaleTables["36"] = Prescales("data/prescalesHLT_BTagMu_AKDiJet170_Mu5.txt")
-    prescaleTables["37"] = Prescales("data/prescalesHLT_BTagMu_AKJet300_Mu5.txt")
+    prescaleTables["32"] = Prescales("data/prescalesHLT_BTagMu_AK4DiJet20_Mu5.txt")
+    prescaleTables["33"] = Prescales("data/prescalesHLT_BTagMu_AK4DiJet40_Mu5.txt")
+    prescaleTables["34"] = Prescales("data/prescalesHLT_BTagMu_AK4DiJet70_Mu5.txt")
+    prescaleTables["35"] = Prescales("data/prescalesHLT_BTagMu_AK4DiJet110_Mu5.txt")
+    prescaleTables["36"] = Prescales("data/prescalesHLT_BTagMu_AK4DiJet170_Mu5.txt")
+    prescaleTables["37"] = Prescales("data/prescalesHLT_BTagMu_AK4Jet300_Mu5.txt")
 
   else:
-    pileup = Pileup(["data/PileupHistogram_Full2017_294927-306462_69p2mb_Rereco.root"],
+    pileup = Pileup(["data/PileupHistogram_Run2017D_69p2mb_Rereco.root"],
                      [1.],
                      chain)
     crossSection = CrossSection("data/xsectionFilter.txt")                 
