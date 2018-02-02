@@ -9,7 +9,13 @@ cd $base
 eval `scram runtime -sh`
 cd -
 
-mkdir $base/plots
+list=$1
+lumi=$2
+puprofile=$3
+outdir=$4
+isdata=$5
+
+mkdir $base/$outdir
 
 outputFile=`basename $1 ".txt"`.root
 
@@ -21,6 +27,6 @@ cp $base/copy.sh .
 ./copy.sh $base/listsFromKirill/$1 ./
 
 #echo $outputFile
-python loop.py listlocal.txt $base/plots/$outputFile $2 
+python loop.py listlocal.txt $base/$outdir/$outputFile -l $lumi -p $puprofile $isdata 
 
 

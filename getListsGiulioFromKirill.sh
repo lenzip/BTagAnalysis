@@ -1,17 +1,17 @@
 #!/bin/bash
 
-dataDir="srm://stormfe1.pi.infn.it:8444/srm/managerv2?SFN=/cms/store/user/lenzip/BTagMorion2017/DATA/BTagMu/"
+dataDir="srm://stormfe1.pi.infn.it:8444/srm/managerv2?SFN=/cms/store/user/lenzip/BTagMorion2017/DATAVALID/BTagMu/"
 #dataDirOut="root://xrootd-cms.infn.it///store/user/kskovpen/BTV/MORIOND17JPDEF/BTagMu/"
-dataDirOut="srm://stormfe1.pi.infn.it:8444/srm/managerv2?SFN=/cms/store/user/lenzip/BTagMorion2017/DATA/BTagMu/"
+dataDirOut="srm://stormfe1.pi.infn.it:8444/srm/managerv2?SFN=/cms/store/user/lenzip/BTagMorion2017/DATAVALID/BTagMu/"
 mcDir="srm://stormfe1.pi.infn.it:8444/srm/managerv2?SFN=/cms/store/user/lenzip/BTagMorion2017/MC/"
 #mcDirOut="root://xrootd-cms.infn.it///store/user/kskovpen/BTV/MORIOND17JPDEF/"
 mcDirOut="srm://stormfe1.pi.infn.it:8444/srm/managerv2?SFN=/cms/store/user/lenzip/BTagMorion2017/MC/"
-dataSubdir1=$(gfal-ls $dataDir | grep Run2017D)
+dataSubdir1=$(gfal-ls $dataDir | grep Run2017)
 mcSubdir1=$(gfal-ls $mcDir | grep MuEnriched)
 echo "gfal-ls $dataDir | grep BTagMu"
 nFilesDATA=5
-nFilesMC=2
-outDir="listsFromKirill/"
+nFilesMC=5
+outDir="listsFromKirill"
 
 mkdir $outDir
 

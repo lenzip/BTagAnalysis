@@ -28,6 +28,7 @@ def bookamelo(outFileName, variables, cuts, systematics):
     for cutname in cuts.keys():
       hname = varname+"__"+cutname
       h = TH1F(hname, hname, variables[varname]['nbins'], variables[varname]['xmin'], variables[varname]['xmax'])
+      #print "booking", hname, " between",variables[varname]['xmin'],variables[varname]['xmax']
       h.Sumw2()
       histos[varname][cutname] = {}
       histos[varname][cutname]['central'] = h
@@ -62,6 +63,7 @@ if __name__ == "__main__":
   parser.add_option("-s", action="store", help="systematics file name (default systematics.py)", default="systematics.py", dest="systematicsFile")
   parser.add_option("-d", action="store_true", help="if it is data apply trigger (default false (i.e. MC))", default=False, dest="isData")
   parser.add_option("-l", action="store", help="data luminosity in fb-1 (default=4.235)", default=4.235, dest="lumi")
+  parser.add_option("-p", action="store", help="what PU profile to use (defualt=PileupHistogram_Run2017D_69p2mb_Rereco.root)", default="PileupHistogram_Run2017D_69p2mb_Rereco.root", dest="pufile")
 
 
   (opzioni, args) = parser.parse_args()
@@ -275,7 +277,7 @@ if __name__ == "__main__":
     prescaleTables["37"] = Prescales("data/prescalesHLT_BTagMu_AK4Jet300_Mu5.txt")
 
   else:
-    pileup = Pileup(["data/PileupHistogram_Run2017D_69p2mb_Rereco.root"],
+    pileup = Pileup(["data/"+opzioni.pufile],
                      [1.],
                      chain)
     crossSection = CrossSection("data/xsectionFilter.txt")                 
@@ -296,7 +298,7 @@ if __name__ == "__main__":
         # PU weight
         weight = weight*pileup.getWeight(npu)
         # xsec weight
-        weight = weight*crossSection.getWeight(chain, opzioni.lumi*1000.)
+        weight = weight*crossSection.getWeight(chain, float(opzioni.lumi)*1000.)
 
         #just to be sure, check the main tree and the helper one are in sync
         if event.Evt != event.Evt_new:
@@ -315,8 +317,10 @@ if __name__ == "__main__":
       nJet=event.nJet
       nPFMuon=event.nPFMuon
       jets=[]
+      event.associatedMuonIds = []
       #print "This event has", nJet, "jets", event.Evt#, event.Evt_new
       for IJ in range(nJet):
+        event.associatedMuonIds.append(-1)
         #print "gluonSplitting  (Up,Do)", event.gluonSplittingWeightUp[IJ], event.gluonSplittingWeightDo[IJ]  
         #print "bFragmentation  (Up,Do)", event.bFragmentationWeightUp[IJ], event.bFragmentationWeightDo[IJ]  
         #print "cdFragmentation (Up,Do)", event.cdFragmentationWeightUp[IJ], event.cdFragmentationWeightDo[IJ] 
@@ -326,6 +330,7 @@ if __name__ == "__main__":
         #print "pt JER          (Up,Do)", event.Jet_ptJERUp[IJ], event.Jet_ptJERDo[IJ]
         #print "pt JES          (Up,Do)", event.Jet_ptJESUp[IJ], event.Jet_ptJESDo[IJ]
         jet=Jet(event,IJ)
+        event.associatedMuonIds.append(-1)
         if (jet.fourMomentum.Pt()>20. and abs(jet.fourMomentum.Eta())<2.4):# and jet.Jet_Proba > 0.):
           jets.append(jet)
       #for jet in jets:
@@ -349,8 +354,11 @@ if __name__ == "__main__":
           if muon.passMuId() and muon.match(jet):
             #muon.printMe()
             #print "matched"
+            jet.associateMuon(muon.index)
+            event.associatedMuonIds
             atLeastOneMatchedMuon = True
             matched = True
+            event.associatedMuonIds[jet.index] = muon.index
             jetsWithMatchedMuons.append(jet)
             break
             

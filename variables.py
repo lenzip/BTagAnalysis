@@ -6,7 +6,7 @@ variables["JP"] = {
   "xmax":  2,
   "nbins":  40 
 }
-
+'''
 variables["PT"] = {
   "expression": "min(event.Jet_pt[IJ], 599)",
   "xmin": 20,
@@ -21,10 +21,27 @@ variables["nPV"] = {
   "nbins": 100
 
 }
+
+variables["ETA"] = {
+  "expression": "event.Jet_eta[IJ]",
+  "xmin": -3,
+  "xmax": 3,
+  "nbins": 60
+}
+
+variables["MuPt"] = {
+  "expression": "event.PFMuon_pt[event.associatedMuonIds[IJ]] if event.associatedMuonIds[IJ]>= 0 else -10.",
+  "xmin": 5,
+  "xmax": 100,
+  "nbins": 60
+}
+'''
 activeBranches.extend([
 'Jet_Proba',
 'Jet_pt',
-'nPV'
+'Jet_eta',
+'nPV',
+'PFMuon_pt'
 ])
 
 variableFunctions={}

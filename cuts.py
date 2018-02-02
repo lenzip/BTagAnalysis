@@ -5,8 +5,8 @@ cuts={}
 
 
 #pt bins for the sf calculation
-#ptbins=[20., 30., 50., 70., 100., 140., 200., 300., 670., 1000.]
-ptbins=[20.,1000.]
+ptbins=[20., 30., 50., 70., 100., 140., 200., 300., 670., 1000.]
+#ptbins=[20.,1000.]
 
 # algorithms for which SF are to be computed and corresponding working points
 # the algorithm name must match the branch name in the BTagAnalyzer output, i.e. Jet_<algo>
@@ -56,18 +56,22 @@ for ipt in range(len(ptbins)-1):
   for flavor in flavors:
     if flavor == "l":
       baseCutNameAndFlavor = baseCutName+"_l"
-      cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*((abs(event.Jet_flavour[IJ]) >= 0 and abs(event.Jet_flavour[IJ])<=3) or event.Jet_flavour[IJ] == 21)") 
+      cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*((abs(event.Jet_flavour[IJ]) >= 0 and abs(event.Jet_flavour[IJ])<=3) or event.Jet_flavour[IJ] == 21)")
+      cuts[baseCutNameAndFlavor+"_JP0"] = cuts[baseCutNameAndFlavor].replace("event.Jet_Proba[IJ] > 0","event.Jet_Proba[IJ]<=0")
     elif flavor == "c":
       baseCutNameAndFlavor = baseCutName+"_c"
       cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*(abs(event.Jet_flavour[IJ]) == 4)")   
+      cuts[baseCutNameAndFlavor+"_JP0"] = cuts[baseCutNameAndFlavor].replace("event.Jet_Proba[IJ] > 0","event.Jet_Proba[IJ]<=0")
     else:
       baseCutNameAndFlavor = baseCutName+"_b"
       cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*(abs(event.Jet_flavour[IJ]) == 5)") 
+      cuts[baseCutNameAndFlavor+"_JP0"] = cuts[baseCutNameAndFlavor].replace("event.Jet_Proba[IJ] > 0","event.Jet_Proba[IJ]<=0")
     
     for algo in algos:
       for wp in wps[algo].keys():
         baseCutNameAndFlavorAndTagger=baseCutNameAndFlavor+"_"+algo+wp
         cuts[baseCutNameAndFlavorAndTagger] = cuts[baseCutNameAndFlavor] + "*(event.Jet_"+algo+"[IJ]>"+str(wps[algo][wp])+ ")"                         
+        cuts[baseCutNameAndFlavorAndTagger+"_JP0"] = cuts[baseCutNameAndFlavorAndTagger].replace("event.Jet_Proba[IJ] > 0","event.Jet_Proba[IJ]<=0")                         
         baseCutNameAndFlavorAndTaggerFail = baseCutNameAndFlavorAndTagger+"_Fail"
         cuts[baseCutNameAndFlavorAndTaggerFail] = cuts[baseCutNameAndFlavor] + "*(event.Jet_"+algo+"[IJ]<="+str(wps[algo][wp])+ ")"
 

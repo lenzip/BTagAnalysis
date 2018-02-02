@@ -15,32 +15,56 @@ gStyle.SetOptStat(0)
 mc=sys.argv[1]
 data=sys.argv[2]
 var=sys.argv[3]
+ptbin=sys.argv[4]
+selection=sys.argv[5]
+normalize=sys.argv[6]
 
 mcfile = TFile(mc)
 datafile = TFile(data)
+print var+"__"+ptbin+"_l"+selection
 
-hl = mcfile.Get(var+"__ptbin_20.0-1000.0_l")
+hl = mcfile.Get(var+"__"+ptbin+"_l"+selection)
 hl.SetFillColor(4)
 hl.SetLineColor(4)
-hc = mcfile.Get(var+"__ptbin_20.0-1000.0_c")
+hc = mcfile.Get(var+"__"+ptbin+"_c"+selection)
 hc.SetFillColor(3)
 hc.SetLineColor(3)
-hb = mcfile.Get(var+"__ptbin_20.0-1000.0_b")
+hb = mcfile.Get(var+"__"+ptbin+"_b"+selection)
 hb.SetFillColor(2)
 hb.SetLineColor(2)
+
+
+
+
+htotalmc = hl.Clone()
+htotalmc.Add(hc)
+htotalmc.Add(hb)
+if normalize != None:
+  hl.Scale(1./htotalmc.Integral())
+  hc.Scale(1./htotalmc.Integral())
+  hb.Scale(1./htotalmc.Integral())
+  htotalmc.Scale(1./htotalmc.Integral())
 
 stack = THStack()
 stack.Add(hl)
 stack.Add(hc)
 stack.Add(hb)
 
-htotalmc = hl.Clone()
-htotalmc.Add(hc)
-htotalmc.Add(hb)
 
-hdata=datafile.Get(var+"__ptbin_20.0-1000.0")
+hdata=datafile.Get(var+"__"+ptbin+""+selection)
 hdata.SetMarkerStyle(20)
 hdata.SetLineWidth(2)
+
+legend=TLegend(0.7, 0.7, 0.9, 0.9)
+legend.SetBorderSize(0)
+legend.SetFillColor(0)
+legend.AddEntry(hb, "b jets", "f")
+legend.AddEntry(hc, "c jets", "f")
+legend.AddEntry(hl, "light jets", "f")
+legend.AddEntry(hdata, "data", "lp")
+
+if normalize != None:
+  hdata.Scale(1./hdata.Integral())
 
 hratio=hdata.Clone()
 hratio.Divide(htotalmc)
@@ -51,6 +75,7 @@ pad1.Draw()
 pad1.cd()
 stack.Draw("HIST")
 hdata.Draw("sames")
+legend.Draw("same")
 CMS_lumi.CMS_lumi(pad1, 4, 11)
 pad1.RedrawAxis()
 c.cd()
@@ -68,4 +93,6 @@ hratio.Draw()
 oneLine.Draw("same")
 pad2.SetGridy()
 pad2.RedrawAxis()
-a=raw_input("ciao")
+gPad.Update()
+c.SaveAs("pics/"+var+"__"+ptbin+""+selection+".png")
+#a=raw_input("ciao")
