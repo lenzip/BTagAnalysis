@@ -416,9 +416,9 @@ if __name__ == "__main__":
       for jet in jetsWithMatchedMuons:
         for cut in cuts.keys():
           if cutFunctions[cut](event, jet.index):
-            if cut == "ptbin_20.0-30.0_l_CombIVFM":
-              print cuts[cut]
-              passedFile += "%6d %6d %10d  %+2d  %+4.2f %+4.2f %+4.2f \n" % (event.Run, event.LumiBlock, event.Evt , event.nJet, jet.fourMomentum.Pt(), jet.fourMomentum.Eta(), jet.fourMomentum.Phi())
+            #if cut == "ptbin_20.0-30.0_l_CombIVFM":
+            #  print cuts[cut]
+            #  passedFile += "%6d %6d %10d  %+2d  %+4.2f %+4.2f %+4.2f \n" % (event.Run, event.LumiBlock, event.Evt , event.nJet, jet.fourMomentum.Pt(), jet.fourMomentum.Eta(), jet.fourMomentum.Phi())
             for variable in variables.keys(): 
               histos[variable][cut]['central'].Fill(variableFunctions[variable](event, jet.index), weight)
               if not opzioni.isData:
