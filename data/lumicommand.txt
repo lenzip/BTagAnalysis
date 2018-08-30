@@ -1,0 +1,1 @@
+brilcalc lumi --normtag /cvmfs/cms-bril.cern.ch/cms-lumi-pog/Normtags/normtag_BRIL.json -u /fb -i ../../../src/RecoBTag/PerformanceMeasurements/test/crab_datavalid/crab_Run2017F/results/processedLumis.json
