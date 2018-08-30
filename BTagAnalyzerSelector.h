@@ -308,6 +308,8 @@ public :
    Float_t         cFragmentationWeightDo[NMAX];
    Float_t         v0WeightUp[NMAX];
    Float_t         v0WeightDo[NMAX];
+   Float_t         cSVmassWeightUp[NMAX]; 
+   Float_t         cSVmassWeightDo[NMAX]; 
    Float_t         Jet_ptJERUp[NMAX];
    Float_t         Jet_ptJERDo[NMAX];
    Float_t         Jet_ptJESUp[NMAX];
@@ -586,6 +588,8 @@ public :
    TBranch        *b_cFragmentationWeightDo;
    TBranch        *b_v0WeightUp;
    TBranch        *b_v0WeightDo;
+   TBranch        *b_cSVmassWeightUp;
+   TBranch        *b_cSVmassWeightDo;
    TBranch        *b_Jet_ptJERUp;
    TBranch        *b_Jet_ptJERDo;
    TBranch        *b_Jet_ptJESUp;
@@ -616,6 +620,8 @@ public :
    void cFrag(int ij);
    void Ks(int ij);
    void JEC(int ij);
+   void cSVmass(int ij);
+   double svmassReweight(double rw);
    TTree* getHelperTree() {return newTree;}
 
    ClassDef(BTagAnalyzerSelector,0);
@@ -921,20 +927,22 @@ void BTagAnalyzerSelector::Init(TTree *tree)
 }
 void BTagAnalyzerSelector::cleanForNewEvent(){
   for (unsigned int i = 0; i < NMAX; ++i){
-    gluonSplittingWeightUp[i] = -9999;
-    gluonSplittingWeightDo[i] = -9999;
-    bFragmentationWeightUp[i] = -9999;
-    bFragmentationWeightDo[i] = -9999;
-    cdFragmentationWeightUp[i] = -9999;
-    cdFragmentationWeightDo[i] = -9999;
-    cFragmentationWeightUp[i] = -9999;
-    cFragmentationWeightDo[i] = -9999;
-    v0WeightUp[i] = -9999;
-    v0WeightDo[i] = -9999;
-    Jet_ptJERUp[i] = -9999;
-    Jet_ptJERDo[i] = -9999;
-    Jet_ptJESUp[i] = -9999;
-    Jet_ptJESDo[i] = -9999;
+    gluonSplittingWeightUp[i] = 1.;
+    gluonSplittingWeightDo[i] = 1.;
+    bFragmentationWeightUp[i] = 1.;
+    bFragmentationWeightDo[i] = 1.;
+    cdFragmentationWeightUp[i] = 1.;
+    cdFragmentationWeightDo[i] = 1.;
+    cFragmentationWeightUp[i] = 1.;
+    cFragmentationWeightDo[i] = 1.;
+    v0WeightUp[i] = 1.;
+    v0WeightDo[i] = 1.;
+    cSVmassWeightUp[i] = 1.;
+    cSVmassWeightDo[i] = 1.;
+    Jet_ptJERUp[i] = 1.;
+    Jet_ptJERDo[i] = 1.;
+    Jet_ptJESUp[i] = 1.;
+    Jet_ptJESDo[i] = 1.;
   }
 }
 

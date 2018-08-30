@@ -20,16 +20,16 @@
 
 echo "Submitting DATA ...."
 for i in `ls listsFromKirill | grep Run2017`; do
-  bsub -q cmscaf1nd -o $PWD/logs_data/$i "submitKirill.sh $i 41.213  PileupHistogram_Run2017BCDEF_69p2mb_Rereco.root plots_data_SVmass_v2 -d"
+  bsub -q cmscaf1nd -o $PWD/logs_data/$i "submitKirill.sh $i 41.213  PileupHistogram_Run2017BCDEF_69p2mb_Rereco.root plots_data_SVmass_CSVv2_v3 -d"
 done 
 echo "Submitting DATA inverted ...."
 for i in `ls listsFromKirill_inverted | grep Run2017`; do
-  bsub -q cmscaf1nd -o $PWD/logs_data_inverted/$i "submitKirill_inverted.sh $i 41.213  PileupHistogram_Run2017BCDEF_69p2mb_Rereco.root plots_data_inverted_SVmass_v2 -d"
+  bsub -q cmscaf1nd -o $PWD/logs_data_inverted/$i "submitKirill_inverted.sh $i 41.213  PileupHistogram_Run2017BCDEF_69p2mb_Rereco.root plots_data_inverted_SVmass_CSVv2_v3 -d"
 done
 
 echo "Submitting MC runBCDEF...."
 for i in `ls listsFromKirill | grep MuEnriched`; do
-  bsub -q cmscaf1nd -o $PWD/logs_mc_runbcdef/$i "submitKirill.sh $i 41.213 PileupHistogram_Run2017BCDEF_69p2mb_Rereco.root plots_mc_runBCDEF_SVmass_v2"
+  bsub -q cmscaf1nd -o $PWD/logs_mc_runbcdef/$i "submitKirill.sh $i 41.213 PileupHistogram_Run2017BCDEF_69p2mb_Rereco.root plots_mc_runBCDEF_SVmass_CSVv2_v3"
 done
 
 

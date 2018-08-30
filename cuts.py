@@ -10,17 +10,17 @@ ptbins=[20., 30., 50., 70., 100., 140., 200., 300., 670., 1000.]
 
 # algorithms for which SF are to be computed and corresponding working points
 # the algorithm name must match the branch name in the BTagAnalyzer output, i.e. Jet_<algo>
-algos = ["DeepCSVBDisc"]
-wps={
-"DeepCSVBDisc":
-  {"L": 0.1522, "M":  0.4941, "T":  0.8001},
-}
-
-#algos = ["CombIVF"]
+#algos = ["DeepCSVBDisc"]
 #wps={
-#"CombIVF":
-#  {"L": 0.5803, "M":  0.8838, "T":  0.9693},
+#"DeepCSVBDisc":
+#  {"L": 0.1522, "M":  0.4941, "T":  0.8001},
 #}
+
+algos = ["CombIVF"]
+wps={
+"CombIVF":
+  {"L": 0.5803, "M":  0.8838, "T":  0.9693},
+}
 
 # flavor names
 flavors=["l","b","c"]

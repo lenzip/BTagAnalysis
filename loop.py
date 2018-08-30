@@ -113,6 +113,8 @@ if __name__ == "__main__":
       'cdFragmentationWeightDo',
       'cFragmentationWeightUp',
       'cFragmentationWeightDo',
+      'cSVmassWeightUp',
+      'cSVmassWeightDo',
       'Evt_new',
       'v0WeightUp',
       'v0WeightDo',
