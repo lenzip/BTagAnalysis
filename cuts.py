@@ -10,10 +10,16 @@ ptbins=[20., 30., 50., 70., 100., 140., 200., 300., 670., 1000.]
 
 # algorithms for which SF are to be computed and corresponding working points
 # the algorithm name must match the branch name in the BTagAnalyzer output, i.e. Jet_<algo>
+#algos = ["DeepCSVBDisc"]
+#wps={
+#"DeepCSVBDisc":
+#  {"L": 0.1522, "M":  0.4941, "T":  0.8001},
+#}
+
 algos = ["CombIVF"]
 wps={
 "CombIVF":
-  {"L": 0.5426, "M":  0.8484, "T":  0.9535},
+  {"L": 0.5803, "M":  0.8838, "T":  0.9693},
 }
 
 # flavor names
@@ -44,30 +50,50 @@ for ipt in range(len(ptbins)-1):
   cuts[baseCutName] = "((event.Jet_pt[IJ]>"+ptmin+" and event.Jet_pt[IJ]<"+ptmax+")"+ \
                                " and (abs(event.Jet_eta[IJ])<2.4) and (event.Jet_Proba[IJ] > 0))"
   
-  cuts[baseCutName+"_JP0"] = cuts[baseCutName] + "*(event.Jet_Proba[IJ]<=0)"
+  cuts[baseCutName+"_JP0"] = cuts[baseCutName].replace("event.Jet_Proba[IJ] > 0","event.Jet_Proba[IJ]<=0")
 
   for algo in algos:
     for wp in wps[algo].keys():
       baseCutNameAndTagger=baseCutName+"_"+algo+wp
       cuts[baseCutNameAndTagger] = cuts[baseCutName] + "*(event.Jet_"+algo+"[IJ]>"+str(wps[algo][wp])+ ")"
+      cuts[baseCutNameAndTagger+"SV"] = cuts[baseCutNameAndTagger] + "*(event.TagVarCSV_vertexMass[IJ]>0)"
+      cuts[baseCutNameAndTagger+"NoSV"] = cuts[baseCutNameAndTagger] + "*(event.TagVarCSV_vertexMass[IJ]<0)"
       baseCutNameAndTaggerFail=baseCutNameAndTagger+"_Fail"
       cuts[baseCutNameAndTaggerFail] = cuts[baseCutName] + "*(event.Jet_"+algo+"[IJ]<="+str(wps[algo][wp])+ ")"
+  
+  baseCutNameAndSV = baseCutName+"_SV"
+  cuts[baseCutNameAndSV] = cuts[baseCutName] + "*(event.TagVarCSV_vertexMass[IJ]>0)"
+  baseCutNameAndNoSV = baseCutName+"_NoSV"
+  cuts[baseCutNameAndNoSV] = cuts[baseCutName] + "*(event.TagVarCSV_vertexMass[IJ]<0)"
                                
   for flavor in flavors:
     if flavor == "l":
       baseCutNameAndFlavor = baseCutName+"_l"
-      cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*((abs(event.Jet_flavour[IJ]) >= 0 and abs(event.Jet_flavour[IJ])<=3) or event.Jet_flavour[IJ] == 21)") 
+      cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*((abs(event.Jet_flavour[IJ]) >= 0 and abs(event.Jet_flavour[IJ])<=3) or event.Jet_flavour[IJ] == 21)")
+      cuts[baseCutNameAndFlavor+"_JP0"] = cuts[baseCutNameAndFlavor].replace("event.Jet_Proba[IJ] > 0","event.Jet_Proba[IJ]<=0")
+      cuts[baseCutNameAndFlavor+"_SV"] = cuts[baseCutNameAndFlavor] + ("*(event.TagVarCSV_vertexMass[IJ]>0)")
+      cuts[baseCutNameAndFlavor+"_NoSV"] = cuts[baseCutNameAndFlavor] + ("*(event.TagVarCSV_vertexMass[IJ]<0)")
     elif flavor == "c":
       baseCutNameAndFlavor = baseCutName+"_c"
       cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*(abs(event.Jet_flavour[IJ]) == 4)")   
+      cuts[baseCutNameAndFlavor+"_JP0"] = cuts[baseCutNameAndFlavor].replace("event.Jet_Proba[IJ] > 0","event.Jet_Proba[IJ]<=0")
+      cuts[baseCutNameAndFlavor+"_SV"] = cuts[baseCutNameAndFlavor] + ("*(event.TagVarCSV_vertexMass[IJ]>0)")
+      cuts[baseCutNameAndFlavor+"_NoSV"] = cuts[baseCutNameAndFlavor] + ("*(event.TagVarCSV_vertexMass[IJ]<0)")            
     else:
       baseCutNameAndFlavor = baseCutName+"_b"
       cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*(abs(event.Jet_flavour[IJ]) == 5)") 
+      cuts[baseCutNameAndFlavor+"_JP0"] = cuts[baseCutNameAndFlavor].replace("event.Jet_Proba[IJ] > 0","event.Jet_Proba[IJ]<=0")
+      cuts[baseCutNameAndFlavor+"_SV"] = cuts[baseCutNameAndFlavor] + ("*(event.TagVarCSV_vertexMass[IJ]>0)")
+      cuts[baseCutNameAndFlavor+"_NoSV"] = cuts[baseCutNameAndFlavor] + ("*(event.TagVarCSV_vertexMass[IJ]<0)")
+
     
     for algo in algos:
       for wp in wps[algo].keys():
         baseCutNameAndFlavorAndTagger=baseCutNameAndFlavor+"_"+algo+wp
-        cuts[baseCutNameAndFlavorAndTagger] = cuts[baseCutNameAndFlavor] + "*(event.Jet_"+algo+"[IJ]>"+str(wps[algo][wp])+ ")"                         
+        cuts[baseCutNameAndFlavorAndTagger] = cuts[baseCutNameAndFlavor] + "*(event.Jet_"+algo+"[IJ]>"+str(wps[algo][wp])+ ")"
+        cuts[baseCutNameAndFlavorAndTagger+"_SV"] = cuts[baseCutNameAndFlavorAndTagger] + "*(event.TagVarCSV_vertexMass[IJ]>0)"
+        cuts[baseCutNameAndFlavorAndTagger+"_NoSV"] = cuts[baseCutNameAndFlavorAndTagger] + "*(event.TagVarCSV_vertexMass[IJ]<0)"
+        cuts[baseCutNameAndFlavorAndTagger+"_JP0"] = cuts[baseCutNameAndFlavorAndTagger].replace("event.Jet_Proba[IJ] > 0","event.Jet_Proba[IJ]<=0")                         
         baseCutNameAndFlavorAndTaggerFail = baseCutNameAndFlavorAndTagger+"_Fail"
         cuts[baseCutNameAndFlavorAndTaggerFail] = cuts[baseCutNameAndFlavor] + "*(event.Jet_"+algo+"[IJ]<="+str(wps[algo][wp])+ ")"
 

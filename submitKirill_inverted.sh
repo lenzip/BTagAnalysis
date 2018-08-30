@@ -24,7 +24,7 @@ cp $base/*.C .
 cp $base/*.h .
 cp -r $base/data .
 cp $base/copy.sh .
-./copy.sh $base/listsFromKirill/$1 ./
+./copy.sh $base/listsFromKirill_inverted/$1 ./
 
 #echo $outputFile
 python loop.py listlocal.txt $base/$outdir/$outputFile -l $lumi -p $puprofile $isdata 

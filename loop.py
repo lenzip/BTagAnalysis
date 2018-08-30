@@ -28,6 +28,7 @@ def bookamelo(outFileName, variables, cuts, systematics):
     for cutname in cuts.keys():
       hname = varname+"__"+cutname
       h = TH1F(hname, hname, variables[varname]['nbins'], variables[varname]['xmin'], variables[varname]['xmax'])
+      #print "booking", hname, " between",variables[varname]['xmin'],variables[varname]['xmax']
       h.Sumw2()
       histos[varname][cutname] = {}
       histos[varname][cutname]['central'] = h
@@ -61,7 +62,8 @@ if __name__ == "__main__":
   parser.add_option("-v", action="store", help="variables file name (default variables.py)", default="variables.py", dest="variablesFile")
   parser.add_option("-s", action="store", help="systematics file name (default systematics.py)", default="systematics.py", dest="systematicsFile")
   parser.add_option("-d", action="store_true", help="if it is data apply trigger (default false (i.e. MC))", default=False, dest="isData")
-  parser.add_option("-l", action="store", help="data luminosity in fb-1 (default=35.9)", default=35.9, dest="lumi")
+  parser.add_option("-l", action="store", help="data luminosity in fb-1 (default=4.235)", default=4.235, dest="lumi")
+  parser.add_option("-p", action="store", help="what PU profile to use (defualt=PileupHistogram_Run2017D_69p2mb_Rereco.root)", default="PileupHistogram_Run2017D_69p2mb_Rereco.root", dest="pufile")
 
 
   (opzioni, args) = parser.parse_args()
@@ -111,6 +113,8 @@ if __name__ == "__main__":
       'cdFragmentationWeightDo',
       'cFragmentationWeightUp',
       'cFragmentationWeightDo',
+      'cSVmassWeightUp',
+      'cSVmassWeightDo',
       'Evt_new',
       'v0WeightUp',
       'v0WeightDo',
@@ -267,17 +271,16 @@ if __name__ == "__main__":
   # prepare prescale tables
   if opzioni.isData:
     prescaleTables={}
-    prescaleTables["30"] = Prescales("data/prescalesHLT_BTagMu_DiJet20_Mu5.txt")
-    prescaleTables["31"] = Prescales("data/prescalesHLT_BTagMu_DiJet40_Mu5.txt")
-    prescaleTables["32"] = Prescales("data/prescalesHLT_BTagMu_DiJet70_Mu5.txt")
-    prescaleTables["33"] = Prescales("data/prescalesHLT_BTagMu_DiJet110_Mu5.txt")
-    prescaleTables["34"] = Prescales("data/prescalesHLT_BTagMu_DiJet170_Mu5.txt")
-    prescaleTables["35"] = Prescales("data/prescalesHLT_BTagMu_Jet300_Mu5.txt")
+    prescaleTables["32"] = Prescales("data/prescalesHLT_BTagMu_AK4DiJet20_Mu5.txt")
+    prescaleTables["33"] = Prescales("data/prescalesHLT_BTagMu_AK4DiJet40_Mu5.txt")
+    prescaleTables["34"] = Prescales("data/prescalesHLT_BTagMu_AK4DiJet70_Mu5.txt")
+    prescaleTables["35"] = Prescales("data/prescalesHLT_BTagMu_AK4DiJet110_Mu5.txt")
+    prescaleTables["36"] = Prescales("data/prescalesHLT_BTagMu_AK4DiJet170_Mu5.txt")
+    prescaleTables["37"] = Prescales("data/prescalesHLT_BTagMu_AK4Jet300_Mu5.txt")
 
   else:
-    pileup = Pileup(["data/PileupHistogram_Full2016_271036-278808_69p2mb_Rereco.root",
-                     "data/PileupHistogram_Full2016_278820-284044_69p2mb_Rereco.root"],
-                     [0.1, 0.9],
+    pileup = Pileup(["data/"+opzioni.pufile],
+                     [1.],
                      chain)
     crossSection = CrossSection("data/xsectionFilter.txt")                 
   i=0
@@ -297,7 +300,7 @@ if __name__ == "__main__":
         # PU weight
         weight = weight*pileup.getWeight(npu)
         # xsec weight
-        weight = weight*crossSection.getWeight(chain, opzioni.lumi*1000.)
+        weight = weight*crossSection.getWeight(chain, float(opzioni.lumi)*1000.)
 
         #just to be sure, check the main tree and the helper one are in sync
         if event.Evt != event.Evt_new:
@@ -316,8 +319,10 @@ if __name__ == "__main__":
       nJet=event.nJet
       nPFMuon=event.nPFMuon
       jets=[]
+      event.associatedMuonIds = []
       #print "This event has", nJet, "jets", event.Evt#, event.Evt_new
       for IJ in range(nJet):
+        event.associatedMuonIds.append(-1)
         #print "gluonSplitting  (Up,Do)", event.gluonSplittingWeightUp[IJ], event.gluonSplittingWeightDo[IJ]  
         #print "bFragmentation  (Up,Do)", event.bFragmentationWeightUp[IJ], event.bFragmentationWeightDo[IJ]  
         #print "cdFragmentation (Up,Do)", event.cdFragmentationWeightUp[IJ], event.cdFragmentationWeightDo[IJ] 
@@ -327,6 +332,7 @@ if __name__ == "__main__":
         #print "pt JER          (Up,Do)", event.Jet_ptJERUp[IJ], event.Jet_ptJERDo[IJ]
         #print "pt JES          (Up,Do)", event.Jet_ptJESUp[IJ], event.Jet_ptJESDo[IJ]
         jet=Jet(event,IJ)
+        event.associatedMuonIds.append(-1)
         if (jet.fourMomentum.Pt()>20. and abs(jet.fourMomentum.Eta())<2.4):# and jet.Jet_Proba > 0.):
           jets.append(jet)
       #for jet in jets:
@@ -339,8 +345,8 @@ if __name__ == "__main__":
 
       # the following is needed to decide how to 
       # assign pt bins to Triggers
-      nJets=[0, 0, 0, 0, 0] 
-      nMuJets=[0, 0, 0, 0, 0]
+      nJets=[0, 0, 0, 0, 0, 0] 
+      nMuJets=[0, 0, 0, 0, 0, 0]
       atLeastOneMatchedMuon=False
       jetsWithMatchedMuons=[]
       for jet in jets:
@@ -350,22 +356,27 @@ if __name__ == "__main__":
           if muon.passMuId() and muon.match(jet):
             #muon.printMe()
             #print "matched"
+            jet.associateMuon(muon.index)
+            event.associatedMuonIds
             atLeastOneMatchedMuon = True
             matched = True
+            event.associatedMuonIds[jet.index] = muon.index
             jetsWithMatchedMuons.append(jet)
             break
             
         if (jet.fourMomentum.Pt()>20. and jet.fourMomentum.Pt()<50): nJets[0]=nJets[0]+1
         if (jet.fourMomentum.Pt()>50. and jet.fourMomentum.Pt()<80): nJets[1]=nJets[1]+1
         if (jet.fourMomentum.Pt()>80. and jet.fourMomentum.Pt()<120): nJets[2]=nJets[2]+1
-        if (jet.fourMomentum.Pt()>120. and jet.fourMomentum.Pt()<320): nJets[3]=nJets[3]+1
-        if (jet.fourMomentum.Pt()>320.) : nJets[4]=nJets[4]+1
+        if (jet.fourMomentum.Pt()>120. and jet.fourMomentum.Pt()<180): nJets[3]=nJets[3]+1
+        if (jet.fourMomentum.Pt()>180. and jet.fourMomentum.Pt()<320): nJets[4]=nJets[4]+1
+        if (jet.fourMomentum.Pt()>320.) : nJets[5]=nJets[5]+1
         
         if (jet.fourMomentum.Pt()>20. and jet.fourMomentum.Pt()<50 and matched): nMuJets[0]=nMuJets[0]+1 
         if (jet.fourMomentum.Pt()>50. and jet.fourMomentum.Pt()<80 and matched): nMuJets[1]=nMuJets[1]+1
         if (jet.fourMomentum.Pt()>80. and jet.fourMomentum.Pt()<120 and matched): nMuJets[2]=nMuJets[2]+1
-        if (jet.fourMomentum.Pt()>120. and jet.fourMomentum.Pt()<320 and matched): nMuJets[3]=nMuJets[3]+1
-        if (jet.fourMomentum.Pt()>320. and matched) : nMuJets[4]=nMuJets[4]+1 
+        if (jet.fourMomentum.Pt()>120. and jet.fourMomentum.Pt()<180 and matched): nMuJets[3]=nMuJets[3]+1
+        if (jet.fourMomentum.Pt()>180. and jet.fourMomentum.Pt()<320 and matched): nMuJets[4]=nMuJets[4]+1
+        if (jet.fourMomentum.Pt()>320. and matched) : nMuJets[5]=nMuJets[5]+1 
         
       if not atLeastOneMatchedMuon: continue
       #for jet in jetsWithMatchedMuons:
@@ -374,16 +385,17 @@ if __name__ == "__main__":
       #print "at east one matched muon"
       # trigger selection    
       triggers=[]
-      for itrig in range(30, 36):
-        if passTrigger(event, itrig) and itrig != 34: ##removed 170 for the moment as it was not available for the whole period
+      for itrig in range(32, 38):
+        if passTrigger(event, itrig) : #and itrig != 34: ##removed 170 for the moment as it was not available for the whole period
           triggers.append(itrig)
       if len(triggers) == 0: continue
       triggerPtBins=[]
-      if ( nJets[0] >= 2 and nMuJets[0] >= 1 )  : triggerPtBins.append(30)
-      if ( nJets[1] >= 2 and nMuJets[1] >= 1 )  : triggerPtBins.append(31)
-      if ( nJets[2] >= 2 and nMuJets[2] >= 1 )  : triggerPtBins.append(32)
-      if ( nJets[3] >= 2 and nMuJets[3] >= 1 )  : triggerPtBins.append(33)
-      if ( nJets[4] > 0 and nMuJets[4] >= 1 )   : triggerPtBins.append(35)
+      if ( nJets[0] >= 2 and nMuJets[0] >= 1 )  : triggerPtBins.append(32)
+      if ( nJets[1] >= 2 and nMuJets[1] >= 1 )  : triggerPtBins.append(33)
+      if ( nJets[2] >= 2 and nMuJets[2] >= 1 )  : triggerPtBins.append(34)
+      if ( nJets[3] >= 2 and nMuJets[3] >= 1 )  : triggerPtBins.append(35)
+      if ( nJets[4] >= 2 and nMuJets[4] >= 1 )  : triggerPtBins.append(36)
+      if ( nJets[5] > 0  and nMuJets[5] >= 1 )  : triggerPtBins.append(37)
       #print nJets
       #print nMuJets
 
@@ -406,9 +418,9 @@ if __name__ == "__main__":
       for jet in jetsWithMatchedMuons:
         for cut in cuts.keys():
           if cutFunctions[cut](event, jet.index):
-            if cut == "ptbin_20.0-30.0_l_CombIVFM":
-              print cuts[cut]
-              passedFile += "%6d %6d %10d  %+2d  %+4.2f %+4.2f %+4.2f \n" % (event.Run, event.LumiBlock, event.Evt , event.nJet, jet.fourMomentum.Pt(), jet.fourMomentum.Eta(), jet.fourMomentum.Phi())
+            #if cut == "ptbin_20.0-30.0_l_CombIVFM":
+            #  print cuts[cut]
+            #  passedFile += "%6d %6d %10d  %+2d  %+4.2f %+4.2f %+4.2f \n" % (event.Run, event.LumiBlock, event.Evt , event.nJet, jet.fourMomentum.Pt(), jet.fourMomentum.Eta(), jet.fourMomentum.Phi())
             for variable in variables.keys(): 
               histos[variable][cut]['central'].Fill(variableFunctions[variable](event, jet.index), weight)
               if not opzioni.isData:

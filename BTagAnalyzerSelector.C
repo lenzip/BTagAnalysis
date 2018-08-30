@@ -44,6 +44,8 @@ BTagAnalyzerSelector::BTagAnalyzerSelector(TTree * tree) : fChain(0){
   b_cFragmentationWeightDo = newTree->Branch("cFragmentationWeightDo", cFragmentationWeightDo, "cFragmentationWeightDo[500]/F");
   b_v0WeightUp = newTree->Branch("v0WeightUp", v0WeightUp, "v0WeightUp[500]/F");
   b_v0WeightDo = newTree->Branch("v0WeightDo", v0WeightDo, "v0WeightDo[500]/F");
+  b_cSVmassWeightUp = newTree->Branch("cSVmassWeightUp", cSVmassWeightUp, "cSVmassWeightUp[500]/F"); 
+  b_cSVmassWeightDo = newTree->Branch("cSVmassWeightDo", cSVmassWeightDo, "cSVmassWeightDo[500]/F"); 
   b_Jet_ptJERUp = newTree->Branch("Jet_ptJERUp", Jet_ptJERUp, "Jet_ptJERUp[500]/F");
   b_Jet_ptJERDo = newTree->Branch("Jet_ptJERDo", Jet_ptJERDo, "Jet_ptJERDo[500]/F");
   b_Jet_ptJESUp = newTree->Branch("Jet_ptJESUp", Jet_ptJESUp, "Jet_ptJESUp[500]/F");
@@ -164,6 +166,7 @@ Bool_t BTagAnalyzerSelector::Process(Long64_t entry)
       cFrag(ij);
       Ks(ij);
       JEC(ij);
+      cSVmass(ij);
    }
 
    newTree->Fill(); 
@@ -187,7 +190,36 @@ void BTagAnalyzerSelector::Terminate()
 
 }
 
+double BTagAnalyzerSelector::svmassReweight(double rw){
 
+  double a = 1.04340e+00;
+  double b = -4.44267e-01;
+  double c = 4.81803e-01;
+  double d = -1.20184e-01;
+
+  double rwt = a+b*rw+c*rw*rw+d*rw*rw*rw;
+  if (rw > 2.5) rwt = 1.0;
+  if (rw < 0.) rwt = 1.0;
+  return rwt;
+
+}
+
+void BTagAnalyzerSelector::cSVmass(int ij){
+  float sfUp = 1.;
+  float sfDo = 1.;
+
+  int jFlavour = abs(Jet_flavour[ij]);
+  //cout << "Jet flavor " << jFlavour << endl;
+  if (jFlavour == 4){
+    sfUp *= svmassReweight(TagVarCSV_vertexMass[ij]);
+    //cout << "SV weight " << sfUp << endl;
+  }
+
+  cSVmassWeightUp[ij] = sfUp;
+  cSVmassWeightDo[ij] = sfDo;
+  
+
+}
 void BTagAnalyzerSelector::GluonSplitting(int ij)
 {
   float sfUp = 1.;
