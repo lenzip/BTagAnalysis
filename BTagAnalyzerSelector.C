@@ -56,7 +56,7 @@ BTagAnalyzerSelector::BTagAnalyzerSelector(TTree * tree) : fChain(0){
 
   //JES and JER
   //jesTotal = new JetCorrectionUncertainty(*(new JetCorrectorParameters("data/Summer16_23Sep2016V5_MC_UncertaintySources_AK4PFchs.txt", "Total")));
-  jesTotal = new JetCorrectionUncertainty("data/Summer16_23Sep2016V4_MC_Uncertainty_AK4PFchs.txt");
+  jesTotal = new JetCorrectionUncertainty("data/Winter22Run3_V2_MC_Uncertainty_AK4PFPuppi.txt");
 
    // JER taken from https://twiki.cern.ch/twiki/bin/view/CMS/JetResolution
    
@@ -156,10 +156,10 @@ Bool_t BTagAnalyzerSelector::Process(Long64_t entry)
    //
    // The return value is currently not used.
    cleanForNewEvent();
-   fChain->GetEntry(entry);
+   fReader.SetLocalEntry(entry);
  
-   Evt_new = Evt; 
-   for (int ij = 0; ij < nJet; ++ij){
+   Evt_new = *Evt; 
+   for (int ij = 0; ij < *nJet; ++ij){
       GluonSplitting(ij);    
       bFrag(ij);
       cdFrag(ij);
@@ -241,30 +241,30 @@ void BTagAnalyzerSelector::GluonSplitting(int ij)
 
   TLorentzVector jet;
   jet.SetPtEtaPhiM(jpt, jeta, jphi, 0.);
-
+  std::cout << "flavch " << flavch << std::endl;
   // post-ICHEP 
   if( flavch == 2 )
     {        
        int ndHadronsFound = 0;
-       for( int k=0;k<nDHadrons;k++ )
+       for( int k=0;k<*nDHadron;k++ )
          {
          TLorentzVector D;
          D.SetPtEtaPhiM(DHadron_pT[k], DHadron_eta[k], DHadron_phi[k], 0.);
          double dRqj = jet.DeltaR(D);
          if( dRqj < 0.4 ) ndHadronsFound++;
          }
-       
        if( ndHadronsFound >= 2 ) GSPc = 1;
     }
   
   if( flavch == 1 )
     {
        int nbHadronsFound = 0;
-       for( int k=0;k<nBHadrons;k++ )
+       for( int k=0;k<*nBHadron;k++ )
          {
          TLorentzVector B;
          B.SetPtEtaPhiM(BHadron_pT[k], BHadron_eta[k], BHadron_phi[k], 0.);
          double dRqj = jet.DeltaR(B);;
+         std::cout << "dRqj " << dRqj << std::endl;
          if( dRqj < 0.4 ) nbHadronsFound++;
          }
        
@@ -277,7 +277,8 @@ void BTagAnalyzerSelector::GluonSplitting(int ij)
   if( 
      ((GSPc && flavch == 2) || (GSPb && flavch == 1))
     ) sfUp *= 1.25;   
-
+ 
+  std::cout << *nDHadron << " " << *nBHadron << " " << flavch << " " << sfUp << " " << sfDo << std::endl;
   gluonSplittingWeightUp[ij] = sfUp;
   gluonSplittingWeightDo[ij] = sfDo;
 
@@ -326,7 +327,7 @@ void BTagAnalyzerSelector::bFrag(int ij)
        else                 iptBin =  0;
        
        float B_Mass = 0.;
-       for( int ib=0;ib<nBHadrons;ib++ ){
+       for( int ib=0;ib<*nBHadron;ib++ ){
          
           TLorentzVector B;
           B.SetPtEtaPhiM(BHadron_pT[ib], BHadron_eta[ib], BHadron_phi[ib], BHadron_mass[ib]);
@@ -342,7 +343,7 @@ void BTagAnalyzerSelector::bFrag(int ij)
        }
        
        if( iB >= 0 ){
-          EnergyFraction = BHadron_pT[iB]/Jet_genpt[ij];
+          EnergyFraction = BHadron_pT[iB] / Jet_genpt[ij];
           efbin = int( EnergyFraction / 0.02 );
           if( efbin >= 0 && efbin < 100 ) 
             {
@@ -363,7 +364,7 @@ void BTagAnalyzerSelector::cdFrag(int ij)
 {       
   float sfUp = 1.;
   float sfDo = 1.;
-
+  /*
   int flavch = 0;
 
   float drMin = 0.4;   
@@ -386,7 +387,7 @@ void BTagAnalyzerSelector::cdFrag(int ij)
        bool isDplusMu = false, isDzeroMu = false, isDsubsMu = false;
        
        int ndaughters = 0;
-       for( int k=0;k<nDHadrons;k++ ){
+       for( int k=0;k<*nDHadron;k++ ){
          TLorentzVector D;
          D.SetPtEtaPhiM(DHadron_pT[k], DHadron_eta[k], DHadron_phi[k], 0.);
          double dR = jet.DeltaR(D); 
@@ -410,6 +411,7 @@ void BTagAnalyzerSelector::cdFrag(int ij)
        if( isDzeroMu ) sfDo *= 0.067 / 0.077;
        if( isDsubsMu ) sfDo *= 0.067 / 0.080;
    }
+   */
    cdFragmentationWeightUp[ij] = sfUp;
    cdFragmentationWeightDo[ij] = sfDo;  
 }
@@ -439,16 +441,16 @@ void BTagAnalyzerSelector::cFrag(int ij)
 
   if( flavch == 2 ){
        bool hasCquark = 0;
-       for( int c=0;c<ncQuarks;c++ ){
+       for( int c=0;c<*ncQuark;c++ ){
           TLorentzVector C;
-          C.SetPtEtaPhiM(cQuark_pT[c], cQuark_eta[c],cQuark_phi[c], 0.);
+          C.SetPtEtaPhiM(cQuark_pT[c], cQuark_eta[c], cQuark_phi[c], 0.);
           double dRc = jet.DeltaR(C); 
           if( dRc < drMin ) hasCquark = 1;
        }
        
        if( hasCquark ){                               
           bool isDplus = false, isDzero = false, isDsubs = false, isDbary = false;
-          for( int k=0;k<nDHadrons;k++ ){
+          for( int k=0;k<*nDHadron;k++ ){
             TLorentzVector D;
             D.SetPtEtaPhiM(DHadron_pT[k], DHadron_eta[k], DHadron_phi[k], DHadron_mass[k]);
             double dR = jet.DeltaR(D); 
@@ -495,12 +497,12 @@ void BTagAnalyzerSelector::Ks(int ij)
   int nK0s = 0, nLambda = 0;
   if( flavch == 3 )
     {
-       for( int k=0;k<nGenV0;k++ ){
+       for( int k=0;k<*nGenV0;k++ ){
          TLorentzVector V0;
          V0.SetPtEtaPhiM(GenV0_pT[k], GenV0_eta[k], GenV0_phi[k], 0.);
          double dR = jet.DeltaR(V0); 
          if( dR > 0.3 ) continue;
-         int pdgid = abs(GenV0_pdgID[k]);
+         int pdgid = abs(GenV0_pdgId[k]);
          if( pdgid == 310 )  nK0s++;
          if( pdgid == 3122 ) nLambda++;
        }

@@ -5,8 +5,8 @@ cuts={}
 
 
 #pt bins for the sf calculation
-ptbins=[20., 30., 50., 70., 100., 140., 200., 300., 670., 1000.]
-#ptbins=[20.,1000.]
+#ptbins=[20., 30., 50., 70., 100., 140., 200., 300., 670., 1000.]
+ptbins=[20.,1000.]
 
 # algorithms for which SF are to be computed and corresponding working points
 # the algorithm name must match the branch name in the BTagAnalyzer output, i.e. Jet_<algo>
@@ -16,9 +16,9 @@ ptbins=[20., 30., 50., 70., 100., 140., 200., 300., 670., 1000.]
 #  {"L": 0.1522, "M":  0.4941, "T":  0.8001},
 #}
 
-algos = ["CombIVF"]
+algos = ["DeepFlavourBDisc"]
 wps={
-"CombIVF":
+"DeepFlavourBDisc":
   {"L": 0.5803, "M":  0.8838, "T":  0.9693},
 }
 
@@ -53,7 +53,7 @@ for ipt in range(len(ptbins)-1):
   cuts[baseCutName+"_JP0"] = cuts[baseCutName].replace("event.Jet_Proba[IJ] > 0","event.Jet_Proba[IJ]<=0")
 
   for algo in algos:
-    for wp in wps[algo].keys():
+    for wp in list(wps[algo].keys()):
       baseCutNameAndTagger=baseCutName+"_"+algo+wp
       cuts[baseCutNameAndTagger] = cuts[baseCutName] + "*(event.Jet_"+algo+"[IJ]>"+str(wps[algo][wp])+ ")"
       cuts[baseCutNameAndTagger+"SV"] = cuts[baseCutNameAndTagger] + "*(event.TagVarCSV_vertexMass[IJ]>0)"
@@ -88,7 +88,7 @@ for ipt in range(len(ptbins)-1):
 
     
     for algo in algos:
-      for wp in wps[algo].keys():
+      for wp in list(wps[algo].keys()):
         baseCutNameAndFlavorAndTagger=baseCutNameAndFlavor+"_"+algo+wp
         cuts[baseCutNameAndFlavorAndTagger] = cuts[baseCutNameAndFlavor] + "*(event.Jet_"+algo+"[IJ]>"+str(wps[algo][wp])+ ")"
         cuts[baseCutNameAndFlavorAndTagger+"_SV"] = cuts[baseCutNameAndFlavorAndTagger] + "*(event.TagVarCSV_vertexMass[IJ]>0)"
@@ -101,7 +101,7 @@ for ipt in range(len(ptbins)-1):
 # lambda function of the event and of the Jet number (IJ)
 # (to avoid the need of doing eval at every event)
 cutFunctions={}
-for cut in cuts.keys():
+for cut in list(cuts.keys()):
   #print stringcut
   cutFunctions[cut]=eval("lambda event,IJ:"+cuts[cut])
   #cuts[cut]=lambda event,IJ: eval(stringcut)

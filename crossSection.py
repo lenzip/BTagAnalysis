@@ -13,7 +13,7 @@ class CrossSection:
       
   def getWeight(self, chain, dataLumi):
     filename = chain.GetFile().GetName()
-    for key in self.data.keys():
+    for key in list(self.data.keys()):
       if key in filename:
         return dataLumi/self.data[key]['mcLumi']
     return 1.

@@ -10,9 +10,9 @@ class Jet:
     self.associatedMuonId = -1.
 
   def printMe(self):
-    print "jet pt", self.fourMomentum.Pt()
-    print "jet eta", self.fourMomentum.Eta()
-    print "jet JP", self.Jet_Proba
+    print("jet pt", self.fourMomentum.Pt())
+    print("jet eta", self.fourMomentum.Eta())
+    print("jet JP", self.Jet_Proba)
   
   def associateMuon(self, index):
     self.associatedMuonId = index

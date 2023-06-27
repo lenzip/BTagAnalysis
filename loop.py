@@ -16,16 +16,16 @@ def skim(tree, eventSel):
   mylist = TEventList("mylist") 
   tree.Draw(">> mylist", eventSel)
   tree.SetEventList(mylist)
-  print "total chain entries:", tree.GetEntries()
+  print("total chain entries:", tree.GetEntries())
   mylist.Print()
 
 def bookamelo(outFileName, variables, cuts, systematics):
   outFile = TFile(outFileName, "recreate")
   outFile.cd()
   histos={}
-  for varname in variables.keys():
+  for varname in list(variables.keys()):
     histos[varname]={}
-    for cutname in cuts.keys():
+    for cutname in list(cuts.keys()):
       hname = varname+"__"+cutname
       h = TH1F(hname, hname, variables[varname]['nbins'], variables[varname]['xmin'], variables[varname]['xmax'])
       #print "booking", hname, " between",variables[varname]['xmin'],variables[varname]['xmax']
@@ -44,6 +44,7 @@ def bookamelo(outFileName, variables, cuts, systematics):
     
 def passTrigger(event,trigIdx):
   bitIdx = trigIdx/32 ;
+  return 1
   return ( event.BitTrigger[bitIdx] & ( 1 << (trigIdx - bitIdx*32) ) )
 
 
@@ -68,7 +69,7 @@ if __name__ == "__main__":
 
   (opzioni, args) = parser.parse_args()
   if len(args) != 2:
-    print parser.print_help() 
+    print(parser.print_help()) 
     sys.exit(1)
 
   # list of branches to activate
@@ -77,19 +78,20 @@ if __name__ == "__main__":
   activeBranches=[]
 
   activeBranches.extend([
-  "PFMuon_isGlobal",
-  "PFMuon_nMuHit",
-  "PFMuon_nTkHit",
-  "PFMuon_nPixHit",
-  "PFMuon_nOutHit",
-  "PFMuon_nMatched",
-  "PFMuon_chi2",
-  "PFMuon_chi2Tk",
+  #"PFMuon_isGlobal",
+  #"PFMuon_nMuHit",
+  #"PFMuon_nTkHit",
+  #"PFMuon_nPixHit",
+  #"PFMuon_nOutHit",
+  #"PFMuon_nMatched",
+  #"PFMuon_chi2",
+  #"PFMuon_chi2Tk",
   "PFMuon_IdxJet",
   'nPFMuon',
   'PFMuon_pt',
   'PFMuon_eta',
   'PFMuon_phi',
+  'PFMuon_GoodQuality',
   'Jet_pt',
   'Jet_phi',
   'Jet_eta',
@@ -98,9 +100,9 @@ if __name__ == "__main__":
   'Run',
   'LumiBlock',
   'Evt',
-  'mcweight',
+  #'mcweight',
   'nPUtrue',
-  'nPV']
+  'nPU']
   )
 
   if (not opzioni.isData):
@@ -129,19 +131,19 @@ if __name__ == "__main__":
 
   if os.path.exists(cutsFile) :
     handle = open(cutsFile,'r')
-    exec(handle)
+    exec(handle.read())
     handle.close()
   else:
-    print "!!! ERROR file ", cutsFile, " does not exist."
+    print("!!! ERROR file ", cutsFile, " does not exist.")
     sys.exit(1)
 
   variablesFile = opzioni.variablesFile  
   if os.path.exists(variablesFile) :
     handle = open(variablesFile,'r')
-    exec(handle)
+    exec(handle.read())
     handle.close()
   else:
-    print "!!! ERROR file ", variablesFile, " does not exist."
+    print("!!! ERROR file ", variablesFile, " does not exist.")
     sys.exit(1)
 
   weightSystematics = []
@@ -149,10 +151,10 @@ if __name__ == "__main__":
   systematicsFile = opzioni.systematicsFile
   if os.path.exists(systematicsFile) :
     handle = open(systematicsFile,'r')
-    exec(handle)
+    exec(handle.read())
     handle.close()
   else:
-    print "!!! ERROR file ", systematicsFile, " does not exist."
+    print("!!! ERROR file ", systematicsFile, " does not exist.")
     sys.exit(1)
   allSystematics = []
   allSystematics.extend(weightSystematics)
@@ -195,17 +197,17 @@ if __name__ == "__main__":
 
   fileList=open(args[0])
   outputFile=args[1]
-  print "creating chain..."
+  print("creating chain...")
   # create a chain with all files in the list
   chain = TChain(opzioni.tree)
   for line in fileList:
     chain.Add(line.rstrip('\n'))
-  print "...done"
+  print("...done")
   fileList.seek(0)
 
-  print bookamelo
+  print(bookamelo)
   if not opzioni.isData:
-    print "this is MC, adding systematic variations to the tree..."
+    print("this is MC, adding systematic variations to the tree...")
     cmssw_base = os.getenv('CMSSW_BASE')
     gSystem.AddIncludePath("-I"+cmssw_base+"/interface/");
     gSystem.Load("libFWCoreFWLite.so");
@@ -213,7 +215,7 @@ if __name__ == "__main__":
       gROOT.LoadMacro('BTagAnalyzerSelector.C++g')
     except RuntimeError:
       gROOT.LoadMacro('BTagAnalyzerSelector.C++g')
-    print "Starting pre-processing"   
+    print("Starting pre-processing")   
     ihelper = 0
     helperChain = TChain("helper")
     helperFiles = []
@@ -222,7 +224,7 @@ if __name__ == "__main__":
       helperFile = TFile(helpername, "recreate")
       helperFile.cd()
       systHelper = BTagAnalyzerSelector()
-      print "processing tree", filename
+      print("processing tree", filename)
       thisFile = TFile.Open(filename.rstrip('\n'))
       thisTree = thisFile.Get(opzioni.tree)
       systHelper.Init(thisTree)
@@ -247,15 +249,15 @@ if __name__ == "__main__":
       ipre = ipre+1  
       systHelper.Process(iEvent)
     '''
-    print chain.GetEntries(), helperChain.GetEntries()
+    print(chain.GetEntries(), helperChain.GetEntries())
     chain.AddFriend(helperChain)
-    print "...done"
+    print("...done")
 
-  print bookamelo
+  print(bookamelo)
   # book histos
-  print "booking histos..."
+  print("booking histos...")
   outFile, histos = bookamelo(outputFile, variables, cuts, allSystematics)
-  print "...done"
+  print("...done")
 
   #skim the chain according to the gloval event selection
   #print "skimming..."
@@ -285,17 +287,18 @@ if __name__ == "__main__":
     crossSection = CrossSection("data/xsectionFilter.txt")                 
   i=0
   passed=0
-  for event in chain:
+  for ievent,event in enumerate(chain):
     try:
+      print("**",ievent)
       #if event.Evt != 1614523636 :
       #  continue
       # event weight
      
       weight=1.
       if (not opzioni.isData):
-        mcweight = event.mcweight 
+        mcweight = 1.#event.mcweight 
         weight = weight*mcweight
-        npv = event.nPV
+        npv = event.nPU
         npu = event.nPUtrue
         # PU weight
         weight = weight*pileup.getWeight(npu)
@@ -304,7 +307,7 @@ if __name__ == "__main__":
 
         #just to be sure, check the main tree and the helper one are in sync
         if event.Evt != event.Evt_new:
-          print "main tree and helper tree are out of sync. Big Problem. Ending now."
+          print("main tree and helper tree are out of sync. Big Problem. Ending now.")
           sys.exit(1)
 
       i=i+1
@@ -320,7 +323,7 @@ if __name__ == "__main__":
       nPFMuon=event.nPFMuon
       jets=[]
       event.associatedMuonIds = []
-      #print "This event has", nJet, "jets", event.Evt#, event.Evt_new
+      print("This event has", nJet, "jets", event.Evt)#, event.Evt_new
       for IJ in range(nJet):
         event.associatedMuonIds.append(-1)
         #print "gluonSplitting  (Up,Do)", event.gluonSplittingWeightUp[IJ], event.gluonSplittingWeightDo[IJ]  
@@ -328,17 +331,19 @@ if __name__ == "__main__":
         #print "cdFragmentation (Up,Do)", event.cdFragmentationWeightUp[IJ], event.cdFragmentationWeightDo[IJ] 
         #print "cFragmentation  (Up,Do)", event.cFragmentationWeightUp[IJ], event.cFragmentationWeightDo[IJ]    
         #print "v0              (Up,Do)", event.v0WeightUp[IJ], event.v0WeightDo[IJ] 
-        #print "pt                     ", event.Jet_pt[IJ]
+        print("pt                     ", event.Jet_pt[IJ])
         #print "pt JER          (Up,Do)", event.Jet_ptJERUp[IJ], event.Jet_ptJERDo[IJ]
         #print "pt JES          (Up,Do)", event.Jet_ptJESUp[IJ], event.Jet_ptJESDo[IJ]
         jet=Jet(event,IJ)
         event.associatedMuonIds.append(-1)
         if (jet.fourMomentum.Pt()>20. and abs(jet.fourMomentum.Eta())<2.4):# and jet.Jet_Proba > 0.):
           jets.append(jet)
-      #for jet in jets:
-      # print jet.index, jet.fourMomentum.Pt(),jet.fourMomentum.Eta(),jet.Jet_Proba
+      for jet in jets:
+       print(jet.index, jet.fourMomentum.Pt(),jet.fourMomentum.Eta(),jet.Jet_Proba)
       muons=[]
+      print(nPFMuon)
       for IM in range(nPFMuon):
+        print("  ",IM)
         muon=Muon(event,IM)
         if (muon.fourMomentum.Pt()>5. and abs(muon.fourMomentum.Eta()<2.4)):
           muons.append(muon)
@@ -416,12 +421,12 @@ if __name__ == "__main__":
       #passedFile += "%6d %6d %10d  %+2d  %+4.2f %+4.2f %+4.2f \n" % (event.Run, event.LumiBlock, event.Evt , event.nJet, jets[0].fourMomentum.Pt(), jets[0].fourMomentum.Eta(), jets[0].fourMomentum.Phi());
       # loop over jets, apply jet specific categorization and fill plots   
       for jet in jetsWithMatchedMuons:
-        for cut in cuts.keys():
+        for cut in list(cuts.keys()):
           if cutFunctions[cut](event, jet.index):
             #if cut == "ptbin_20.0-30.0_l_CombIVFM":
             #  print cuts[cut]
             #  passedFile += "%6d %6d %10d  %+2d  %+4.2f %+4.2f %+4.2f \n" % (event.Run, event.LumiBlock, event.Evt , event.nJet, jet.fourMomentum.Pt(), jet.fourMomentum.Eta(), jet.fourMomentum.Phi())
-            for variable in variables.keys(): 
+            for variable in list(variables.keys()): 
               histos[variable][cut]['central'].Fill(variableFunctions[variable](event, jet.index), weight)
               if not opzioni.isData:
                 for syst in weightSystematics:
@@ -432,16 +437,16 @@ if __name__ == "__main__":
           if not opzioni.isData:      
             for syst in shapeSystematics:
               if cutFunctionsUp[syst][cut](event, jet.index):
-                for variable in variables.keys():
+                for variable in list(variables.keys()):
                   histos[variable][cut][syst+'_up'].Fill(variableFunctionsUp[syst][variable](event, jet.index), weight)
               if cutFunctionsDo[syst][cut](event, jet.index):  
-                for variable in variables.keys():
+                for variable in list(variables.keys()):
                   histos[variable][cut][syst+'_do'].Fill(variableFunctionsDo[syst][variable](event, jet.index), weight)
     except KeyboardInterrupt:
-      print "\nInterrupted"
+      print("\nInterrupted")
       break
-  print "\n"
-  print "Total events processed", i, "; passed", passed
+  print("\n")
+  print("Total events processed", i, "; passed", passed)
   outFile.Write()
 
-  print passedFile
+  print(passedFile)
