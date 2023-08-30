@@ -1,0 +1,711 @@
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360390,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360390,18,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360390,39,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360390,42,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360390,49,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360390,78,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360391,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360392,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360392,14,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360393,1,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360400,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360400,46,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360413,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360413,29,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360413,31,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360413,34,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360413,38,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360413,48,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360413,52,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360413,62,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360413,65,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360413,106,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360428,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360428,8,18,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360428,35,17,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360428,36,15,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360428,37,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360428,44,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360428,55,9,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360428,71,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360428,80,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360428,85,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360432,1,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360432,12,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360435,1,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360435,29,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360437,1,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360438,1,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360438,10,2,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360438,12,1,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360458,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360458,45,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360458,63,9,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360458,107,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360458,122,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360458,127,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360459,1,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360459,414,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360459,469,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360459,636,9,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360459,743,10,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360459,1004,12,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360460,1,12,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360460,57,13,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360460,552,15,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360486,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360486,87,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360486,103,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360486,113,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360486,212,4,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360486,260,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360486,263,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360486,471,19,0.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/0,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360490,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360490,4,19,0.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/0,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360490,9,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360490,34,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360490,42,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360490,123,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360490,182,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360490,313,9,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360490,422,10,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360490,634,12,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360490,657,11,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360490,730,12,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360490,1120,13,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360491,1,13,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360737,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360737,7,4,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360761,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360761,41,4,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360794,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360794,46,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360794,49,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360794,93,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360794,99,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360794,249,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360794,263,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360794,320,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360794,351,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360795,1,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360795,30,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360795,338,9,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360797,1,12,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360820,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360820,61,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360820,70,4,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360820,143,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360820,146,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360820,164,4,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360820,214,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360820,344,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360820,385,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360820,440,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360820,548,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360820,719,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360820,803,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360825,1,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360825,13,9,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360825,78,10,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360825,334,11,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360825,336,12,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360826,1,12,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360856,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360856,67,4,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360874,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360874,39,4,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360876,1,4,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360876,238,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360876,252,18,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360876,259,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360876,268,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360876,273,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360876,279,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360876,284,10,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360876,288,13,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360876,292,15,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360876,296,17,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360876,302,15,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360876,312,13,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360887,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360888,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360889,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360890,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360890,17,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360890,49,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360890,187,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360890,259,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360890,437,9,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360892,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360892,13,10,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360892,232,12,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360895,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360895,6,12,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360895,326,13,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360919,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360919,79,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360919,127,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360919,268,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360919,294,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360919,701,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360919,770,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360920,1,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360921,1,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360921,99,9,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360921,220,10,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360927,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360927,104,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360927,123,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360927,175,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360927,204,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360927,275,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360927,303,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360927,369,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360927,561,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360927,775,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360927,877,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360927,1014,9,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360927,1040,10,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360927,1045,9,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360927,1113,10,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360927,1381,12,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360927,1808,13,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360941,1,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360941,46,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360941,74,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360942,1,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360942,8,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360945,1,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360946,1,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360946,125,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360946,193,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360948,1,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360948,14,9,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360950,1,9,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360950,5,10,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360950,256,12,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360951,1,12,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360951,9,13,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360991,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+360991,61,4,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+360992,1,4,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361020,1,4,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361020,50,12,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361020,62,13,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361020,72,14,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361020,81,15,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361020,89,16,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361020,95,17,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361020,103,18,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361020,109,19,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361044,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361044,69,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361044,77,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361045,1,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361045,637,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361045,686,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361045,829,9,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361045,907,10,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361050,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361052,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361052,15,12,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361054,1,10,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361054,19,12,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361054,311,13,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361083,1,13,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361083,24,14,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361083,31,15,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361083,37,16,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361091,1,12,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361091,55,13,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361091,76,14,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361091,90,15,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361091,106,16,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361105,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361105,73,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361105,81,10,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361105,96,9,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361105,101,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361105,410,9,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361105,415,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361106,1,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361107,1,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361107,15,9,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361107,24,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361108,1,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361110,1,8,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361188,1,3,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361188,81,5,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361188,85,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361193,1,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361195,1,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361197,1,6,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361197,846,7,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361197,948,9,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361197,1054,10,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361197,1305,12,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361197,1650,13,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361197,2066,15,3.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/1,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361223,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361223,54,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361223,75,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361223,86,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361223,112,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361239,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361239,38,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361239,43,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361239,53,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361239,115,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361239,886,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361239,1007,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361240,1,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361240,15,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361240,135,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361240,321,12,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361240,338,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361240,351,12,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361240,675,13,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361272,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361272,93,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361272,107,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361280,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361283,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361284,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361297,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361297,34,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361297,321,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361297,342,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361297,803,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361297,886,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361303,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361303,27,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361303,30,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361303,38,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361303,40,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361303,65,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361303,70,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361303,104,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361303,108,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361303,945,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361303,1050,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361303,1210,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361303,1341,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361303,1583,11,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361303,1586,12,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361303,1921,13,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361318,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361318,26,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361318,29,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361318,32,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361318,43,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361318,67,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361318,210,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361318,226,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361319,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361319,171,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361320,1,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361320,13,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361320,204,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361320,266,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361333,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361333,28,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361333,30,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361333,61,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361333,65,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361333,67,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361333,71,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361361,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361361,52,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361361,60,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361361,98,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361362,1,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361363,1,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361363,8,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361365,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361366,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361366,134,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361366,177,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361400,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361400,68,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361400,79,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361400,88,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361400,98,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361417,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361417,51,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361417,627,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361417,703,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361417,931,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361417,1011,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361417,1174,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361417,1245,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361417,1548,12,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361443,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361443,72,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361443,81,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361443,144,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361443,154,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361443,234,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361443,236,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361443,938,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361443,998,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361443,1157,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361443,1273,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361443,1497,12,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361443,1844,13,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361443,2214,15,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361443,2232,16,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361468,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361468,39,4,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361468,294,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361468,356,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361468,382,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361468,1033,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361468,1132,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361468,1280,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361468,1399,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361468,1631,12,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361475,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361475,78,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361475,85,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361475,861,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361475,897,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361475,1032,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361475,1223,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361512,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361512,88,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361512,132,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361512,828,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361512,908,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361512,1075,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361512,1190,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361512,1430,12,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361569,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361569,49,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361569,89,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361569,102,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361573,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361573,5,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361573,91,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361579,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361579,66,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361579,765,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361579,844,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361580,1,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361580,70,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361580,156,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361957,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361957,815,13,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361971,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361971,86,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361971,108,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361971,113,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361971,885,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361971,956,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361971,1090,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361971,1202,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361971,1428,12,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361971,1739,13,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361971,2123,15,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361989,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361989,42,4,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361989,57,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+361989,74,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361990,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+361994,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362058,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362058,69,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362058,76,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362058,85,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362058,93,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362058,96,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362058,108,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362059,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362060,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362061,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362062,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362063,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362063,11,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362063,28,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362064,1,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362064,94,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362064,205,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362064,407,12,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362064,825,13,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362087,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362091,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362091,464,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362091,496,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362091,663,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362091,744,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362091,970,12,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362091,1328,13,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362104,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362104,75,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362104,124,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362105,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362106,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362107,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362107,74,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362107,80,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362107,393,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362107,428,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362107,495,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362107,570,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362107,691,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362148,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362148,95,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362153,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362154,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362154,6,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362154,46,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362154,127,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362154,262,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362154,394,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362154,610,12,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362159,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362161,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362161,76,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362163,1,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362166,1,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362166,27,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362167,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362167,369,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362167,470,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362167,577,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362167,585,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362167,635,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362437,1,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362437,4,2,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362437,12,0,0.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/0,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/0.00
+362437,26,1,0.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/0,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362437,73,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362439,1,1,0.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/0,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362439,8,3,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362439,15,2,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362439,35,1,0.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/0,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362439,249,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362439,282,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362439,328,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362439,389,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362439,475,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362439,735,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362439,819,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362439,926,11,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362439,986,12,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362439,989,11,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362439,1056,12,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362439,1281,14,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362597,1,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362597,127,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362614,1,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362614,35,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362614,89,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362614,97,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362614,142,4,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362615,1,4,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362615,17,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362616,1,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362616,74,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362617,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362618,1,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362618,29,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362618,124,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362653,1,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362653,42,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362653,70,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362653,103,7,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362653,123,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362653,145,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362653,169,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362654,1,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362655,1,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362655,3,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362657,1,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362657,6,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362657,36,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362657,154,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362657,182,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362695,1,0,0.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/0,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/0.00
+362695,5,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362695,89,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362696,1,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362696,655,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362696,659,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362696,680,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362696,783,11,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362696,856,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362696,872,11,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362696,873,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362696,879,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362696,888,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362696,891,11,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362696,907,12,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362696,959,13,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362696,1130,14,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362696,1474,15,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362698,1,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362698,7,15,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362698,126,17,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362720,1,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362720,80,6,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362720,148,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362720,175,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362720,190,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362720,193,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362720,325,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362727,1,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362728,1,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362728,53,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362728,55,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362728,63,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362728,137,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362728,146,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362728,214,11,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362728,349,13,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362757,1,5,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362757,70,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362758,1,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+# run,cmsls,prescidx,totprescval,hltpath/prescval,logic,l1bit/prescval
+362760,1,8,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362760,473,9,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362760,529,10,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00
+362760,670,11,6.00,HLT_BTagMu_AK4DiJet170_Mu5_v14/2,ONE,L1_Mu3_Jet120er2p5_dR_Max0p4/3.00

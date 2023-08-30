@@ -27,10 +27,10 @@ class Prescales:
       distance=999999
       closest="1"
       for ls in list(prescaleTable.keys()):
-        if lumi-int(ls)>0 and lumi-int(ls)<distance:
+        if lumi-int(ls)>=0 and lumi-int(ls)<distance:
           distance = lumi-int(ls)
           closest = ls
-      if closest != "0":    
+      if closest != "0": 
         return prescaleTable[closest]      
       else:
         print("Warning: prescale table requested for ls 0. This should not happen. Run", run, "lumi", lumi, "file", self.csvFile) 
@@ -48,7 +48,7 @@ class Prescales:
 
 
 if __name__ == "__main__":
-  prescale=Prescales('data/HLT_BTagMu_DiJet110_Mu5.csv')
-  a=prescale.data['283685']
+  prescale=Prescales('data/prescalesRun2022FG_HLT_BTagMu_AK4DiJet40_Mu5.txt')
+  a=prescale.data['362695']
   print(a)
-  print(prescale.getPrescale(283685, 56))
+  print(prescale.getPrescale(362695, 4))

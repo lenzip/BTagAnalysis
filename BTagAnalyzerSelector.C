@@ -46,10 +46,10 @@ BTagAnalyzerSelector::BTagAnalyzerSelector(TTree * tree) : fChain(0){
   b_v0WeightDo = newTree->Branch("v0WeightDo", v0WeightDo, "v0WeightDo[500]/F");
   b_cSVmassWeightUp = newTree->Branch("cSVmassWeightUp", cSVmassWeightUp, "cSVmassWeightUp[500]/F"); 
   b_cSVmassWeightDo = newTree->Branch("cSVmassWeightDo", cSVmassWeightDo, "cSVmassWeightDo[500]/F"); 
-  b_Jet_ptJERUp = newTree->Branch("Jet_ptJERUp", Jet_ptJERUp, "Jet_ptJERUp[500]/F");
-  b_Jet_ptJERDo = newTree->Branch("Jet_ptJERDo", Jet_ptJERDo, "Jet_ptJERDo[500]/F");
-  b_Jet_ptJESUp = newTree->Branch("Jet_ptJESUp", Jet_ptJESUp, "Jet_ptJESUp[500]/F");
-  b_Jet_ptJESDo = newTree->Branch("Jet_ptJESDo", Jet_ptJESDo, "Jet_ptJESDo[500]/F");
+  b_Jet_pTJERUp = newTree->Branch("Jet_pTJERUp", Jet_pTJERUp, "Jet_pTJERUp[500]/F");
+  b_Jet_pTJERDo = newTree->Branch("Jet_pTJERDo", Jet_pTJERDo, "Jet_pTJERDo[500]/F");
+  b_Jet_pTJESUp = newTree->Branch("Jet_pTJESUp", Jet_pTJESUp, "Jet_pTJESUp[500]/F");
+  b_Jet_pTJESDo = newTree->Branch("Jet_pTJESDo", Jet_pTJESDo, "Jet_pTJESDo[500]/F");
   b_Evt_new     = newTree->Branch("Evt_new", &Evt_new, "Evt_new/I");
  
 
@@ -237,11 +237,11 @@ void BTagAnalyzerSelector::GluonSplitting(int ij)
 
   float jeta = Jet_eta[ij];
   float jphi = Jet_phi[ij];   
-  float jpt  = Jet_pt[ij];   
+  float jpt  = Jet_pT[ij];   
 
   TLorentzVector jet;
   jet.SetPtEtaPhiM(jpt, jeta, jphi, 0.);
-  std::cout << "flavch " << flavch << std::endl;
+  //std::cout << "flavch " << flavch << std::endl;
   // post-ICHEP 
   if( flavch == 2 )
     {        
@@ -264,7 +264,7 @@ void BTagAnalyzerSelector::GluonSplitting(int ij)
          TLorentzVector B;
          B.SetPtEtaPhiM(BHadron_pT[k], BHadron_eta[k], BHadron_phi[k], 0.);
          double dRqj = jet.DeltaR(B);;
-         std::cout << "dRqj " << dRqj << std::endl;
+         //std::cout << "dRqj " << dRqj << std::endl;
          if( dRqj < 0.4 ) nbHadronsFound++;
          }
        
@@ -278,7 +278,7 @@ void BTagAnalyzerSelector::GluonSplitting(int ij)
      ((GSPc && flavch == 2) || (GSPb && flavch == 1))
     ) sfUp *= 1.25;   
  
-  std::cout << *nDHadron << " " << *nBHadron << " " << flavch << " " << sfUp << " " << sfDo << std::endl;
+  //std::cout << *nDHadron << " " << *nBHadron << " " << flavch << " " << sfUp << " " << sfDo << std::endl;
   gluonSplittingWeightUp[ij] = sfUp;
   gluonSplittingWeightDo[ij] = sfDo;
 
@@ -299,7 +299,7 @@ void BTagAnalyzerSelector::bFrag(int ij)
  
 
   float drMin = 0.4;   
-  float jPT = Jet_pt[ij];
+  float jPT = Jet_pT[ij];
   float jeta = Jet_eta[ij];
   float jphi = Jet_phi[ij];
   float WeightBFrag = 1.;
@@ -370,7 +370,7 @@ void BTagAnalyzerSelector::cdFrag(int ij)
   float drMin = 0.4;   
   float jeta = Jet_eta[ij];
   float jphi = Jet_phi[ij];
-  float jpt  = Jet_pt[ij];
+  float jpt  = Jet_pT[ij];
 
   int jFlavour = abs(Jet_flavour[ij]);
   if( jFlavour == 5 )  flavch = 1;
@@ -428,7 +428,7 @@ void BTagAnalyzerSelector::cFrag(int ij)
   float drMin = 0.4;
   float jeta = Jet_eta[ij];
   float jphi = Jet_phi[ij];
-  float jpt  = Jet_pt[ij];
+  float jpt  = Jet_pT[ij];
 
   int jFlavour = abs(Jet_flavour[ij]);
   if( jFlavour == 5 )  flavch = 1;
@@ -483,7 +483,7 @@ void BTagAnalyzerSelector::Ks(int ij)
   int flavch = 0; 
   float jeta = Jet_eta[ij];
   float jphi = Jet_phi[ij];
-  float jpt  = Jet_pt[ij];
+  float jpt  = Jet_pT[ij];
 
   int jFlavour = abs(Jet_flavour[ij]);
   if( jFlavour == 5 )  flavch = 1;
@@ -523,7 +523,7 @@ void  BTagAnalyzerSelector::JEC(int ij)
   jeta = Jet_eta[ij];
   jphi = Jet_phi[ij];
   jm = Jet_mass[ij];
-  jpt = Jet_pt[ij];
+  jpt = Jet_pT[ij];
    
   int etaIdx = -1;
   if( fabs(jeta) >= 0. && fabs(jeta) < 0.5 ) etaIdx = 0;
@@ -554,16 +554,16 @@ void  BTagAnalyzerSelector::JEC(int ij)
    }  
     
 
-   Jet_ptJERUp[ij] = jpt_c_up;
-   Jet_ptJERDo[ij] = jpt_c_down;
+   Jet_pTJERUp[ij] = jpt_c_up;
+   Jet_pTJERDo[ij] = jpt_c_down;
    
    // JES
    jesTotal->setJetPt(jpt);
    jesTotal->setJetEta(jeta);
    double uncert = jesTotal->getUncertainty(true);
   
-   Jet_ptJESUp[ij] = jpt*(1.+uncert);
-   Jet_ptJESDo[ij] = jpt*(1.-uncert);
+   Jet_pTJESUp[ij] = jpt*(1.+uncert);
+   Jet_pTJESDo[ij] = jpt*(1.-uncert);
 
   
 }

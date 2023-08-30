@@ -2,7 +2,7 @@
 
 from ROOT import *
 import CMS_lumi
-CMS_lumi.lumi_13TeV = "42 fb^{-1}"
+CMS_lumi.lumi_13TeV = "21 fb^{-1}"
 #CMS_lumi.writeExtraText = 1
 #CMS_lumi.writeExtraText2 = 1
 CMS_lumi.extraText = "Preliminary"
@@ -23,6 +23,7 @@ var=sys.argv[4]
 ptbin=sys.argv[5]
 selection=sys.argv[6]
 normalize=sys.argv[7]
+xtitle=sys.argv[8]
 
 mcfile = TFile(mc)
 datafile = TFile(data)
@@ -51,6 +52,7 @@ hb.SetLineColor(2)
 
 
 htotalmc = hl.Clone()
+htotalmc.GetXaxis().SetTitle(xtitle)
 htotalmc.Add(hc)
 htotalmc.Add(hb)
 

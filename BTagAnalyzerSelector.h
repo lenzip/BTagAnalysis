@@ -60,14 +60,14 @@ public :
    TTreeReaderArray<Float_t> bQuark_phi = {fReader, "bQuark_phi"};
    TTreeReaderArray<Int_t> bQuark_pdgId = {fReader, "bQuark_pdgId"};
    TTreeReaderArray<Int_t> bQuark_status = {fReader, "bQuark_status"};
-   TTreeReaderArray<Long64_t> bQuark_fromGSP = {fReader, "bQuark_fromGSP"};
+   TTreeReaderArray<bool> bQuark_fromGSP = {fReader, "bQuark_fromGSP"};
    TTreeReaderValue<Int_t> ncQuark = {fReader, "ncQuark"};
    TTreeReaderArray<Float_t> cQuark_pT = {fReader, "cQuark_pT"};
    TTreeReaderArray<Float_t> cQuark_eta = {fReader, "cQuark_eta"};
    TTreeReaderArray<Float_t> cQuark_phi = {fReader, "cQuark_phi"};
    TTreeReaderArray<Int_t> cQuark_pdgId = {fReader, "cQuark_pdgId"};
    TTreeReaderArray<Int_t> cQuark_status = {fReader, "cQuark_status"};
-   TTreeReaderArray<Long64_t> cQuark_fromGSP = {fReader, "cQuark_fromGSP"};
+   TTreeReaderArray<bool> cQuark_fromGSP = {fReader, "cQuark_fromGSP"};
    TTreeReaderValue<Int_t> nBHadron = {fReader, "nBHadron"};
    TTreeReaderArray<Float_t> BHadron_pT = {fReader, "BHadron_pT"};
    TTreeReaderArray<Float_t> BHadron_eta = {fReader, "BHadron_eta"};
@@ -100,16 +100,13 @@ public :
    TTreeReaderArray<Double_t> GenV0_SVy = {fReader, "GenV0_SVy"};
    TTreeReaderArray<Double_t> GenV0_SVz = {fReader, "GenV0_SVz"};
    TTreeReaderValue<Int_t> nJet = {fReader, "nJet"};
-   TTreeReaderArray<Float_t> Jet_pt = {fReader, "Jet_pt"};
+   TTreeReaderArray<Float_t> Jet_pT = {fReader, "Jet_pT"};
    TTreeReaderArray<Float_t> Jet_eta = {fReader, "Jet_eta"};
    TTreeReaderArray<Float_t> Jet_phi = {fReader, "Jet_phi"};
    TTreeReaderArray<Float_t> Jet_mass = {fReader, "Jet_mass"};
    TTreeReaderArray<Float_t> Jet_uncorrpt = {fReader, "Jet_uncorrpt"};
-   TTreeReaderArray<Long64_t> Jet_looseID = {fReader, "Jet_looseID"};
-   TTreeReaderArray<Long64_t> Jet_tightID = {fReader, "Jet_tightID"};
-   TTreeReaderArray<Long64_t> Jet_pileup_tightID = {fReader, "Jet_pileup_tightID"};
-   TTreeReaderArray<Long64_t> Jet_pileup_mediumID = {fReader, "Jet_pileup_mediumID"};
-   TTreeReaderArray<Long64_t> Jet_pileup_looseID = {fReader, "Jet_pileup_looseID"};
+   TTreeReaderArray<bool> Jet_looseID = {fReader, "Jet_looseID"};
+   TTreeReaderArray<bool> Jet_tightID = {fReader, "Jet_tightID"};
    TTreeReaderArray<Float_t> Jet_area = {fReader, "Jet_area"};
    TTreeReaderArray<Float_t> Jet_Proba = {fReader, "Jet_Proba"};
    TTreeReaderArray<Float_t> Jet_ProbaN = {fReader, "Jet_ProbaN"};
@@ -123,8 +120,8 @@ public :
    TTreeReaderArray<Float_t> Jet_DeepFlavourCvsBDiscN = {fReader, "Jet_DeepFlavourCvsBDiscN"};
    TTreeReaderArray<Int_t> Jet_nbHadrons = {fReader, "Jet_nbHadrons"};
    TTreeReaderArray<Int_t> Jet_ncHadrons = {fReader, "Jet_ncHadrons"};
-   TTreeReaderArray<Int_t> Jet_partonFlavour = {fReader, "Jet_partonFlavour"};
-   TTreeReaderArray<Int_t> Jet_hadronFlavour = {fReader, "Jet_hadronFlavour"};
+   TTreeReaderArray<short> Jet_partonFlavour = {fReader, "Jet_partonFlavour"};
+   TTreeReaderArray<unsigned char> Jet_hadronFlavour = {fReader, "Jet_hadronFlavour"};
    TTreeReaderArray<Long64_t> Jet_flavour = {fReader, "Jet_flavour"};
    TTreeReaderArray<Double_t> Jet_genpt = {fReader, "Jet_genpt"};
    TTreeReaderArray<Long64_t> Jet_flavourCleaned = {fReader, "Jet_flavourCleaned"};
@@ -178,10 +175,10 @@ public :
    Float_t         v0WeightDo[NMAX];
    Float_t         cSVmassWeightUp[NMAX]; 
    Float_t         cSVmassWeightDo[NMAX]; 
-   Float_t         Jet_ptJERUp[NMAX];
-   Float_t         Jet_ptJERDo[NMAX];
-   Float_t         Jet_ptJESUp[NMAX];
-   Float_t         Jet_ptJESDo[NMAX];
+   Float_t         Jet_pTJERUp[NMAX];
+   Float_t         Jet_pTJERDo[NMAX];
+   Float_t         Jet_pTJESUp[NMAX];
+   Float_t         Jet_pTJESDo[NMAX];
    Int_t           Evt_new;
 
    //new branches to add
@@ -197,10 +194,10 @@ public :
    TBranch        *b_v0WeightDo;
    TBranch        *b_cSVmassWeightUp;
    TBranch        *b_cSVmassWeightDo;
-   TBranch        *b_Jet_ptJERUp;
-   TBranch        *b_Jet_ptJERDo;
-   TBranch        *b_Jet_ptJESUp;
-   TBranch        *b_Jet_ptJESDo;
+   TBranch        *b_Jet_pTJERUp;
+   TBranch        *b_Jet_pTJERDo;
+   TBranch        *b_Jet_pTJESUp;
+   TBranch        *b_Jet_pTJESDo;
    TBranch        *b_Evt_new;
 
    BTagAnalyzerSelector(TTree* tree = 0); 
@@ -262,10 +259,10 @@ void BTagAnalyzerSelector::Init(TTree *tree)
    b_cFragmentationWeightDo = newTree->Branch("cFragmentationWeightDo", cFragmentationWeightDo, "cFragmentationWeightDo[500]/F");
    b_v0WeightUp = newTree->Branch("v0WeightUp", v0WeightUp, "v0WeightUp[500]/F");
    b_v0WeightDo = newTree->Branch("v0WeightDo", v0WeightDo, "v0WeightDo[500]/F");
-   b_Jet_ptJERUp = newTree->Branch("Jet_ptJERUp", Jet_ptJERUp, "Jet_ptJERUp[500]/F");
-   b_Jet_ptJERDo = newTree->Branch("Jet_ptJERDo", Jet_ptJERDo, "Jet_ptJERDo[500]/F");
-   b_Jet_ptJESUp = newTree->Branch("Jet_ptJESUp", Jet_ptJESUp, "Jet_ptJESUp[500]/F");
-   b_Jet_ptJESDo = newTree->Branch("Jet_ptJESDo", Jet_ptJESDo, "Jet_ptJESDo[500]/F");
+   b_Jet_pTJERUp = newTree->Branch("Jet_pTJERUp", Jet_pTJERUp, "Jet_pTJERUp[500]/F");
+   b_Jet_pTJERDo = newTree->Branch("Jet_pTJERDo", Jet_pTJERDo, "Jet_pTJERDo[500]/F");
+   b_Jet_pTJESUp = newTree->Branch("Jet_pTJESUp", Jet_pTJESUp, "Jet_pTJESUp[500]/F");
+   b_Jet_pTJESDo = newTree->Branch("Jet_pTJESDo", Jet_pTJESDo, "Jet_pTJESDo[500]/F");
    b_Evt_new     = newTree->Branch("b_Evt_new", &Evt_new, "Evt_new/I");
 */
 }
@@ -283,10 +280,10 @@ void BTagAnalyzerSelector::cleanForNewEvent(){
     v0WeightDo[i] = 1.;
     cSVmassWeightUp[i] = 1.;
     cSVmassWeightDo[i] = 1.;
-    Jet_ptJERUp[i] = 1.;
-    Jet_ptJERDo[i] = 1.;
-    Jet_ptJESUp[i] = 1.;
-    Jet_ptJESDo[i] = 1.;
+    Jet_pTJERUp[i] = 1.;
+    Jet_pTJERDo[i] = 1.;
+    Jet_pTJESUp[i] = 1.;
+    Jet_pTJESDo[i] = 1.;
   }
 }
 

@@ -1,14 +1,13 @@
 #!/bin/bash
 
-dataDir="srm://stormfe1.pi.infn.it:8444/srm/managerv2?SFN=/cms/store/user/lenzip/BTagMorion2017/DATAVALID/BTagMu/"
+dataDir="/eos/cms/store/group/phys_btag/coli/BTA_Run3_NANO130X/data_2022FG_prompt/addPFMuons/"
 #dataDirOut="root://xrootd-cms.infn.it///store/user/kskovpen/BTV/MORIOND17JPDEF/BTagMu/"
-dataDirOut="srm://stormfe1.pi.infn.it:8444/srm/managerv2?SFN=/cms/store/user/lenzip/BTagMorion2017/DATAVALID/BTagMu/"
-mcDir="srm://stormfe1.pi.infn.it:8444/srm/managerv2?SFN=/cms/store/user/lenzip/BTagMorion2017/MC/"
+dataDirOut="root://xrootd-cms.infn.it///store/group/phys_btag/coli/BTA_Run3_NANO130X/data_2022FG_prompt/addPFMuons/"
+mcDir="/eos/cms/store/group/phys_btag/coli/BTA_Run3_NANO130X/mc_summer22EE/addPFMuons/"
 #mcDirOut="root://xrootd-cms.infn.it///store/user/kskovpen/BTV/MORIOND17JPDEF/"
-mcDirOut="srm://stormfe1.pi.infn.it:8444/srm/managerv2?SFN=/cms/store/user/lenzip/BTagMorion2017/MC/"
-dataSubdir1=$(gfal-ls $dataDir | grep Run2017)
-mcSubdir1=$(gfal-ls $mcDir | grep MuEnriched)
-echo "gfal-ls $dataDir | grep BTagMu"
+mcDirOut="root://xrootd-cms.infn.it///store/group/phys_btag/coli/BTA_Run3_NANO130X/mc_summer22EE/addPFMuons/"
+dataSubdir1=$(ls $dataDir | grep BTagMu)
+mcSubdir1=$(ls $mcDir | grep MuEnrichedPt5)
 nFilesDATA=5
 nFilesMC=5
 outDir="listsFromKirill"
@@ -19,18 +18,10 @@ rm /tmp/tempDATA.txt
 
 for dir1 in $dataSubdir1; do
   echo $dir1
-  dataSubdir2=$(gfal-ls $dataDir/$dir1)
-  for dir2 in $dataSubdir2; do
-    echo $dir2
-    dataSubdir3=$(gfal-ls $dataDir/$dir1/$dir2)
-    for dir3 in $dataSubdir3; do
-      echo $dir3
-      files=$(gfal-ls $dataDir/$dir1/$dir2/$dir3 | grep root)
-      for file in $files; do
-        echo "$dataDirOut/$dir1/$dir2/$dir3/$file" >> /tmp/tempDATA.txt
-      done  
-    done  
-  done
+  files=$(ls $dataDir/$dir1)
+  for file in $files; do
+    echo "$dataDirOut/$dir1/$file" >> /tmp/tempDATA.txt  
+  done  
   split -a 5 -l ${nFilesDATA} -d /tmp/tempDATA.txt /tmp/${dir1}_
   lsfi=$(ls /tmp/${dir1}_*)
   jid=0
@@ -45,21 +36,10 @@ done
 
 
 for dir1 in $mcSubdir1; do
-  echo $dir1
-  dataSubdir2=$(gfal-ls $mcDir/$dir1)
-  for dir2 in $dataSubdir2; do
-    echo $dir2
-    dataSubdir3=$(gfal-ls $mcDir/$dir1/$dir2)
-    for dir3 in $dataSubdir3; do
-      echo $dir3
-      dataSubdir4=$(gfal-ls $mcDir/$dir1/$dir2/$dir3)
-      for dir4 in $dataSubdir4; do
-        files=$(gfal-ls $mcDir/$dir1/$dir2/$dir3/$dir4/ | grep root)
-          for file in $files; do
-          echo "$mcDirOut/$dir1/$dir2/$dir3/$dir4/$file" >> /tmp/tempMC.txt
-        done  
-      done 
-    done  
+  echo "1",$dir1
+  files=$(ls $mcDir/$dir1)
+  for file in $files; do
+      echo "$mcDirOut/$dir1/$file" >> /tmp/tempMC.txt
   done
   split -a 5 -l ${nFilesMC} -d /tmp/tempMC.txt /tmp/${dir1}_
   lsfi=$(ls /tmp/${dir1}_*)

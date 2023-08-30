@@ -1,4 +1,6 @@
 Since there is no imputLumiJson I did the following:
+- to setup:
+`source /cvmfs/cms-bril.cern.ch/cms-lumi-pog/brilws-docker/brilws-env`
 - To get the per bunch crossing lumi:
 `brilcalc lumi --normtag /cvmfs/cms-bril.cern.ch/cms-lumi-pog/Normtags/normtag_BRIL.json  -i run2022FG.json --byls --xing -o /tmp/lenzip/run2022FG_lumi_byls_xing.csv`
 - to compute the inputLumiJson:

@@ -19,7 +19,7 @@ ptbins=[20.,1000.]
 algos = ["DeepFlavourBDisc"]
 wps={
 "DeepFlavourBDisc":
-  {"L": 0.5803, "M":  0.8838, "T":  0.9693},
+  {"L": 0.0614, "M":  0.3196, "T":  0.73, "XT": 0.8184, "XXT": 0.9542},
 }
 
 # flavor names
@@ -29,7 +29,7 @@ flavors=["l","b","c"]
 # this is very importnt to speed up data access
 activeBranches.extend([
 "nJet",
-"Jet_pt",
+"Jet_pT",
 "Jet_eta",
 "Jet_flavour",
 "nPFMuon"
@@ -47,7 +47,7 @@ for ipt in range(len(ptbins)-1):
   
   baseCutName = "ptbin_"+str(ptmin)+"-"+str(ptmax)
   
-  cuts[baseCutName] = "((event.Jet_pt[IJ]>"+ptmin+" and event.Jet_pt[IJ]<"+ptmax+")"+ \
+  cuts[baseCutName] = "((event.Jet_pT[IJ]>"+ptmin+" and event.Jet_pT[IJ]<"+ptmax+")"+ \
                                " and (abs(event.Jet_eta[IJ])<2.4) and (event.Jet_Proba[IJ] > 0))"
   
   cuts[baseCutName+"_JP0"] = cuts[baseCutName].replace("event.Jet_Proba[IJ] > 0","event.Jet_Proba[IJ]<=0")
@@ -65,7 +65,8 @@ for ipt in range(len(ptbins)-1):
   cuts[baseCutNameAndSV] = cuts[baseCutName] + "*(event.TagVarCSV_vertexMass[IJ]>0)"
   baseCutNameAndNoSV = baseCutName+"_NoSV"
   cuts[baseCutNameAndNoSV] = cuts[baseCutName] + "*(event.TagVarCSV_vertexMass[IJ]<0)"
-                               
+  if opzioni.isData:
+    continue
   for flavor in flavors:
     if flavor == "l":
       baseCutNameAndFlavor = baseCutName+"_l"

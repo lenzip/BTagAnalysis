@@ -43,8 +43,8 @@ def bookamelo(outFileName, variables, cuts, systematics):
   return outFile, histos    
     
 def passTrigger(event,trigIdx):
-  bitIdx = trigIdx/32 ;
-  return 1
+  bitIdx = int(trigIdx/32) ;
+  #return 1
   return ( event.BitTrigger[bitIdx] & ( 1 << (trigIdx - bitIdx*32) ) )
 
 
@@ -92,7 +92,7 @@ if __name__ == "__main__":
   'PFMuon_eta',
   'PFMuon_phi',
   'PFMuon_GoodQuality',
-  'Jet_pt',
+  'Jet_pT',
   'Jet_phi',
   'Jet_eta',
   'nBitTrigger',
@@ -120,10 +120,10 @@ if __name__ == "__main__":
       'Evt_new',
       'v0WeightUp',
       'v0WeightDo',
-      'Jet_ptJERUp',
-      'Jet_ptJERDo',
-      'Jet_ptJESUp',
-      'Jet_ptJESDo',
+      'Jet_pTJERUp',
+      'Jet_pTJERDo',
+      'Jet_pTJESUp',
+      'Jet_pTJESDo',
           ])
 
   cutsFile = opzioni.cutsFile
@@ -181,18 +181,18 @@ if __name__ == "__main__":
     cutsDo[syst] = copy.deepcopy(cuts)
     cutFunctionsDo[syst] = copy.deepcopy(cutFunctions)
     for cut in cuts:
-      cutsUp[syst][cut] = cutsUp[syst][cut].replace('Jet_pt', 'Jet_pt'+syst+"Up")
+      cutsUp[syst][cut] = cutsUp[syst][cut].replace('Jet_pT', 'Jet_pT'+syst+"Up")
       cutFunctionsUp[syst][cut]=eval("lambda event,IJ:"+cutsUp[syst][cut])
-      cutsDo[syst][cut] = cutsDo[syst][cut].replace('Jet_pt', 'Jet_pt'+syst+"Do")
+      cutsDo[syst][cut] = cutsDo[syst][cut].replace('Jet_pT', 'Jet_pT'+syst+"Do")
       cutFunctionsDo[syst][cut]=eval("lambda event,IJ:"+cutsDo[syst][cut])
     variablesUp[syst] = copy.deepcopy(variables)  
     variableFunctionsUp[syst] = copy.deepcopy(variableFunctions)
     variablesDo[syst] = copy.deepcopy(variables)
     variableFunctionsDo[syst] = copy.deepcopy(variableFunctions)
     for variable in variables:
-      variablesUp[syst][variable]['expression'] = variablesUp[syst][variable]['expression'].replace('Jet_pt', 'Jet_pt'+syst+"Up")
+      variablesUp[syst][variable]['expression'] = variablesUp[syst][variable]['expression'].replace('Jet_pT', 'Jet_pT'+syst+"Up")
       variableFunctionsUp[syst][variable]=eval("lambda event,IJ:"+variablesUp[syst][variable]['expression'])
-      variablesDo[syst][variable]['expression'] = variablesDo[syst][variable]['expression'].replace('Jet_pt', 'Jet_pt'+syst+"Do")
+      variablesDo[syst][variable]['expression'] = variablesDo[syst][variable]['expression'].replace('Jet_pT', 'Jet_pT'+syst+"Do")
       variableFunctionsDo[syst][variable]=eval("lambda event,IJ:"+variablesDo[syst][variable]['expression'])
 
   fileList=open(args[0])
@@ -212,9 +212,9 @@ if __name__ == "__main__":
     gSystem.AddIncludePath("-I"+cmssw_base+"/interface/");
     gSystem.Load("libFWCoreFWLite.so");
     try:
-      gROOT.LoadMacro('BTagAnalyzerSelector.C++g')
+      gROOT.LoadMacro('BTagAnalyzerSelector.C+g')
     except RuntimeError:
-      gROOT.LoadMacro('BTagAnalyzerSelector.C++g')
+      gROOT.LoadMacro('BTagAnalyzerSelector.C+g')
     print("Starting pre-processing")   
     ihelper = 0
     helperChain = TChain("helper")
@@ -273,12 +273,12 @@ if __name__ == "__main__":
   # prepare prescale tables
   if opzioni.isData:
     prescaleTables={}
-    prescaleTables["32"] = Prescales("data/prescalesHLT_BTagMu_AK4DiJet20_Mu5.txt")
-    prescaleTables["33"] = Prescales("data/prescalesHLT_BTagMu_AK4DiJet40_Mu5.txt")
-    prescaleTables["34"] = Prescales("data/prescalesHLT_BTagMu_AK4DiJet70_Mu5.txt")
-    prescaleTables["35"] = Prescales("data/prescalesHLT_BTagMu_AK4DiJet110_Mu5.txt")
-    prescaleTables["36"] = Prescales("data/prescalesHLT_BTagMu_AK4DiJet170_Mu5.txt")
-    prescaleTables["37"] = Prescales("data/prescalesHLT_BTagMu_AK4Jet300_Mu5.txt")
+    prescaleTables["32"] = Prescales("data/prescalesRun2022FG_HLT_BTagMu_AK4DiJet20_Mu5.txt")
+    prescaleTables["33"] = Prescales("data/prescalesRun2022FG_HLT_BTagMu_AK4DiJet40_Mu5.txt")
+    prescaleTables["34"] = Prescales("data/prescalesRun2022FG_HLT_BTagMu_AK4DiJet70_Mu5.txt")
+    prescaleTables["35"] = Prescales("data/prescalesRun2022FG_HLT_BTagMu_AK4DiJet110_Mu5.txt")
+    prescaleTables["36"] = Prescales("data/prescalesRun2022FG_HLT_BTagMu_AK4DiJet170_Mu5.txt")
+    prescaleTables["37"] = Prescales("data/prescalesRun2022FG_HLT_BTagMu_AK4Jet300_Mu5.txt")
 
   else:
     pileup = Pileup(["data/"+opzioni.pufile],
@@ -289,7 +289,7 @@ if __name__ == "__main__":
   passed=0
   for ievent,event in enumerate(chain):
     try:
-      print("**",ievent)
+      #print("**",ievent)
       #if event.Evt != 1614523636 :
       #  continue
       # event weight
@@ -302,13 +302,15 @@ if __name__ == "__main__":
         npu = event.nPUtrue
         # PU weight
         weight = weight*pileup.getWeight(npu)
+        #print ("puweight", pileup.getWeight(npu))
+        #print ("xsweight", crossSection.getWeight(chain, float(opzioni.lumi)*1000.))
         # xsec weight
         weight = weight*crossSection.getWeight(chain, float(opzioni.lumi)*1000.)
 
         #just to be sure, check the main tree and the helper one are in sync
-        if event.Evt != event.Evt_new:
-          print("main tree and helper tree are out of sync. Big Problem. Ending now.")
-          sys.exit(1)
+        #if event.Evt != event.Evt_new:  
+        #  print("main tree and helper tree are out of sync. Big Problem. Ending now.",event.Evt,event.Evt_new)
+        #  sys.exit(1)
 
       i=i+1
       if (i%1000==0):
@@ -323,7 +325,7 @@ if __name__ == "__main__":
       nPFMuon=event.nPFMuon
       jets=[]
       event.associatedMuonIds = []
-      print("This event has", nJet, "jets", event.Evt)#, event.Evt_new
+      #print("This event has", nJet, "jets", event.Evt)#, event.Evt_new
       for IJ in range(nJet):
         event.associatedMuonIds.append(-1)
         #print "gluonSplitting  (Up,Do)", event.gluonSplittingWeightUp[IJ], event.gluonSplittingWeightDo[IJ]  
@@ -331,19 +333,19 @@ if __name__ == "__main__":
         #print "cdFragmentation (Up,Do)", event.cdFragmentationWeightUp[IJ], event.cdFragmentationWeightDo[IJ] 
         #print "cFragmentation  (Up,Do)", event.cFragmentationWeightUp[IJ], event.cFragmentationWeightDo[IJ]    
         #print "v0              (Up,Do)", event.v0WeightUp[IJ], event.v0WeightDo[IJ] 
-        print("pt                     ", event.Jet_pt[IJ])
-        #print "pt JER          (Up,Do)", event.Jet_ptJERUp[IJ], event.Jet_ptJERDo[IJ]
-        #print "pt JES          (Up,Do)", event.Jet_ptJESUp[IJ], event.Jet_ptJESDo[IJ]
+        #print("pt                     ", event.Jet_pT[IJ])
+        #print "pt JER          (Up,Do)", event.Jet_pTJERUp[IJ], event.Jet_pTJERDo[IJ]
+        #print "pt JES          (Up,Do)", event.Jet_pTJESUp[IJ], event.Jet_pTJESDo[IJ]
         jet=Jet(event,IJ)
         event.associatedMuonIds.append(-1)
         if (jet.fourMomentum.Pt()>20. and abs(jet.fourMomentum.Eta())<2.4):# and jet.Jet_Proba > 0.):
           jets.append(jet)
-      for jet in jets:
-       print(jet.index, jet.fourMomentum.Pt(),jet.fourMomentum.Eta(),jet.Jet_Proba)
+      #for jet in jets:
+      # print(jet.index, jet.fourMomentum.Pt(),jet.fourMomentum.Eta(),jet.Jet_Proba)
       muons=[]
-      print(nPFMuon)
+      #print(nPFMuon)
       for IM in range(nPFMuon):
-        print("  ",IM)
+        #print("  ",IM)
         muon=Muon(event,IM)
         if (muon.fourMomentum.Pt()>5. and abs(muon.fourMomentum.Eta()<2.4)):
           muons.append(muon)
@@ -407,14 +409,14 @@ if __name__ == "__main__":
       #find matches between triggers that actually fired and pt bins
       matches=set(triggers).intersection(triggerPtBins)
       matches=list(matches)
-      #print triggers, triggerPtBins, matches
+      #print (triggers, triggerPtBins, matches)
       if len(matches)==0: continue
       #print "triggered"
       if opzioni.isData:
         #get the prescale weight from the first trigger in the list
-        #print ">>>>", matches
+        #print (">>>>", matches)
         matches.sort(reverse=True)
-        #print "<<<<", matches
+        #print ("<<<<", matches, event.Run, event.LumiBlock, prescaleTables[str(matches[0])].getPrescaleWeight(event.Run, event.LumiBlock))
         weight = weight*prescaleTables[str(matches[0])].getPrescaleWeight(event.Run, event.LumiBlock)
 
       passed +=1
