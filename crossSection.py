@@ -1,3 +1,4 @@
+
 class CrossSection:
   def __init__(self, inputFile):
     self.data={}
@@ -10,7 +11,7 @@ class CrossSection:
       self.data[linesplit[0]]['events'] = float(linesplit[2])
       self.data[linesplit[0]]['mcLumi'] = self.data[linesplit[0]]['events']/(self.data[linesplit[0]]['xsec'])
     #print self.data
-      
+  
   def getWeight(self, chain, dataLumi):
     filename = chain.GetFile().GetName()
     #print (filename)

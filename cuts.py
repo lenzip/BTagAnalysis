@@ -1,12 +1,12 @@
 # global event selection
-eventsel="(event.nJet>=2 and event.nPFMuon>=1)"
+eventsel="(nJet>=2 and nPFMuon>=1)"
 
 cuts={}
 
 
 #pt bins for the sf calculation
-#ptbins=[20., 30., 50., 70., 100., 140., 200., 300., 670., 1000.]
-ptbins=[20.,1000.]
+#ptbins=[20, 30, 50, 70, 100, 140, 200, 300, 600, 1000]
+ptbins=[20,1000]
 
 # algorithms for which SF are to be computed and corresponding working points
 # the algorithm name must match the branch name in the BTagAnalyzer output, i.e. Jet_<algo>
@@ -16,10 +16,14 @@ ptbins=[20.,1000.]
 #  {"L": 0.1522, "M":  0.4941, "T":  0.8001},
 #}
 
-algos = ["DeepFlavourBDisc"]
+algos = ["DeepFlavourBDisc", "ParTBDisc", "PNetBDisc"]
 wps={
 "DeepFlavourBDisc":
-  {"L": 0.0614, "M":  0.3196, "T":  0.73, "XT": 0.8184, "XXT": 0.9542},
+  {"L": 0.0614, "M":  0.3196, "T":  0.73,   "XT": 0.8184, "XXT": 0.9542},
+"ParTBDisc":
+  {"L": 0.0897, "M":  0.451,  "T":  0.8604, "XT": 0.9234, "XXT": 0.9893},
+"PNetBDisc":
+  {"L": 0.0499, "M":  0.2605, "T":  0.6915, "XT": 0.8033, "XXT": 0.9664}
 }
 
 # flavor names
@@ -45,70 +49,57 @@ for ipt in range(len(ptbins)-1):
   ptmin = str(ptbins[ipt])
   ptmax = str(ptbins[ipt+1])
   
-  baseCutName = "ptbin_"+str(ptmin)+"-"+str(ptmax)
+  baseCutName = "ptbin_"+str(ptmin)+"_"+str(ptmax)
   
-  cuts[baseCutName] = "((event.Jet_pT[IJ]>"+ptmin+" and event.Jet_pT[IJ]<"+ptmax+")"+ \
-                               " and (abs(event.Jet_eta[IJ])<2.4) and (event.Jet_Proba[IJ] > 0))"
+  cuts[baseCutName] = "((GoodJet_pT>"+ptmin+" && GoodJet_pT<"+ptmax+")"+ \
+                               " && (abs(GoodJet_eta)<2.4) && (GoodJet_Proba > 0))"
   
-  cuts[baseCutName+"_JP0"] = cuts[baseCutName].replace("event.Jet_Proba[IJ] > 0","event.Jet_Proba[IJ]<=0")
+  cuts[baseCutName+"_JP0"] = cuts[baseCutName].replace("GoodJet_Proba > 0","GoodJet_Proba<=0")
 
   for algo in algos:
     for wp in list(wps[algo].keys()):
       baseCutNameAndTagger=baseCutName+"_"+algo+wp
-      cuts[baseCutNameAndTagger] = cuts[baseCutName] + "*(event.Jet_"+algo+"[IJ]>"+str(wps[algo][wp])+ ")"
-      cuts[baseCutNameAndTagger+"SV"] = cuts[baseCutNameAndTagger] + "*(event.TagVarCSV_vertexMass[IJ]>0)"
-      cuts[baseCutNameAndTagger+"NoSV"] = cuts[baseCutNameAndTagger] + "*(event.TagVarCSV_vertexMass[IJ]<0)"
+      cuts[baseCutNameAndTagger] = cuts[baseCutName] + "&& (GoodJet_"+algo+">"+str(wps[algo][wp])+ ")"
+      cuts[baseCutNameAndTagger+"SV"] = cuts[baseCutNameAndTagger] + "&& (GoodTagVarCSV_vertexMass>0)"
+      cuts[baseCutNameAndTagger+"NoSV"] = cuts[baseCutNameAndTagger] + "&& (GoodTagVarCSV_vertexMass<0)"
       baseCutNameAndTaggerFail=baseCutNameAndTagger+"_Fail"
-      cuts[baseCutNameAndTaggerFail] = cuts[baseCutName] + "*(event.Jet_"+algo+"[IJ]<="+str(wps[algo][wp])+ ")"
+      cuts[baseCutNameAndTaggerFail] = cuts[baseCutName] + "&& (GoodJet_"+algo+"<="+str(wps[algo][wp])+ ")"
   
   baseCutNameAndSV = baseCutName+"_SV"
-  cuts[baseCutNameAndSV] = cuts[baseCutName] + "*(event.TagVarCSV_vertexMass[IJ]>0)"
+  cuts[baseCutNameAndSV] = cuts[baseCutName] + " && (GoodTagVarCSV_vertexMass>0)"
   baseCutNameAndNoSV = baseCutName+"_NoSV"
-  cuts[baseCutNameAndNoSV] = cuts[baseCutName] + "*(event.TagVarCSV_vertexMass[IJ]<0)"
+  cuts[baseCutNameAndNoSV] = cuts[baseCutName] + "&& (GoodTagVarCSV_vertexMass<0)"
   if opzioni.isData:
     continue
   for flavor in flavors:
     if flavor == "l":
       baseCutNameAndFlavor = baseCutName+"_l"
-      cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*((abs(event.Jet_flavour[IJ]) >= 0 and abs(event.Jet_flavour[IJ])<=3) or event.Jet_flavour[IJ] == 21)")
-      cuts[baseCutNameAndFlavor+"_JP0"] = cuts[baseCutNameAndFlavor].replace("event.Jet_Proba[IJ] > 0","event.Jet_Proba[IJ]<=0")
-      cuts[baseCutNameAndFlavor+"_SV"] = cuts[baseCutNameAndFlavor] + ("*(event.TagVarCSV_vertexMass[IJ]>0)")
-      cuts[baseCutNameAndFlavor+"_NoSV"] = cuts[baseCutNameAndFlavor] + ("*(event.TagVarCSV_vertexMass[IJ]<0)")
+      cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("&& ((abs(GoodJet_flavour) >= 0 && abs(GoodJet_flavour)<=3) || GoodJet_flavour == 21)")
+      cuts[baseCutNameAndFlavor+"_JP0"] = cuts[baseCutNameAndFlavor].replace("GoodJet_Proba > 0","GoodJet_Proba<=0")
+      cuts[baseCutNameAndFlavor+"_SV"] = cuts[baseCutNameAndFlavor] + ("&& (GoodTagVarCSV_vertexMass>0)")
+      cuts[baseCutNameAndFlavor+"_NoSV"] = cuts[baseCutNameAndFlavor] + ("&& (GoodTagVarCSV_vertexMass<0)")
     elif flavor == "c":
       baseCutNameAndFlavor = baseCutName+"_c"
-      cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*(abs(event.Jet_flavour[IJ]) == 4)")   
-      cuts[baseCutNameAndFlavor+"_JP0"] = cuts[baseCutNameAndFlavor].replace("event.Jet_Proba[IJ] > 0","event.Jet_Proba[IJ]<=0")
-      cuts[baseCutNameAndFlavor+"_SV"] = cuts[baseCutNameAndFlavor] + ("*(event.TagVarCSV_vertexMass[IJ]>0)")
-      cuts[baseCutNameAndFlavor+"_NoSV"] = cuts[baseCutNameAndFlavor] + ("*(event.TagVarCSV_vertexMass[IJ]<0)")            
+      cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("&& (abs(GoodJet_flavour) == 4)")   
+      cuts[baseCutNameAndFlavor+"_JP0"] = cuts[baseCutNameAndFlavor].replace("GoodJet_Proba > 0","GoodJet_Proba<=0")
+      cuts[baseCutNameAndFlavor+"_SV"] = cuts[baseCutNameAndFlavor] + ("&& (GoodTagVarCSV_vertexMass>0)")
+      cuts[baseCutNameAndFlavor+"_NoSV"] = cuts[baseCutNameAndFlavor] + ("&& (GoodTagVarCSV_vertexMass<0)")            
     else:
       baseCutNameAndFlavor = baseCutName+"_b"
-      cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("*(abs(event.Jet_flavour[IJ]) == 5)") 
-      cuts[baseCutNameAndFlavor+"_JP0"] = cuts[baseCutNameAndFlavor].replace("event.Jet_Proba[IJ] > 0","event.Jet_Proba[IJ]<=0")
-      cuts[baseCutNameAndFlavor+"_SV"] = cuts[baseCutNameAndFlavor] + ("*(event.TagVarCSV_vertexMass[IJ]>0)")
-      cuts[baseCutNameAndFlavor+"_NoSV"] = cuts[baseCutNameAndFlavor] + ("*(event.TagVarCSV_vertexMass[IJ]<0)")
+      cuts[baseCutNameAndFlavor] = cuts[baseCutName]+("&& (abs(GoodJet_flavour) == 5)") 
+      cuts[baseCutNameAndFlavor+"_JP0"] = cuts[baseCutNameAndFlavor].replace("GoodJet_Proba > 0","GoodJet_Proba<=0")
+      cuts[baseCutNameAndFlavor+"_SV"] = cuts[baseCutNameAndFlavor] + ("&& (GoodTagVarCSV_vertexMass>0)")
+      cuts[baseCutNameAndFlavor+"_NoSV"] = cuts[baseCutNameAndFlavor] + ("&& (GoodTagVarCSV_vertexMass<0)")
 
     
     for algo in algos:
       for wp in list(wps[algo].keys()):
         baseCutNameAndFlavorAndTagger=baseCutNameAndFlavor+"_"+algo+wp
-        cuts[baseCutNameAndFlavorAndTagger] = cuts[baseCutNameAndFlavor] + "*(event.Jet_"+algo+"[IJ]>"+str(wps[algo][wp])+ ")"
-        cuts[baseCutNameAndFlavorAndTagger+"_SV"] = cuts[baseCutNameAndFlavorAndTagger] + "*(event.TagVarCSV_vertexMass[IJ]>0)"
-        cuts[baseCutNameAndFlavorAndTagger+"_NoSV"] = cuts[baseCutNameAndFlavorAndTagger] + "*(event.TagVarCSV_vertexMass[IJ]<0)"
-        cuts[baseCutNameAndFlavorAndTagger+"_JP0"] = cuts[baseCutNameAndFlavorAndTagger].replace("event.Jet_Proba[IJ] > 0","event.Jet_Proba[IJ]<=0")                         
+        cuts[baseCutNameAndFlavorAndTagger] = cuts[baseCutNameAndFlavor] + "&& (GoodJet_"+algo+">"+str(wps[algo][wp])+ ")"
+        cuts[baseCutNameAndFlavorAndTagger+"_SV"] = cuts[baseCutNameAndFlavorAndTagger] + "&& (GoodTagVarCSV_vertexMass>0)"
+        cuts[baseCutNameAndFlavorAndTagger+"_NoSV"] = cuts[baseCutNameAndFlavorAndTagger] + "&& (GoodTagVarCSV_vertexMass<0)"
+        cuts[baseCutNameAndFlavorAndTagger+"_JP0"] = cuts[baseCutNameAndFlavorAndTagger].replace("GoodJet_Proba > 0","GoodJet_Proba<=0")                         
         baseCutNameAndFlavorAndTaggerFail = baseCutNameAndFlavorAndTagger+"_Fail"
-        cuts[baseCutNameAndFlavorAndTaggerFail] = cuts[baseCutNameAndFlavor] + "*(event.Jet_"+algo+"[IJ]<="+str(wps[algo][wp])+ ")"
-
-# now transform the strings representing each cut in a 
-# lambda function of the event and of the Jet number (IJ)
-# (to avoid the need of doing eval at every event)
-cutFunctions={}
-for cut in list(cuts.keys()):
-  #print stringcut
-  cutFunctions[cut]=eval("lambda event,IJ:"+cuts[cut])
-  #cuts[cut]=lambda event,IJ: eval(stringcut)
-  #print cut, cuts[cut]
+        cuts[baseCutNameAndFlavorAndTaggerFail] = cuts[baseCutNameAndFlavor] + "&& (GoodJet_"+algo+"<="+str(wps[algo][wp])+ ")"
 
 
-
-eventSelString = eventsel
-eventsel=eval("lambda event: " + eventSelString)

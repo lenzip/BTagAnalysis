@@ -1,11 +1,11 @@
 #!/bin/bash
 
-dataDir="/eos/cms/store/group/phys_btag/coli/BTA_Run3_NANO130X/data_2022FG_prompt/addPFMuons/"
+dataDir="/eos/cms/store/group/phys_btag/milee/BTA_addPFMuons_NanoV12/Summer22EE/"
 #dataDirOut="root://xrootd-cms.infn.it///store/user/kskovpen/BTV/MORIOND17JPDEF/BTagMu/"
-dataDirOut="root://xrootd-cms.infn.it///store/group/phys_btag/coli/BTA_Run3_NANO130X/data_2022FG_prompt/addPFMuons/"
-mcDir="/eos/cms/store/group/phys_btag/coli/BTA_Run3_NANO130X/mc_summer22EE/addPFMuons/"
+dataDirOut="root://xrootd-cms.infn.it///store/group/phys_btag/milee/BTA_addPFMuons_NanoV12/Summer22EE/"
+mcDir="/eos/cms/store/group/phys_btag/milee/BTA_addPFMuons_NanoV12/Summer22EE/"
 #mcDirOut="root://xrootd-cms.infn.it///store/user/kskovpen/BTV/MORIOND17JPDEF/"
-mcDirOut="root://xrootd-cms.infn.it///store/group/phys_btag/coli/BTA_Run3_NANO130X/mc_summer22EE/addPFMuons/"
+mcDirOut="root://xrootd-cms.infn.it///store/group/phys_btag/milee/BTA_addPFMuons_NanoV12/Summer22EE/"
 dataSubdir1=$(ls $dataDir | grep BTagMu)
 mcSubdir1=$(ls $mcDir | grep MuEnrichedPt5)
 nFilesDATA=5

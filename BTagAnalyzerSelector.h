@@ -108,10 +108,10 @@ public :
    TTreeReaderArray<bool> Jet_looseID = {fReader, "Jet_looseID"};
    TTreeReaderArray<bool> Jet_tightID = {fReader, "Jet_tightID"};
    TTreeReaderArray<Float_t> Jet_area = {fReader, "Jet_area"};
-   TTreeReaderArray<Float_t> Jet_Proba = {fReader, "Jet_Proba"};
-   TTreeReaderArray<Float_t> Jet_ProbaN = {fReader, "Jet_ProbaN"};
-   TTreeReaderArray<Float_t> Jet_Bprob = {fReader, "Jet_Bprob"};
-   TTreeReaderArray<Float_t> Jet_BprobN = {fReader, "Jet_BprobN"};
+   TTreeReaderArray<Double_t> Jet_Proba = {fReader, "Jet_Proba"};
+   TTreeReaderArray<Double_t> Jet_ProbaN = {fReader, "Jet_ProbaN"};
+   TTreeReaderArray<Double_t> Jet_Bprob = {fReader, "Jet_Bprob"};
+   TTreeReaderArray<Double_t> Jet_BprobN = {fReader, "Jet_BprobN"};
    TTreeReaderArray<Float_t> Jet_DeepFlavourBDisc = {fReader, "Jet_DeepFlavourBDisc"};
    TTreeReaderArray<Float_t> Jet_DeepFlavourCvsLDisc = {fReader, "Jet_DeepFlavourCvsLDisc"};
    TTreeReaderArray<Float_t> Jet_DeepFlavourCvsBDisc = {fReader, "Jet_DeepFlavourCvsBDisc"};
