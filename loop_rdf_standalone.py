@@ -141,7 +141,7 @@ if __name__ == "__main__":
   if not opzioni.isData:  
     i=0
     for filename in fileList:  
-      helperChain.Add("helper"+str(i)+".root")
+      helperChain.Add("/afs/cern.ch/user/l/lenzip/public/forVincenzo/QCD_PT-50to80_MuEnrichedPt5_TuneCP5_13p6TeV_pythia8/helper"+str(i)+".root")
       i+=1
     print(chain.GetEntries(), helperChain.GetEntries())
     chain.AddFriend(helperChain)
@@ -234,14 +234,18 @@ if __name__ == "__main__":
   histosWithVariations = []
   for cut in list(cuts.keys()):
       maskname = f"{cut}_mask"
-      #df_final = df_final.Define(f"{cut}_mask", cuts[cut])
-      #df_final = df_final.Define('myweight_vector_'+cut, f"myweight_vector[{maskname}]")
+      df_final = df_final.Define(f"{cut}_mask", cuts[cut])
+      df_final = df_final.Define('myweight_vector_'+cut, f"myweight_vector[{maskname}]")
       for variable in list(variables.keys()):
         name_column_for_fill = f"{variable}__{cut}" 
-        h = df_final.Define(f"{cut}_mask", cuts[cut]).\
-                     Define(name_column_for_fill, variables[variable]['expression'].replace('mask', maskname)).\
-                     Define('myweight_vector_'+cut, f"myweight_vector[{maskname}]").\
-                     Histo1D((name_column_for_fill, name_column_for_fill, 
+        #h = df_final.Define(f"{cut}_mask", cuts[cut]).\
+        #             Define(name_column_for_fill, variables[variable]['expression'].replace('mask', maskname)).\
+        #             Define('myweight_vector_'+cut, f"myweight_vector[{maskname}]").\
+        #             Histo1D((name_column_for_fill, name_column_for_fill, 
+        #                variables[variable]['nbins'], variables[variable]['xmin'], variables[variable]['xmax']), 
+        #                name_column_for_fill, 'myweight_vector_'+cut)
+        df_final = df_final.Define(name_column_for_fill, variables[variable]['expression'].replace('mask', maskname))
+        h = df_final.Histo1D((name_column_for_fill, name_column_for_fill, 
                         variables[variable]['nbins'], variables[variable]['xmin'], variables[variable]['xmax']), 
                         name_column_for_fill, 'myweight_vector_'+cut)
         histosWithVariations.append(h)
