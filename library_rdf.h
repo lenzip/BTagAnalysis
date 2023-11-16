@@ -5,12 +5,14 @@
 #include <fstream>
 #include <sstream>
 #include <unordered_map>
+#include <ROOT/RVec.hxx>
 
 namespace RDFHelper {
 
 
 using cRVecF = const ROOT::RVecF &;
 using cRVecI = const ROOT::RVecI &;
+using cRVecB = const ROOT::RVecB &;
 
 class Pileup{
   public:
@@ -182,4 +184,51 @@ ROOT::RVecI GetTriggerPtBins(int nJets20, int nJets50, int nJets80, int nJets120
   return triggerPtBins;                         
 }
 
+ROOT::RVecB InPtBin(cRVecF pts, cRVecF etas, cRVecF probas, float ptmin, float ptmax){
+  ROOT::RVecB result;
+  for (auto i = 0; i < pts.size(); i++){
+    result.push_back(pts[i]>ptmin && pts[i]<ptmax && fabs(etas[i])<2.4 && probas[i]>0);  
+  }
+  return result;
+}
+
+ROOT::RVecB InPtBinJP0(cRVecF pts, cRVecF etas, cRVecF probas, float ptmin, float ptmax){
+  ROOT::RVecB result;
+  for (auto i = 0; i < pts.size(); i++){
+    result.push_back(pts[i]>ptmin && pts[i]<ptmax && fabs(etas[i])<2.4 && probas[i]<=0);  
+  }
+  return result;
+}
+ROOT::RVecB InPtBinAndTaggerPass(cRVecF pts, cRVecF etas, cRVecF probas, cRVecF tagger, float ptmin, float ptmax, float wp){
+  ROOT::RVecB result;
+  for (auto i = 0; i < pts.size(); i++){
+    result.push_back(pts[i]>ptmin && pts[i]<ptmax && fabs(etas[i])<2.4 && probas[i]>0 &&
+                     tagger[i]>wp);  
+  }
+  return result;
+}
+ROOT::RVecB InPtBinAndTaggerFail(cRVecF pts, cRVecF etas, cRVecF probas, cRVecF tagger, float ptmin, float ptmax, float wp){
+  ROOT::RVecB result;
+  for (auto i = 0; i < pts.size(); i++){
+    result.push_back(pts[i]>ptmin && pts[i]<ptmax && fabs(etas[i])<2.4 && probas[i]>0 &&
+                     tagger[i]<=wp);  
+  }
+  return result;
+}
+ROOT::RVecB InPtBinAndTaggerPassAndSVMass(cRVecF pts, cRVecF etas, cRVecF probas, cRVecF tagger, cRVecF svmass, float ptmin, float ptmax, float wp){
+  ROOT::RVecB result;
+  for (auto i = 0; i < pts.size(); i++){
+    result.push_back(pts[i]>ptmin && pts[i]<ptmax && fabs(etas[i])<2.4 && probas[i]>0 &&
+                     tagger[i]>wp && svmass[i]>0);  
+  }
+  return result;
+}
+ROOT::RVecB InPtBinAndTaggerPassAndSVMassFail(cRVecF pts, cRVecF etas, cRVecF probas, cRVecF tagger, cRVecF svmass, float ptmin, float ptmax, float wp){
+  ROOT::RVecB result;
+  for (auto i = 0; i < pts.size(); i++){
+    result.push_back(pts[i]>ptmin && pts[i]<ptmax && fabs(etas[i])<2.4 && probas[i]>0 &&
+                     tagger[i]>wp && svmass[i]<=0);  
+  }
+  return result;
+}
 }

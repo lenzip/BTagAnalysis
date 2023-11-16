@@ -5,8 +5,8 @@ cuts={}
 
 
 #pt bins for the sf calculation
-#ptbins=[20, 30, 50, 70, 100, 140, 200, 300, 600, 1000]
-ptbins=[20,1000]
+ptbins=[20, 30, 50, 70, 100, 140, 200, 300, 600, 1000]
+#ptbins=[20,1000]
 
 # algorithms for which SF are to be computed and corresponding working points
 # the algorithm name must match the branch name in the BTagAnalyzer output, i.e. Jet_<algo>
@@ -16,14 +16,14 @@ ptbins=[20,1000]
 #  {"L": 0.1522, "M":  0.4941, "T":  0.8001},
 #}
 
-algos = ["DeepFlavourBDisc", "ParTBDisc", "PNetBDisc"]
+algos = ["DeepFlavourBDisc"]#, "ParTBDisc", "PNetBDisc"]
 wps={
 "DeepFlavourBDisc":
   {"L": 0.0614, "M":  0.3196, "T":  0.73,   "XT": 0.8184, "XXT": 0.9542},
-"ParTBDisc":
-  {"L": 0.0897, "M":  0.451,  "T":  0.8604, "XT": 0.9234, "XXT": 0.9893},
-"PNetBDisc":
-  {"L": 0.0499, "M":  0.2605, "T":  0.6915, "XT": 0.8033, "XXT": 0.9664}
+#"ParTBDisc":
+#  {"L": 0.0897, "M":  0.451,  "T":  0.8604, "XT": 0.9234, "XXT": 0.9893},
+#"PNetBDisc":
+#  {"L": 0.0499, "M":  0.2605, "T":  0.6915, "XT": 0.8033, "XXT": 0.9664}
 }
 
 # flavor names
