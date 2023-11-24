@@ -51,9 +51,10 @@ class Prescale{
           continue;
       }
       std::istringstream iss(line);
-      std::string run, ls, prescale;
+      std::string run, ls, prescaleidx, prescale;
       std::getline(iss, run, ',');
       std::getline(iss, ls, ',');
+      std::getline(iss, prescaleidx, ',');
       std::getline(iss, prescale, ',');
       if (ls == "None") {
           ls = "1";
@@ -71,8 +72,8 @@ class Prescale{
       std::cout << "No data for trigger index " << trigIdx << std::endl;
       return 1.;
     }
-    if (data[trigIdx].find(run) != data[trigIdx].end()) {
-       std::cout << "This run was not found for this trigger" << std::endl;
+    if (data[trigIdx].find(run) == data[trigIdx].end()) {
+       std::cout << "This run "<< run << " was not found for this trigger " << trigIdx << std::endl;
        return 1.;
     }
     auto& prescaleTable = data[trigIdx][run];

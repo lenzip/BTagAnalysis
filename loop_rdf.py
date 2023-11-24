@@ -30,6 +30,7 @@ if __name__ == "__main__":
   parser.add_option("-v", action="store", help="variables file name (default variables.py)", default="variables.py", dest="variablesFile")
   parser.add_option("-s", action="store", help="systematics file name (default systematics.py)", default="systematics.py", dest="systematicsFile")
   parser.add_option("-d", action="store_true", help="if it is data apply trigger (default false (i.e. MC))", default=False, dest="isData")
+  parser.add_option("-b", action="store_true", help="batch mode (default=False)", default=False, dest="batch")
   parser.add_option("-l", action="store", help="data luminosity in fb-1 (default=4.235)", default=4.235, dest="lumi")
   parser.add_option("-p", action="store", help="what PU profile to use (defualt=PileupHistogram_Run2017D_69p2mb_Rereco.root)", default="PileupHistogram_Run2017D_69p2mb_Rereco.root", dest="pufile")
 
@@ -183,7 +184,7 @@ if __name__ == "__main__":
   for branch in activeBranches:
     chain.SetBranchStatus(branch, 1)
 
-
+  """
   # prepare prescale tables
   if opzioni.isData:
     prescaleTables={}
@@ -199,33 +200,35 @@ if __name__ == "__main__":
                      [1.],
                      chain)
     crossSection = CrossSection("data/xsectionFilter.txt")                 
+  """  
   i=0
   gInterpreter.Declare('#include "library_rdf.h"')
   df = ROOT.RDataFrame(chain)
+  #ROOT.RDF.Experimental.AddProgressBar(df)
   pileup_rdf = None
   if (not opzioni.isData):
     filepu = TFile("data/"+opzioni.pufile)
     dataHistopu = filepu.Get("pileup")
-    pileup_rdf = RDFHelper.Pileup(dataHistopu, df.Histo1D(("mcpu", "mcpu", dataHistopu.GetXaxis().GetNbins(), dataHistopu.GetXaxis().GetXmin(), dataHistopu.GetXaxis().GetXmax()), "nPUtrue").GetPtr())
-    df = df.Define("my_puweight", pileup_rdf, ["nPUtrue"])
-    df = df.DefinePerSample("my_xsecweight", "RDFHelper::getXsectionWeight(rdfslot_, rdfsampleinfo_)")
-    df = df.Define("myweight", f"my_puweight*my_xsecweight*{float(opzioni.lumi)}*1000.")
-    #df.Display(["myweight"]).Print()
+    mcpu = TH1F("mcpu", "mcpu", dataHistopu.GetXaxis().GetNbins(), dataHistopu.GetXaxis().GetXmin(), dataHistopu.GetXaxis().GetXmax())
+    chain.Draw("nPUtrue >> mcpu", "", "goff")
+    pileup_rdf = RDFHelper.Pileup(dataHistopu, mcpu)
+    df = df.Define("my_puweight", pileup_rdf, ["nPUtrue"]).\
+             DefinePerSample("my_xsecweight", "RDFHelper::getXsectionWeight(rdfslot_, rdfsampleinfo_)").\
+             Define("myweight", f"my_puweight*my_xsecweight*{float(opzioni.lumi)}*1000.")
     
 
   df = df.Filter(eventsel) 
 
   print (weightSystematics)
-  
-  for syst in shapeSystematics:
-    df = df.Vary("Jet_pT", 'ROOT::RVec<ROOT::RVecF>{Jet_pT'+syst+'Up, Jet_pT'+syst+'Do}', [f'{syst}Up', f'{syst}Do'])
+  if (not opzioni.isData):
+    for syst in shapeSystematics:
+      df = df.Vary("Jet_pT", 'ROOT::RVec<ROOT::RVecF>{Jet_pT'+syst+'Up, Jet_pT'+syst+'Do}', [f'{syst}_up', f'{syst}_do'])
 
   df = df.Define("good_muon_idx", "RDFHelper::FindGoodMuons(PFMuon_pt, PFMuon_eta)")\
          .Define("good_jet_idx", "RDFHelper::FindGoodJets(Jet_pT, Jet_eta)")\
          .Define("good_matched_jet_idx", "RDFHelper::FindMatchedJets(Take(Jet_eta, good_jet_idx), Take(Jet_phi, good_jet_idx), Take(PFMuon_eta, good_muon_idx), Take(PFMuon_phi, good_muon_idx))")\
-         .Filter("ROOT::VecOps::Sum(good_jet_idx)>0 && Sum(good_muon_idx)>0") 
-
-  df = df.Define("nJet20", "Sum(Take(Jet_pT, good_jet_idx)>20 && Take(Jet_pT, good_jet_idx)<50)")\
+         .Filter("ROOT::VecOps::Sum(good_jet_idx)>0 && Sum(good_muon_idx)>0")\
+         .Define("nJet20", "Sum(Take(Jet_pT, good_jet_idx)>20 && Take(Jet_pT, good_jet_idx)<50)")\
          .Define("nJet50", "Sum(Take(Jet_pT, good_jet_idx)>50 && Take(Jet_pT, good_jet_idx)<80)")\
          .Define("nJet80", "Sum(Take(Jet_pT, good_jet_idx)>80 && Take(Jet_pT, good_jet_idx)<120)")\
          .Define("nJet120", "Sum(Take(Jet_pT, good_jet_idx)>120 && Take(Jet_pT, good_jet_idx)<180)")\
@@ -236,14 +239,14 @@ if __name__ == "__main__":
          .Define("nMuJet80", "Sum(Take(Jet_pT, good_matched_jet_idx)>80 && Take(Jet_pT, good_matched_jet_idx)<120)")\
          .Define("nMuJet120", "Sum(Take(Jet_pT, good_matched_jet_idx)>120 && Take(Jet_pT, good_matched_jet_idx)<180)")\
          .Define("nMuJet180", "Sum(Take(Jet_pT, good_matched_jet_idx)>180 && Take(Jet_pT, good_matched_jet_idx)<320)")\
-         .Define("nMuJet320", "Sum(Take(Jet_pT, good_matched_jet_idx)>320)")
-        
-
-  df_final = df.Define("triggers", "RDFHelper::GetTriggersFires(BitTrigger)")\
+         .Define("nMuJet320", "Sum(Take(Jet_pT, good_matched_jet_idx)>320)")\
+         .Define("triggers", "RDFHelper::GetTriggersFires(BitTrigger)")\
          .Define("triggerPtBins", "RDFHelper::GetTriggerPtBins(nJet20, nJet50, nJet80, nJet120, nJet180, nJet320, nMuJet20, nMuJet50, nMuJet80, nMuJet120, nMuJet180, nMuJet320)")\
-         .Define("triggerMatches", "Reverse(Sort(Intersect(triggers, triggerPtBins)))").Filter("triggerMatches.size()>0")
+         .Define("triggerMatches", "Reverse(Sort(Intersect(triggers, triggerPtBins)))")
+  
+  df = df.Filter("triggerMatches.size()>0")
+  
   #df.Display(["triggers", "triggerPtBins", "triggerMatches"]).Print()
-  del df  
 
   if (opzioni.isData):
     prescales = RDFHelper.Prescale()
@@ -254,46 +257,72 @@ if __name__ == "__main__":
     prescales.load(36, "data/prescalesRun2022FG_HLT_BTagMu_AK4DiJet170_Mu5.txt")
     prescales.load(37, "data/prescalesRun2022FG_HLT_BTagMu_AK4Jet300_Mu5.txt")
     df = df.Define("myweight", prescales, ['triggerMatches', 'Run', 'LumiBlock'])
-  
+    df.Display(["triggerMatches", "Run", "LumiBlock", "myweight"]).Print()
   for branch in set(activeBranches):
     if "Jet_" in branch or "TagVarCSV" in branch:
-      df_final = df_final.Define("Good"+branch, f"Take({branch},good_matched_jet_idx)")
-  df_final = df_final.Define("myweight_vector", 'ROOT::RVecD(good_matched_jet_idx.size(), myweight)')
-  for syst in weightSystematics:
-    df_final = df_final.Define(f"myweight_vector_{syst}Up", f'myweight_vector*Take({syst}WeightUp, good_matched_jet_idx)')
-    df_final = df_final.Define(f"myweight_vector_{syst}Do", f'myweight_vector*Take({syst}WeightDo, good_matched_jet_idx)')
-  
+      if "Jet_flavour" in branch and opzioni.isData:
+        continue
+      df = df.Define("Good"+branch, f"Take({branch},good_matched_jet_idx)")
+  df = df.Define("myweight_vector", 'ROOT::RVecF(good_matched_jet_idx.size(), myweight)')
+  if not opzioni.isData:
+    for syst in weightSystematics:
+      df = df.Vary("myweight_vector", 'ROOT::RVec<ROOT::RVecF>{myweight_vector*Take('+syst+'WeightUp, good_matched_jet_idx), myweight_vector*Take('+syst+'WeightDo, good_matched_jet_idx)}', [f'{syst}_up', f'{syst}_do'])
 
   outFile = TFile(outputFile, "RECREATE")
   outFile.cd()
+  #histosvars = []
+  #df.Display(["my_puweight", "my_xsecweight", "myweight", "myweight_vector"]).Print()
   histos = []
   histosWithVariations = []
-  #histosvars = []
-
+  #ROOT.RDF.Experimental.AddProgressBar(ROOT.RDF.AsRNode(df))
   for cut in list(cuts.keys()):
       maskname = f"{cut}_mask"
-      dfi = df_final.Define(f"{cut}_mask", cuts[cut])
+      dfi = df.Define(f"{cut}_mask", cuts[cut])
       dfi = dfi.Define('myweight_vector_'+cut, f"myweight_vector[{maskname}]")
-      for syst in weightSystematics:
-        for direction in ["Up", "Do"]:
-          dfi = dfi.Define(f'myweight_vector_{cut}_{syst}{direction}', f"myweight_vector_{syst}{direction}[{maskname}]")
       for variable in list(variables.keys()):
-        name_column_for_fill = f"{variable}__{cut}"   
-        h = dfi.Define(name_column_for_fill, variables[variable]['expression'].replace('mask', maskname))\
-              .Histo1D((name_column_for_fill, name_column_for_fill, 
+        name_column_for_fill = f"{variable}__{cut}" 
+        h = dfi.Define(name_column_for_fill, variables[variable]['expression'].replace('mask', maskname)).\
+               Histo1D((name_column_for_fill, name_column_for_fill, 
                         variables[variable]['nbins'], variables[variable]['xmin'], variables[variable]['xmax']), 
                         name_column_for_fill, 'myweight_vector_'+cut)
         histosWithVariations.append(h)
-        for syst in weightSystematics:
-          for direction in ["Up", "Do"]:
-            h = dfi.Define(name_column_for_fill, variables[variable]['expression'].replace('mask', maskname))\
-                  .Histo1D((f'{name_column_for_fill}_{syst}{direction}', f'{name_column_for_fill}_{syst}{direction}', 
-                                   variables[variable]['nbins'], variables[variable]['xmin'], variables[variable]['xmax']), 
-                                   name_column_for_fill, f'myweight_vector_{cut}_{syst}{direction}')
-            histos.append(h)
-        #hvar = ROOT.Rdf_final.Experimental.VariationsFor(h)
-        #histosvars.append(hvar)  
-  #ROOT.RDF.AddProgressBar(df)
+  gInterpreter.Declare("""
+    const UInt_t barWidth = 60;
+    ULong64_t processed = 0, totalEvents = 0;
+    std::string progressBar;
+    std::mutex barMutex;
+    auto registerEvents = [](ULong64_t nIncrement) {totalEvents += nIncrement;};
+
+    ROOT::RDF::RResultPtr<ULong64_t> AddProgressBar(ROOT::RDF::RNode df, int everyN=10000, int totalN=100000) {
+        registerEvents(totalN);
+        auto c = df.Count();
+        c.OnPartialResultSlot(everyN, [everyN] (unsigned int slot, ULong64_t &cnt){
+            std::lock_guard<std::mutex> l(barMutex);
+            processed += everyN; //everyN captured by value for this lambda
+            progressBar = "[";
+            for(UInt_t i = 0; i < static_cast<UInt_t>(static_cast<Float_t>(processed)/totalEvents*barWidth); ++i){
+                progressBar.push_back('|');
+            }
+            // escape the '\' when defined in python string
+            std::cout << "\\r" << std::left << std::setw(barWidth) << progressBar << "] " << processed << "/" << totalEvents << std::flush;
+        });
+        return c;
+    }
+  """)
+  if (not opzioni.batch):
+    counts_1 = AddProgressBar(ROOT.RDF.AsRNode(df), max(100, int(chain.GetEntries()/5000)), int(chain.GetEntries()))
+  #ROOT.RDF.Experimental.AddProgressBar(ROOT.RDF.AsRNode(df))
+  hvars = [ROOT.RDF.Experimental.VariationsFor(h) for h in histosWithVariations]
+  for hvar in hvars:
+    for label in hvar.GetKeys():
+      if "nominal" in str(label):
+        newname = hvar[label].GetName()
+      else:   
+        newname = hvar[label].GetName()+"_"+str(label).split(':')[-1]
+        hvar[label].SetNameTitle(newname, newname)
+      hvar[label].Write()                
+  ROOT.RDF.SaveGraph(ROOT.RDF.AsRNode(df), "./mydot.dot")
+  '''
   for h in histos:
     h.Write()
   for h in histosWithVariations:  
@@ -306,6 +335,7 @@ if __name__ == "__main__":
       hvar[label].SetNameTitle(newname, newname)
       hvar[label].Write()
   #ROOT.RDF.SaveGraph(df, "./mydot.dot");
+  '''
   """  
   ROOT.RDF.SaveGraph(df, "./mydot.dot");
   for histo in histos:
