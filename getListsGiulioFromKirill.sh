@@ -1,15 +1,15 @@
 #!/bin/bash
 
-dataDir="/eos/cms/store/group/phys_btag/milee/BTA_addPFMuons_NanoV12/Summer22EE/"
+dataDir="/eos/cms/store/group/phys_btag/milee/BTA_addPFMuons_NanoV12_fixPuppi/Summer22EE/"
 #dataDirOut="root://xrootd-cms.infn.it///store/user/kskovpen/BTV/MORIOND17JPDEF/BTagMu/"
-dataDirOut="root://xrootd-cms.infn.it///store/group/phys_btag/milee/BTA_addPFMuons_NanoV12/Summer22EE/"
-mcDir="/eos/cms/store/group/phys_btag/milee/BTA_addPFMuons_NanoV12/Summer22EE/"
+dataDirOut="/eos/cms/store/group/phys_btag/milee/BTA_addPFMuons_NanoV12_fixPuppi/Summer22EE/"
+mcDir="/eos/cms/store/group/phys_btag/milee/BTA_addPFMuons_NanoV12_fixPuppi/Summer22EE/"
 #mcDirOut="root://xrootd-cms.infn.it///store/user/kskovpen/BTV/MORIOND17JPDEF/"
-mcDirOut="root://xrootd-cms.infn.it///store/group/phys_btag/milee/BTA_addPFMuons_NanoV12/Summer22EE/"
+mcDirOut="/eos/cms/store/group/phys_btag/milee/BTA_addPFMuons_NanoV12_fixPuppi/Summer22EE/"
 dataSubdir1=$(ls $dataDir | grep BTagMu)
 mcSubdir1=$(ls $mcDir | grep MuEnrichedPt5)
-nFilesDATA=5
-nFilesMC=5
+nFilesDATA=15
+nFilesMC=15
 outDir="listsFromKirill"
 
 mkdir $outDir
@@ -41,7 +41,7 @@ for dir1 in $mcSubdir1; do
   for file in $files; do
       echo "$mcDirOut/$dir1/$file" >> /tmp/tempMC.txt
   done
-  split -a 5 -l ${nFilesMC} -d /tmp/tempMC.txt /tmp/${dir1}_
+  split -a 5 -l ${nFilesMC} -d /tmp/tempMC.txt /tmp//${dir1}_
   lsfi=$(ls /tmp/${dir1}_*)
   jid=0
   for fil in $lsfi; do

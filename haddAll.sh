@@ -1,32 +1,32 @@
 #!/bin/bash
 
-cd plots_data_SVmass_CSVv2_v3
-hadd -f Run2017B.root  Run2017B_ID*.root
-hadd -f Run2017C.root  Run2017C_ID*.root
-hadd -f Run2017D.root  Run2017D_ID*.root
-hadd -f Run2017Elo.root  Run2017Elo_ID*.root
-hadd -f Run2017Ehi.root  Run2017Ehi_ID*.root
-hadd -f Run2017F.root  Run2017F_ID*.root
+cp haddfast mc/
+cd mc
 
-hadd -f Run2017.root Run2017B.root Run2017C.root Run2017D.root Run2017Elo.root Run2017Ehi.root Run2017F.root 
-hadd -f Run2017CDElo.root Run2017C.root Run2017D.root Run2017Elo.root
-hadd -f Run2017EhiF.root Run2017Ehi.root Run2017F.root
-cd ..
+samplesmc=(QCD_PT-15to20_MuEnrichedPt5 QCD_PT-20to30_MuEnrichedPt5 QCD_PT-30to50_MuEnrichedPt5 QCD_PT-50to80_MuEnrichedPt5 QCD_PT-80to120_MuEnrichedPt5 QCD_PT-120to170_MuEnrichedPt5 QCD_PT-170to300_MuEnrichedPt5 QCD_PT-300to470_MuEnrichedPt5 QCD_PT-470to600_MuEnrichedPt5 QCD_PT-600to800_MuEnrichedPt5 QCD_PT-800to1000_MuEnrichedPt5 QCD_PT-1000_MuEnrichedPt5)
+#samplesmc=(QCD_PT-800to1000_MuEnrichedPt5 QCD_PT-1000_MuEnrichedPt5)
+rm tmplist*
+for sample in ${samplesmc[@]}; do
+  ls ${sample}_TuneCP5_13p6TeV_pythia8_ID* > tmplist
+  split -a 3 -l 50 -d tmplist tmplist_
+  for ichunk in `ls tmplist_*`; do 
+    echo "hadd -j 15 -k -f ${sample}_TuneCP5_13p6TeV_pythia8_${ichunk}.root `cat $ichunk | tr "\n" " "`;"
+    hadd -k -j 8 -f ${sample}_TuneCP5_13p6TeV_pythia8_${ichunk}.root `cat $ichunk | tr "\n" " "`; 
+  done
+  list=""
+  for ichunk in `ls tmplist_*`; do
+    list="$list ${sample}_TuneCP5_13p6TeV_pythia8_${ichunk}.root"
+  done
+  echo "hadd -j 5 -k -f ${sample}_TuneCP5_13p6TeV_pythia8.root $list"
+  hadd -k -j 5 -f ${sample}_TuneCP5_13p6TeV_pythia8.root $list
+  rm tmplist*
+done  
 
+list=""
+for sample in ${samplesmc[@]}; do
+  list="$list ${sample}_TuneCP5_13p6TeV_pythia8.root"
+done
 
-cd plots_data_inverted_SVmass_CSVv2_v3
-hadd -f Run2017B_MCJP.root  Run2017B_MCJP_ID*.root
-hadd -f Run2017C_MCJP.root  Run2017C_MCJP_ID*.root
-hadd -f Run2017D_MCJP.root  Run2017D_MCJP_ID*.root
-hadd -f Run2017Elo_MCJP.root  Run2017Elo_MCJP_ID*.root
-hadd -f Run2017Ehi_MCJP.root  Run2017Ehi_MCJP_ID*.root
-hadd -f Run2017F_MCJP.root  Run2017F_MCJP_ID*.root
+hadd -k -f QCD_MuEnriched_rdf.root $list
 
-hadd -f Run2017_MCJP.root Run2017B_MCJP.root Run2017C_MCJP.root Run2017D_MCJP.root Run2017Elo_MCJP.root Run2017Ehi_MCJP.root Run2017F_MCJP.root
-hadd -f Run2017CDElo_MCJP.root Run2017C_MCJP.root Run2017D_MCJP.root Run2017Elo_MCJP.root
-hadd -f Run2017EhiF_MCJP.root Run2017Ehi_MCJP.root Run2017F_MCJP.root
-cd ..
-
-cd plots_mc_runBCDEF_SVmass_CSVv2_v3
-hadd -f QCD_MuEnriched.root QCD_Pt*.root
 cd ..

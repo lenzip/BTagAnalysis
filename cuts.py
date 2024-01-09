@@ -5,8 +5,8 @@ cuts={}
 
 
 #pt bins for the sf calculation
-#ptbins=[20, 30, 50, 70, 100, 140, 200, 300, 600, 1000]
-ptbins=[20,1000]
+ptbins=[20, 30, 50, 70, 100, 140, 200, 300, 600, 1000]
+#ptbins=[20,1000]
 
 # algorithms for which SF are to be computed and corresponding working points
 # the algorithm name must match the branch name in the BTagAnalyzer output, i.e. Jet_<algo>
