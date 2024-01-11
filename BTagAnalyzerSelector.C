@@ -364,7 +364,7 @@ void BTagAnalyzerSelector::cdFrag(int ij)
 {       
   float sfUp = 1.;
   float sfDo = 1.;
-  /*
+
   int flavch = 0;
 
   float drMin = 0.4;   
@@ -392,15 +392,16 @@ void BTagAnalyzerSelector::cdFrag(int ij)
          D.SetPtEtaPhiM(DHadron_pT[k], DHadron_eta[k], DHadron_phi[k], 0.);
          double dR = jet.DeltaR(D); 
          if( dR > drMin ) continue;
-         bool isSemiMu = false;
-         int nd = DHadron_nDaughters[k];
+         bool isSemiMu = DHadron_muInDaughter[k];
+         /*int nd = DHadron_nDaughters[k];
          for( int kk=0;kk<nd;kk++ ){
            if( abs(DHadron_DaughtersPdgID[kk+ndaughters]) == 13 ) isSemiMu = true;
          }
-      
          ndaughters += nd;
+         */
       
          if( !isSemiMu ) continue;
+         //std::cout << "isSemiMu " << isSemiMu << " id " << DHadron_pdgID[k] << std::endl;
          if( abs(DHadron_pdgID[k]) == 411 ) isDplusMu = true;
          if( abs(DHadron_pdgID[k]) == 421 ) isDzeroMu = true;
          if( abs(DHadron_pdgID[k]) == 431 ) isDsubsMu = true;
@@ -411,9 +412,10 @@ void BTagAnalyzerSelector::cdFrag(int ij)
        if( isDzeroMu ) sfDo *= 0.067 / 0.077;
        if( isDsubsMu ) sfDo *= 0.067 / 0.080;
    }
-   */
+   
    cdFragmentationWeightUp[ij] = sfUp;
    cdFragmentationWeightDo[ij] = sfDo;  
+   //std::cout << cdFragmentationWeightDo[ij] << std::endl;
 }
 
 // c fragmentation sys
@@ -501,8 +503,10 @@ void BTagAnalyzerSelector::Ks(int ij)
          TLorentzVector V0;
          V0.SetPtEtaPhiM(GenV0_pT[k], GenV0_eta[k], GenV0_phi[k], 0.);
          double dR = jet.DeltaR(V0); 
+         //std::cout << "before " << abs(GenV0_pdgId[k]) << std::endl;
          if( dR > 0.3 ) continue;
          int pdgid = abs(GenV0_pdgId[k]);
+         //std::cout << "after " <<  pdgid << std::endl;
          if( pdgid == 310 )  nK0s++;
          if( pdgid == 3122 ) nLambda++;
        }
@@ -511,6 +515,7 @@ void BTagAnalyzerSelector::Ks(int ij)
     }
   v0WeightUp[ij] = sfUp;
   v0WeightDo[ij] = sfDo;   
+  //std::cout << v0WeightUp[ij] << ", " << v0WeightDo[ij] << std::endl;
 }
 
 void  BTagAnalyzerSelector::JEC(int ij)

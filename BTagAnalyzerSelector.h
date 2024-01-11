@@ -83,6 +83,7 @@ public :
    TTreeReaderArray<Float_t> DHadron_phi = {fReader, "DHadron_phi"};
    TTreeReaderArray<Int_t> DHadron_pdgID = {fReader, "DHadron_pdgID"};
    TTreeReaderArray<Double_t> DHadron_mass = {fReader, "DHadron_mass"};
+   TTreeReaderArray<bool> DHadron_muInDaughter = {fReader, "DHadron_muInDaughter"};
    TTreeReaderValue<Int_t> nGenlep = {fReader, "nGenlep"};
    TTreeReaderArray<Float_t> Genlep_pT = {fReader, "Genlep_pT"};
    TTreeReaderArray<Float_t> Genlep_eta = {fReader, "Genlep_eta"};
