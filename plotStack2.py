@@ -2,7 +2,7 @@
 
 from ROOT import *
 import CMS_lumi
-CMS_lumi.lumi_13TeV = "21 fb^{-1}"
+CMS_lumi.lumi_13TeV = "27 fb^{-1}"
 #CMS_lumi.writeExtraText = 1
 #CMS_lumi.writeExtraText2 = 1
 CMS_lumi.extraText = "Preliminary"
@@ -22,16 +22,16 @@ data_inverted=sys.argv[3]
 var=sys.argv[4]
 ptbin=sys.argv[5]
 selection=sys.argv[6]
-normalize=sys.argv[7]
+normalize=int(sys.argv[7])
 xtitle=sys.argv[8]
 
 mcfile = TFile(mc)
 datafile = TFile(data)
 datafile_inverted = TFile(data_inverted)
-print var+"__"+ptbin+"_l"+selection
+print (var+"__"+ptbin+"_l"+selection)
 
 handle = open("systematics.py",'r')
-exec(handle)
+exec(handle.read())
 handle.close()
 allSystematics = []
 allSystematics.extend(weightSystematics)
@@ -64,7 +64,7 @@ for ibin in range(1, htotalmc.GetNbinsX()+1):
   systSquareDo.append(0.)
 
 for syst in allSystematics:
-  print syst
+  print (syst)
   htotalUp = mcfile.Get(hl.GetName()+"_"+syst+"_up")
   htotalDo = mcfile.Get(hl.GetName()+"_"+syst+"_do")
   hcUp     = mcfile.Get(hc.GetName()+"_"+syst+"_up")
@@ -105,7 +105,7 @@ for ibin in range(1, htotalmc.GetNbinsX()+1):
   xl.append(htotalmc.GetBinWidth (ibin) / 2.)
   xh.append(htotalmc.GetBinWidth (ibin) / 2.)
   yr.append(1.)
-  if normalize != None:
+  if normalize != 0:
     y.append(htotalmc.GetBinContent (ibin)/htotalmc.Integral())
     yl.append(math.sqrt(systSquareDo[ibin-1])/htotalmc.Integral())
     yh.append(math.sqrt(systSquareUp[ibin-1])/htotalmc.Integral())
@@ -120,7 +120,7 @@ for ibin in range(1, htotalmc.GetNbinsX()+1):
 
 tgrMC      = TGraphAsymmErrors()
 tgrMCRatio = TGraphAsymmErrors()
-#print math.sqrt(systSquareDo[0]), htotalmc.GetBinContent (1), htotalmc.Integral(), ylratio[0]
+#print (math.sqrt(systSquareDo[0]), htotalmc.GetBinContent (1), htotalmc.Integral(), ylratio[0])
 tgrMC.SetLineColor(12)
 tgrMC.SetFillColor(12)
 tgrMC.SetLineWidth(2)
@@ -135,7 +135,7 @@ for iBin in range(0, len(x)) :
   tgrMCRatio.SetPoint     (iBin, x[iBin], yr[iBin])
   tgrMCRatio.SetPointError(iBin, xl[iBin], xh[iBin], ylratio[iBin], yhratio[iBin])
 
-if normalize != None:
+if normalize != 0:
   hl.Scale(1./htotalmc.Integral())
   hc.Scale(1./htotalmc.Integral())
   hb.Scale(1./htotalmc.Integral())
@@ -164,7 +164,7 @@ legend.AddEntry(hl, "light jets", "f")
 legend.AddEntry(hdata, "data", "lp")
 legend.AddEntry(hdata_inverted, "data (MC Calib)", "lp")
 
-if normalize != None:
+if normalize != 0:
   hdata.Scale(1./hdata.Integral())
   hdata_inverted.Scale(1./hdata_inverted.Integral())
 
@@ -198,6 +198,8 @@ hratio.GetXaxis().SetLabelSize(0.15)
 hratio.GetYaxis().SetLabelSize(0.15)
 hratio.GetYaxis().SetRangeUser(0., 2.)
 hratio.GetYaxis().SetNdivisions(508)
+hratio.GetXaxis().SetTitleSize(0.15)
+hratio.GetXaxis().SetTitle(xtitle)
 hratio.Draw()
 hratio_inverted.Draw("same")
 tgrMCRatio.Draw("2")

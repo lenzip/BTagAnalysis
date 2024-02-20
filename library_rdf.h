@@ -12,6 +12,7 @@ namespace RDFHelper {
 
 using cRVecF = const ROOT::RVecF &;
 using cRVecI = const ROOT::RVecI &;
+using cRVecL = const ROOT::RVecL &;
 using cRVecB = const ROOT::RVecB &;
 
 class Pileup{
@@ -24,18 +25,23 @@ class Pileup{
     normMCHisto->Scale(1./normMCHisto->Integral());
     ratio = (TH1*) normDataHisto->Clone();
     ratio->Divide(normMCHisto);
+    highPUratio = normDataHisto->Integral(60, 100)/normMCHisto->Integral(60,100); 
     std::cout << ratio << std::endl;
   };
   
   double operator() (float nPU) const {
     //std::cout << "calling" << nPU << std::endl;
-    return ratio->GetBinContent(ratio->FindBin(nPU));
+    if (nPU < 60)
+      return ratio->GetBinContent(ratio->FindBin(nPU));
+    else 
+      return highPUratio;   
   }  
   
   private:
     TH1* normDataHisto;
     TH1* normMCHisto;
     TH1* ratio;
+    double highPUratio;
 
 };
 
@@ -81,7 +87,7 @@ class Prescale{
     int closest = 1;
     for (const auto& kv : prescaleTable) {
         int ls = kv.first;
-        if (lumi - ls >= 0 && lumi - ls < distance) {
+        if ((lumi - ls) >= 0 && (lumi - ls) < distance) {
             distance = lumi - ls;
             closest = kv.first;
         }
@@ -129,14 +135,28 @@ double getXsectionWeight(unsigned int slot, const ROOT::RDF::RSampleInfo &sample
 
 };
 
+double getPrescaleWeightMC(cRVecI triggers){
+  if (triggers[0]==32)
+    return 1./2130;
+  else if (triggers[0]==33)
+    return 1./340;
+  else if (triggers[0]==34)
+    return 1./ 70;
+  else if (triggers[0]==35)
+    return 1./18;
+  else if (triggers[0]==36)
+    return 1/4.5;
+  else
+    return 1.;         
+
+}
 
 
 
-
-ROOT::RVecI FindGoodJets(cRVecF jetpt, cRVecF jeteta){
+ROOT::RVecI FindGoodJets(cRVecF jetpt, cRVecF jeteta, cRVecB id){
   ROOT::RVecI result;
   for(auto i = 0; i < jetpt.size(); i++) {
-    if (jetpt[i] > 20. && fabs(jeteta[i]< 2.4)) result.push_back(i);
+    if (jetpt[i] > 20. && fabs(jeteta[i]< 2.4) && id[i]) result.push_back(i);
     
   }    
   return result;
@@ -154,10 +174,10 @@ ROOT::RVecI FindMatchedJets(cRVecF jeteta, cRVecF jetphi, cRVecF muoneta, cRVecF
   return result;
 }
 
-ROOT::RVecI FindGoodMuons(cRVecF muonpt, cRVecF muoneta){
+ROOT::RVecI FindGoodMuons(cRVecF muonpt, cRVecF muoneta, cRVecL quality){
   ROOT::RVecI result;
   for(auto i = 0; i < muonpt.size(); i++) {
-    if (muonpt[i] > 5. && fabs(muoneta[i]< 2.4)) result.push_back(i);
+    if (muonpt[i] > 5. && fabs(muoneta[i]< 2.4) && quality[i]>=2) result.push_back(i);
   }    
   return result;
 

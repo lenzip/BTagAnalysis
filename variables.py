@@ -1,24 +1,24 @@
 variables={}
-
+'''
 variables['events'] = {
   'expression': "1",
   'xmin': 0,
   'xmax': 2,
   'nbins': 1
 }
-
+'''
 variables["JP"] = {
   "expression": "GoodJet_Proba[mask]",
   "xmin": 0,
   "xmax":  2,
-  "nbins":  40 
+  "nbins":  20 
 }
 
 variables["SVmass"] = {
   "expression": "GoodTagVarCSV_vertexMass[mask]",
   "xmin": 0,
   "xmax":  10,
-  "nbins":  50
+  "nbins":  20
 }
 
 

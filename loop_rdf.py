@@ -31,8 +31,8 @@ if __name__ == "__main__":
   parser.add_option("-s", action="store", help="systematics file name (default systematics.py)", default="systematics.py", dest="systematicsFile")
   parser.add_option("-d", action="store_true", help="if it is data apply trigger (default false (i.e. MC))", default=False, dest="isData")
   parser.add_option("-b", action="store_true", help="batch mode (default=False)", default=False, dest="batch")
-  parser.add_option("-l", action="store", help="data luminosity in fb-1 (default=4.235)", default=4.235, dest="lumi")
-  parser.add_option("-p", action="store", help="what PU profile to use (defualt=PileupHistogram_Run2017D_69p2mb_Rereco.root)", default="PileupHistogram_Run2017D_69p2mb_Rereco.root", dest="pufile")
+  parser.add_option("-l", action="store", help="data luminosity in fb-1 (default=4.235)", default=21.1, dest="lumi")
+  parser.add_option("-p", action="store", help="what PU profile to use (defualt=PileupHistogram_Run2022FG_80mb.root)", default="PileupHistogram_Run2022FG_80mb.root", dest="pufile")
 
 
   (opzioni, args) = parser.parse_args()
@@ -72,7 +72,7 @@ if __name__ == "__main__":
   'nPUtrue',
   'nPU']
   )
-
+  TH1.SetDefaultSumw2(True)
   if (not opzioni.isData):
     activeBranches.extend([
       'gluonSplittingWeightUp',
@@ -211,10 +211,13 @@ if __name__ == "__main__":
     dataHistopu = filepu.Get("pileup")
     mcpu = TH1F("mcpu", "mcpu", dataHistopu.GetXaxis().GetNbins(), dataHistopu.GetXaxis().GetXmin(), dataHistopu.GetXaxis().GetXmax())
     chain.Draw("nPUtrue >> mcpu", "", "goff")
+    #dataHistopu.DrawNormalized()
+    #mcpu.DrawNormalized("same")
+    #a=input("ciao")
     pileup_rdf = RDFHelper.Pileup(dataHistopu, mcpu)
     df = df.Define("my_puweight", pileup_rdf, ["nPUtrue"]).\
-             DefinePerSample("my_xsecweight", "RDFHelper::getXsectionWeight(rdfslot_, rdfsampleinfo_)").\
-             Define("myweight", f"my_puweight*my_xsecweight*{float(opzioni.lumi)}*1000.")
+             DefinePerSample("my_xsecweight", "RDFHelper::getXsectionWeight(rdfslot_, rdfsampleinfo_)")#.\
+             #Define("myweight", f"my_puweight*my_xsecweight*{float(opzioni.lumi)}*1000.")
     
 
   df = df.Filter(eventsel) 
@@ -224,8 +227,8 @@ if __name__ == "__main__":
     for syst in shapeSystematics:
       df = df.Vary("Jet_pT", 'ROOT::RVec<ROOT::RVecF>{Jet_pT'+syst+'Up, Jet_pT'+syst+'Do}', [f'{syst}_up', f'{syst}_do'])
 
-  df = df.Define("good_muon_idx", "RDFHelper::FindGoodMuons(PFMuon_pt, PFMuon_eta)")\
-         .Define("good_jet_idx", "RDFHelper::FindGoodJets(Jet_pT, Jet_eta)")\
+  df = df.Define("good_muon_idx", "RDFHelper::FindGoodMuons(PFMuon_pt, PFMuon_eta, PFMuon_GoodQuality)")\
+         .Define("good_jet_idx", "RDFHelper::FindGoodJets(Jet_pT, Jet_eta, Jet_looseID)")\
          .Define("good_matched_jet_idx", "RDFHelper::FindMatchedJets(Take(Jet_eta, good_jet_idx), Take(Jet_phi, good_jet_idx), Take(PFMuon_eta, good_muon_idx), Take(PFMuon_phi, good_muon_idx))")\
          .Filter("ROOT::VecOps::Sum(good_jet_idx)>0 && Sum(good_muon_idx)>0")\
          .Define("nJet20", "Sum(Take(Jet_pT, good_jet_idx)>20 && Take(Jet_pT, good_jet_idx)<50)")\
@@ -245,19 +248,29 @@ if __name__ == "__main__":
          .Define("triggerMatches", "Reverse(Sort(Intersect(triggers, triggerPtBins)))")
   
   df = df.Filter("triggerMatches.size()>0")
-  
-  #df.Display(["triggers", "triggerPtBins", "triggerMatches"]).Print()
+  if (not opzioni.isData):
+    df = df.Define('prescaleWeightMC', 'RDFHelper::getPrescaleWeightMC(triggerMatches)').\
+            Define("myweight", f"my_puweight*my_xsecweight*prescaleWeightMC*{float(opzioni.lumi)}*1000.")
 
+  #h = df.Histo1D(('triggers','triggers', 40, 0, 40), 'triggers')
+  #h.Draw()
+  #a=input("ciao")
+  #df.Display([f'my_xsecweight', 'my_puweight', 'myweight']).Print()
+  outFile = TFile(outputFile, "RECREATE")
+  outFile.cd()
   if (opzioni.isData):
-    prescales = RDFHelper.Prescale()
-    prescales.load(32, "data/prescalesRun2022FG_HLT_BTagMu_AK4DiJet20_Mu5.txt")
-    prescales.load(33, "data/prescalesRun2022FG_HLT_BTagMu_AK4DiJet40_Mu5.txt")
-    prescales.load(34, "data/prescalesRun2022FG_HLT_BTagMu_AK4DiJet70_Mu5.txt")
-    prescales.load(35, "data/prescalesRun2022FG_HLT_BTagMu_AK4DiJet110_Mu5.txt")
-    prescales.load(36, "data/prescalesRun2022FG_HLT_BTagMu_AK4DiJet170_Mu5.txt")
-    prescales.load(37, "data/prescalesRun2022FG_HLT_BTagMu_AK4Jet300_Mu5.txt")
-    df = df.Define("myweight", prescales, ['triggerMatches', 'Run', 'LumiBlock'])
-    df.Display(["triggerMatches", "Run", "LumiBlock", "myweight"]).Print()
+    #prescales = RDFHelper.Prescale()
+    #prescales.load(32, "data/prescalesRun2022EFG_HLT_BTagMu_AK4DiJet20_Mu5.txt")
+    #prescales.load(33, "data/prescalesRun2022EFG_HLT_BTagMu_AK4DiJet40_Mu5.txt")
+    #prescales.load(34, "data/prescalesRun2022EFG_HLT_BTagMu_AK4DiJet70_Mu5.txt")
+    #prescales.load(35, "data/prescalesRun2022EFG_HLT_BTagMu_AK4DiJet110_Mu5.txt")
+    #prescales.load(36, "data/prescalesRun2022EFG_HLT_BTagMu_AK4DiJet170_Mu5.txt")
+    #prescales.load(37, "data/prescalesRun2022EFG_HLT_BTagMu_AK4Jet300_Mu5.txt")
+    #df = df.Define("myweight", prescales, ['triggerMatches', 'Run', 'LumiBlock'])
+    df = df.Define("myweight", '1.')
+    df.Display(["triggers", "triggerPtBins", "triggerMatches"], 100).Print()
+    #hpre = df.Define("thetrigger", 'triggerMatches[0]').Histo2D(('prescales', 'prescales', 38, 0, 38, 10000, 0, 10000), 'thetrigger', 'myweight')
+    #hpre.Write()
   for branch in set(activeBranches):
     if "Jet_" in branch or "TagVarCSV" in branch:
       if "Jet_flavour" in branch and opzioni.isData:
@@ -268,10 +281,9 @@ if __name__ == "__main__":
     for syst in weightSystematics:
       df = df.Vary("myweight_vector", 'ROOT::RVec<ROOT::RVecF>{myweight_vector*Take('+syst+'WeightUp, good_matched_jet_idx), myweight_vector*Take('+syst+'WeightDo, good_matched_jet_idx)}', [f'{syst}_up', f'{syst}_do'])
 
-  outFile = TFile(outputFile, "RECREATE")
-  outFile.cd()
+  
   #histosvars = []
-  #df.Display(["my_puweight", "my_xsecweight", "myweight", "myweight_vector"]).Print()
+  #df.Display(["myweight", "myweight_vector"], 10000).Print()
   histos = []
   histosWithVariations = []
   #ROOT.RDF.Experimental.AddProgressBar(ROOT.RDF.AsRNode(df))

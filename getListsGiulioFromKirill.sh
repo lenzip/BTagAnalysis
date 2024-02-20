@@ -35,20 +35,20 @@ for dir1 in $dataSubdir1; do
 done  
 
 
-for dir1 in $mcSubdir1; do
-  echo "1",$dir1
-  files=$(ls $mcDir/$dir1)
-  for file in $files; do
-      echo "$mcDirOut/$dir1/$file" >> /tmp/tempMC.txt
-  done
-  split -a 5 -l ${nFilesMC} -d /tmp/tempMC.txt /tmp//${dir1}_
-  lsfi=$(ls /tmp/${dir1}_*)
-  jid=0
-  for fil in $lsfi; do
-    sampStrip=$dir1
-    mv ${fil} ${outDir}/${dir1}_ID${jid}.txt
-    jid=$(( $jid+1 ))
-    echo $jid
-  done
-  rm -f /tmp/tempMC.txt
-done
+#for dir1 in $mcSubdir1; do
+#  echo "1",$dir1
+#  files=$(ls $mcDir/$dir1)
+#  for file in $files; do
+#      echo "$mcDirOut/$dir1/$file" >> /tmp/tempMC.txt
+#  done
+#  split -a 5 -l ${nFilesMC} -d /tmp/tempMC.txt /tmp//${dir1}_
+#  lsfi=$(ls /tmp/${dir1}_*)
+#  jid=0
+#  for fil in $lsfi; do
+#    sampStrip=$dir1
+#    mv ${fil} ${outDir}/${dir1}_ID${jid}.txt
+#    jid=$(( $jid+1 ))
+#    echo $jid
+#  done
+#  rm -f /tmp/tempMC.txt
+#done
