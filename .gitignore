@@ -1,0 +1,15 @@
+*.txt
+*.so
+*.pyc
+*.bak
+*.root
+*.swp
+*log/
+CMSSW*
+logs*
+Data*
+mc*
+*.jds
+*_C*
+*.dot
+*pics*
