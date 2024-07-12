@@ -2,7 +2,7 @@
 
 from ROOT import *
 import CMS_lumi
-CMS_lumi.lumi_13TeV = "27 fb^{-1}"
+CMS_lumi.lumi_13TeV = "17.7 fb^{-1}"
 #CMS_lumi.writeExtraText = 1
 #CMS_lumi.writeExtraText2 = 1
 CMS_lumi.extraText = "Preliminary"

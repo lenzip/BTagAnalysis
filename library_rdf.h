@@ -107,29 +107,29 @@ class Prescale{
 
 double getXsectionWeight(unsigned int slot, const ROOT::RDF::RSampleInfo &sample){
   if (sample.Contains("QCD_PT-15to20_MuEnrichedPt5"))
-    return 2.948e+06/16191725;
+    return 2.948e+06/9952465;
   else if (sample.Contains("QCD_PT-20to30_MuEnrichedPt5"))  
-    return 2.695e+06/97331894;
+    return 2.695e+06/67016187;
   else if (sample.Contains("QCD_PT-30to50_MuEnrichedPt5")) 
-    return 1.446e+06/102810021;
+    return 1.446e+06/63799051;
   else if (sample.Contains("QCD_PT-50to80_MuEnrichedPt5"))  
-    return 4.060e+05/41330577;
+    return 4.060e+05/25402335;
   else if (sample.Contains("QCD_PT-80to120_MuEnrichedPt5"))
-    return 9.643e+04/87342853; 
+    return 9.643e+04/53192321; 
   else if (sample.Contains("QCD_PT-120to170_MuEnrichedPt5"))   
-    return 2.310e+04/69874302;
+    return 2.310e+04/44453509;
   else if (sample.Contains("QCD_PT-170to300_MuEnrichedPt5"))
-    return 7.789e+03/102039909;
+    return 7.789e+03/65755777;
   else if (sample.Contains("QCD_PT-300to470_MuEnrichedPt5"))
-    return 7.028e+02/97185423;
+    return 7.028e+02/62954149;
   else if (sample.Contains("QCD_PT-470to600_MuEnrichedPt5"))
-    return 6.864e+01/69336360;
+    return 6.864e+01/46186549;
   else if (sample.Contains("QCD_PT-600to800_MuEnrichedPt5"))
-    return 2.128e+01/72411423;
+    return 2.128e+01/46267511;
   else if (sample.Contains("QCD_PT-800to1000_MuEnrichedPt5"))
-    return 3.880e+00/116801203;
+    return 3.880e+00/83892794;
   else if (sample.Contains("QCD_PT-1000_MuEnrichedPt5"))
-    return 1.322e+00/46767938;
+    return 1.322e+00/31521156;
   std::cout << "Error. Unknown sample " << sample.AsString() << std::endl;
   return 0;
 
@@ -137,17 +137,19 @@ double getXsectionWeight(unsigned int slot, const ROOT::RDF::RSampleInfo &sample
 
 double getPrescaleWeightMC(cRVecI triggers){
   if (triggers[0]==32)
-    return 1./2130;
+    return 1./3200;
   else if (triggers[0]==33)
-    return 1./340;
+    return 1./512;
   else if (triggers[0]==34)
-    return 1./ 70;
+    return 1./ 104;
   else if (triggers[0]==35)
-    return 1./18;
+    return 1./26;
   else if (triggers[0]==36)
-    return 1/4.5;
+    return 1/6.5;
+  else if (triggers[0]==37)
+    return 1.5; 
   else
-    return 1.;         
+    return 1.;          
 
 }
 

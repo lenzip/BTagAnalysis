@@ -208,7 +208,7 @@ if __name__ == "__main__":
   pileup_rdf = None
   if (not opzioni.isData):
     filepu = TFile("data/"+opzioni.pufile)
-    dataHistopu = filepu.Get("pileup")
+    dataHistopu = filepu.Get("PU")
     mcpu = TH1F("mcpu", "mcpu", dataHistopu.GetXaxis().GetNbins(), dataHistopu.GetXaxis().GetXmin(), dataHistopu.GetXaxis().GetXmax())
     chain.Draw("nPUtrue >> mcpu", "", "goff")
     #dataHistopu.DrawNormalized()
@@ -259,17 +259,17 @@ if __name__ == "__main__":
   outFile = TFile(outputFile, "RECREATE")
   outFile.cd()
   if (opzioni.isData):
-    #prescales = RDFHelper.Prescale()
-    #prescales.load(32, "data/prescalesRun2022EFG_HLT_BTagMu_AK4DiJet20_Mu5.txt")
-    #prescales.load(33, "data/prescalesRun2022EFG_HLT_BTagMu_AK4DiJet40_Mu5.txt")
-    #prescales.load(34, "data/prescalesRun2022EFG_HLT_BTagMu_AK4DiJet70_Mu5.txt")
-    #prescales.load(35, "data/prescalesRun2022EFG_HLT_BTagMu_AK4DiJet110_Mu5.txt")
-    #prescales.load(36, "data/prescalesRun2022EFG_HLT_BTagMu_AK4DiJet170_Mu5.txt")
-    #prescales.load(37, "data/prescalesRun2022EFG_HLT_BTagMu_AK4Jet300_Mu5.txt")
-    #df = df.Define("myweight", prescales, ['triggerMatches', 'Run', 'LumiBlock'])
+    prescales = RDFHelper.Prescale()
+    prescales.load(32, "data/prescalesRun2023C_HLT_BTagMu_AK4DiJet20_Mu5.txt")
+    prescales.load(33, "data/prescalesRun2023C_HLT_BTagMu_AK4DiJet40_Mu5.txt")
+    prescales.load(34, "data/prescalesRun2023C_HLT_BTagMu_AK4DiJet70_Mu5.txt")
+    prescales.load(35, "data/prescalesRun2023C_HLT_BTagMu_AK4DiJet110_Mu5.txt")
+    prescales.load(36, "data/prescalesRun2023C_HLT_BTagMu_AK4DiJet170_Mu5.txt")
+    prescales.load(37, "data/prescalesRun2023C_HLT_BTagMu_AK4Jet300_Mu5.txt")
+    df = df.Define("prescale", prescales, ['triggerMatches', 'Run', 'LumiBlock'])
     df = df.Define("myweight", '1.')
-    df.Display(["triggers", "triggerPtBins", "triggerMatches"], 100).Print()
-    #hpre = df.Define("thetrigger", 'triggerMatches[0]').Histo2D(('prescales', 'prescales', 38, 0, 38, 10000, 0, 10000), 'thetrigger', 'myweight')
+    #df.Display(["triggers", "triggerPtBins", "triggerMatches"], 100).Print()
+    #hpre = df.Define("thetrigger", 'triggerMatches[0]').Histo2D(('prescales', 'prescales', 38, 0, 38, 10000, 0, 10000), 'thetrigger', 'prescale')
     #hpre.Write()
   for branch in set(activeBranches):
     if "Jet_" in branch or "TagVarCSV" in branch:

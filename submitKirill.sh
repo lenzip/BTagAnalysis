@@ -2,9 +2,9 @@
 export X509_USER_PROXY=/afs/cern.ch/user/l/lenzip/proxy.proxy
 
 source /cvmfs/cms.cern.ch/cmsset_default.sh
-base=/afs/cern.ch/work/l/lenzip/BTag2023/2022Prompt/BTagAnalysis_RDF
+base=/afs/cern.ch/user/l/lenzip/work/BTag2023/Summer23/BTagAnalysis/
 
-cd $base/CMSSW_13_1_3
+cd $base/CMSSW_13_1_4
 
 eval `scram runtime -sh`
 cd -

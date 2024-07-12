@@ -1,16 +1,16 @@
 #!/bin/bash
 
-dataDir="/eos/cms/store/group/phys_btag/milee/BTA_addPFMuons_NanoV12_fixPuppi/Summer22EE/"
+dataDir="/eos/cms/store/group/phys_btag/milee/BTA_addPFMuons/Summer23/systematic/"
 #dataDirOut="root://xrootd-cms.infn.it///store/user/kskovpen/BTV/MORIOND17JPDEF/BTagMu/"
-dataDirOut="/eos/cms/store/group/phys_btag/milee/BTA_addPFMuons_NanoV12_fixPuppi/Summer22EE/"
-mcDir="/eos/cms/store/group/phys_btag/milee/BTA_addPFMuons_NanoV12_fixPuppi/Summer22EE/"
+dataDirOut="/eos/cms/store/group/phys_btag/milee/BTA_addPFMuons/Summer23/"
+mcDir="/eos/cms/store/group/phys_btag/milee/BTA_addPFMuons/Summer23/"
 #mcDirOut="root://xrootd-cms.infn.it///store/user/kskovpen/BTV/MORIOND17JPDEF/"
-mcDirOut="/eos/cms/store/group/phys_btag/milee/BTA_addPFMuons_NanoV12_fixPuppi/Summer22EE/"
+mcDirOut="/eos/cms/store/group/phys_btag/milee/BTA_addPFMuons/Summer23/systematic/"
 dataSubdir1=$(ls $dataDir | grep BTagMu)
 mcSubdir1=$(ls $mcDir | grep MuEnrichedPt5)
 nFilesDATA=15
 nFilesMC=15
-outDir="listsFromKirill"
+outDir="listsFromKirill_inverted"
 
 mkdir $outDir
 

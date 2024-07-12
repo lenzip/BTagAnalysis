@@ -2,9 +2,9 @@
 export X509_USER_PROXY=/afs/cern.ch/user/l/lenzip/proxy.proxy
 
 source /cvmfs/cms.cern.ch/cmsset_default.sh
-base=/afs/cern.ch/work/l/lenzip/BTag2023/2022Prompt/BTagAnalysis_RDF
+base=/afs/cern.ch/user/l/lenzip/work/BTag2023/Summer23/BTagAnalysis/
 
-cd $base/CMSSW_13_1_3
+cd $base/CMSSW_13_1_4
 
 eval `scram runtime -sh`
 cd -
@@ -26,7 +26,7 @@ cp $base/*.h .
 cp -r $base/data .
 #cp $base/copy.sh .
 #./copy.sh $base/listsFromKirill/$1 ./
-cp $base/listsFromKirillInverted/$1 ./listlocal.txt
+cp $base/listsFromKirill_inverted/$1 ./listlocal.txt
 
 #echo $outputFile
 python3 loop_rdf.py -b listlocal.txt $outputFile -l $lumi -p $puprofile $isdata 

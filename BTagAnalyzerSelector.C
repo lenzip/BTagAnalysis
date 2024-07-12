@@ -56,7 +56,7 @@ BTagAnalyzerSelector::BTagAnalyzerSelector(TTree * tree) : fChain(0){
 
   //JES and JER
   //jesTotal = new JetCorrectionUncertainty(*(new JetCorrectorParameters("data/Summer16_23Sep2016V5_MC_UncertaintySources_AK4PFchs.txt", "Total")));
-  jesTotal = new JetCorrectionUncertainty("data/Winter22Run3_V2_MC_Uncertainty_AK4PFPuppi.txt");
+  jesTotal = new JetCorrectionUncertainty("data/Summer23Prompt23_V1_MC_Uncertainty_AK4PFPuppi.txt");
 
    // JER taken from https://twiki.cern.ch/twiki/bin/view/CMS/JetResolution
    

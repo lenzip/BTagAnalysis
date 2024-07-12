@@ -1,10 +1,10 @@
 #!/bin/bash
 wps=(L M T XT XXT)
 #20-inf 
-python3 plotStack2.py mc/QCD_MuEnriched_rdf_inclusive.root Data/BTagMu_Run2022EE_rdf_inclusive.root Data_inverted/BTagMu_Run2022EE_rdf_inclusive.root ETA "ptbin_20_1000" "" 1 "#eta_{jet}"
-python3 plotStack2.py mc/QCD_MuEnriched_rdf_inclusive.root Data/BTagMu_Run2022EE_rdf_inclusive.root Data_inverted/BTagMu_Run2022EE_rdf_inclusive.root PT "ptbin_20_1000" "" 1 "jet p_T [GeV]"
-python3 plotStack2.py mc/QCD_MuEnriched_rdf_inclusive.root Data/BTagMu_Run2022EE_rdf_inclusive.root Data_inverted/BTagMu_Run2022EE_rdf_inclusive.root JP "ptbin_20_1000" "" 1 "jet JP"
-python3 plotStack2.py mc/QCD_MuEnriched_rdf_inclusive.root Data/BTagMu_Run2022EE_rdf_inclusive.root Data_inverted/BTagMu_Run2022EE_rdf_inclusive.root SVmass "ptbin_20_1000" "" 1 "SV mass [GeV]"
+python3 plotStack2.py mc/QCDMuenriched_inclusive.root Data/BTagMuRun2023C_inclusive.root Data_inverted/BTagMuRun2023C_inclusive.root ETA "ptbin_20_1000" "" 1 "#eta_{jet}"
+python3 plotStack2.py mc/QCDMuenriched_inclusive.root Data/BTagMuRun2023C_inclusive.root Data_inverted/BTagMuRun2023C_inclusive.root PT "ptbin_20_1000" "" 1 "jet p_T [GeV]"
+python3 plotStack2.py mc/QCDMuenriched_inclusive.root Data/BTagMuRun2023C_inclusive.root Data_inverted/BTagMuRun2023C_inclusive.root JP "ptbin_20_1000" "" 1 "jet JP"
+python3 plotStack2.py mc/QCDMuenriched_inclusive.root Data/BTagMuRun2023C_inclusive.root Data_inverted/BTagMuRun2023C_inclusive.root SVmass "ptbin_20_1000" "" 1 "SV mass [GeV]"
 
 ## DeepFlavourBDiscL
 #for wp in ${wps[@]}; do
@@ -14,23 +14,23 @@ python3 plotStack2.py mc/QCD_MuEnriched_rdf_inclusive.root Data/BTagMu_Run2022EE
 #  python3 plotStack2.py mc/QCD_MuEnriched_rdf_inclusive.root Data/BTagMu_Run2022EE_rdf_inclusive.root Data_inverted/BTagMu_Run2022EE_rdf_inclusive.root SVmass "ptbin_20_1000" "_DeepFlavourBDisc$wp" 0 "SV mass [GeV]"
 #done  
 ##
-#ptbins=(20_30 30_50 50_70 70_100 100_140 140_200 200_300 300_600 600_1000)
-##discriminators=(DeepFlavourBDisc ParTBDisc PNetBDisc)
-#discriminators=(DeepFlavourBDisc)
-#for ptbin in ${ptbins[@]}; do  
-#  for disc in ${discriminators[@]}; do
-#    python3 plotStack2.py mc/QCD_MuEnriched_rdf_DeepFlavourBDisc.root Data/BTagMu_Run2022EE_rdf_DeepFlavourBDisc.root Data_inverted/BTagMu_Run2022EE_rdf_DeepFlavourBDisc.root ETA "ptbin_${ptbin}" "" 0 "#eta_{jet}"
-#    python3 plotStack2.py mc/QCD_MuEnriched_rdf_DeepFlavourBDisc.root Data/BTagMu_Run2022EE_rdf_DeepFlavourBDisc.root Data_inverted/BTagMu_Run2022EE_rdf_DeepFlavourBDisc.root PT "ptbin_${ptbin}" "" 0 "jet p_T [GeV]"
-#    python3 plotStack2.py mc/QCD_MuEnriched_rdf_DeepFlavourBDisc.root Data/BTagMu_Run2022EE_rdf_DeepFlavourBDisc.root Data_inverted/BTagMu_Run2022EE_rdf_DeepFlavourBDisc.root JP "ptbin_${ptbin}" "" 0 "jet JP"
-#    python3 plotStack2.py mc/QCD_MuEnriched_rdf_DeepFlavourBDisc.root Data/BTagMu_Run2022EE_rdf_DeepFlavourBDisc.root Data_inverted/BTagMu_Run2022EE_rdf_DeepFlavourBDisc.root SVmass "ptbin_${ptbin}" "_${disc}$wp" 0 "SV mass [GeV]"
-#    for wp in ${wps[@]}; do
-#      python3 plotStack2.py mc/QCD_MuEnriched_rdf_DeepFlavourBDisc.root Data/BTagMu_Run2022EE_rdf_DeepFlavourBDisc.root Data_inverted/BTagMu_Run2022EE_rdf_DeepFlavourBDisc.root ETA "ptbin_${ptbin}" "_${disc}$wp" 0 "#eta_{jet}"
-#      python3 plotStack2.py mc/QCD_MuEnriched_rdf_DeepFlavourBDisc.root Data/BTagMu_Run2022EE_rdf_DeepFlavourBDisc.root Data_inverted/BTagMu_Run2022EE_rdf_DeepFlavourBDisc.root PT "ptbin_${ptbin}" "_${disc}$wp" 0 "jet p_T [GeV]"
-#      python3 plotStack2.py mc/QCD_MuEnriched_rdf_DeepFlavourBDisc.root Data/BTagMu_Run2022EE_rdf_DeepFlavourBDisc.root Data_inverted/BTagMu_Run2022EE_rdf_DeepFlavourBDisc.root JP "ptbin_${ptbin}" "_${disc}$wp" 0 "jet JP"
-#      python3 plotStack2.py mc/QCD_MuEnriched_rdf_DeepFlavourBDisc.root Data/BTagMu_Run2022EE_rdf_DeepFlavourBDisc.root Data_inverted/BTagMu_Run2022EE_rdf_DeepFlavourBDisc.root SVmass "ptbin_${ptbin}" "_${disc}$wp" 0 "SV mass [GeV]"
-#    done
-#  done
-#done
+ptbins=(20_30 30_50 50_70 70_100 100_140 140_200 200_300 300_600 600_1000)
+#discriminators=(DeepFlavourBDisc ParTBDisc PNetBDisc)
+discriminators=(ParTBDisc)
+for ptbin in ${ptbins[@]}; do  
+  for disc in ${discriminators[@]}; do
+    python3 plotStack2.py mc/QCDMuenriched_ParTBDisc.root Data/BTagMuRun2023C_ParTBDisc.root Data_inverted/BTagMuRun2023C_ParTBDisc.root ETA "ptbin_${ptbin}" "" 1 "#eta_{jet}"
+    python3 plotStack2.py mc/QCDMuenriched_ParTBDisc.root Data/BTagMuRun2023C_ParTBDisc.root Data_inverted/BTagMuRun2023C_ParTBDisc.root PT "ptbin_${ptbin}" "" 1 "jet p_T [GeV]"
+    python3 plotStack2.py mc/QCDMuenriched_ParTBDisc.root Data/BTagMuRun2023C_ParTBDisc.root Data_inverted/BTagMuRun2023C_ParTBDisc.root JP "ptbin_${ptbin}" "" 1 "jet JP"
+    python3 plotStack2.py mc/QCDMuenriched_ParTBDisc.root Data/BTagMuRun2023C_ParTBDisc.root Data_inverted/BTagMuRun2023C_ParTBDisc.root SVmass "ptbin_${ptbin}" "_${disc}$wp" 1 "SV mass [GeV]"
+    for wp in ${wps[@]}; do
+      python3 plotStack2.py mc/QCDMuenriched_ParTBDisc.root Data/BTagMuRun2023C_ParTBDisc.root Data_inverted/BTagMuRun2023C_ParTBDisc.root ETA "ptbin_${ptbin}" "_${disc}$wp" 1 "#eta_{jet}"
+      python3 plotStack2.py mc/QCDMuenriched_ParTBDisc.root Data/BTagMuRun2023C_ParTBDisc.root Data_inverted/BTagMuRun2023C_ParTBDisc.root PT "ptbin_${ptbin}" "_${disc}$wp" 1 "jet p_T [GeV]"
+      python3 plotStack2.py mc/QCDMuenriched_ParTBDisc.root Data/BTagMuRun2023C_ParTBDisc.root Data_inverted/BTagMuRun2023C_ParTBDisc.root JP "ptbin_${ptbin}" "_${disc}$wp" 1 "jet JP"
+      python3 plotStack2.py mc/QCDMuenriched_ParTBDisc.root Data/BTagMuRun2023C_ParTBDisc.root Data_inverted/BTagMuRun2023C_ParTBDisc.root SVmass "ptbin_${ptbin}" "_${disc}$wp" 1 "SV mass [GeV]"
+    done
+  done
+done
 
 #python3 plotStack2.py plots_ptgt30/QCD_MuEnriched_rdf_inclusive.root plots_ptgt30/Run2017D.root MuPt "ptbin_30.0-1000.0" "" 1
 #python3 plotStack2.py plots_ptgt30/QCD_MuEnriched_rdf_inclusive.root plots_ptgt30/Run2017D.root nPV  "ptbin_30.0-1000.0" "" 1
