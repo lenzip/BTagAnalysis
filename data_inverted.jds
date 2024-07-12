@@ -1,0 +1,91 @@
+executable = /afs/cern.ch/user/l/lenzip/work/BTag2023/Summer23/BTagAnalysis/submitKirill_inverted.sh 
+arguments =  $(i) 17.794 puwei_Summer23.histo.root Data_inverted -d 
+output = /afs/cern.ch/user/l/lenzip/work/BTag2023/Summer23/BTagAnalysis/logs_data/$(i).out 
+error = /afs/cern.ch/user/l/lenzip/work/BTag2023/Summer23/BTagAnalysis//logs_data/$(i).err
+log = /afs/cern.ch/user/l/lenzip/work/BTag2023/Summer23/BTagAnalysis/logs_data/global.log
++JobFlavour = "espresso"
++SingularityImage = "/cvmfs/unpacked.cern.ch/registry.hub.docker.com/cmssw/el8:x86_64" 
+transfer_output_files   = ""
++AccountingGroup = group_u_CMS.u_zh.priority
+accounting_group = group_u_CMS.u_zh.priority 
+queue i in (
+BTagMuRun2023C-22Sep2023_v1-v1_ID0.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID10.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID11.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID12.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID13.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID14.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID15.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID16.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID17.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID18.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID19.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID1.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID20.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID21.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID22.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID2.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID3.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID4.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID5.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID6.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID7.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID8.txt
+BTagMuRun2023C-22Sep2023_v1-v1_ID9.txt
+BTagMuRun2023C-22Sep2023_v2-v1_ID0.txt
+BTagMuRun2023C-22Sep2023_v2-v1_ID1.txt
+BTagMuRun2023C-22Sep2023_v2-v1_ID2.txt
+BTagMuRun2023C-22Sep2023_v2-v1_ID3.txt
+BTagMuRun2023C-22Sep2023_v2-v1_ID4.txt
+BTagMuRun2023C-22Sep2023_v2-v1_ID5.txt
+BTagMuRun2023C-22Sep2023_v3-v1_ID0.txt
+BTagMuRun2023C-22Sep2023_v3-v1_ID1.txt
+BTagMuRun2023C-22Sep2023_v3-v1_ID2.txt
+BTagMuRun2023C-22Sep2023_v3-v1_ID3.txt
+BTagMuRun2023C-22Sep2023_v3-v1_ID4.txt
+BTagMuRun2023C-22Sep2023_v3-v1_ID5.txt
+BTagMuRun2023C-22Sep2023_v3-v1_ID6.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID0.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID10.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID11.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID12.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID13.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID14.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID15.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID16.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID17.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID18.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID19.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID1.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID20.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID21.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID22.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID23.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID24.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID25.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID26.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID27.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID28.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID29.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID2.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID30.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID31.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID32.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID33.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID34.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID35.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID36.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID37.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID38.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID39.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID3.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID40.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID41.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID42.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID4.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID5.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID6.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID7.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID8.txt
+BTagMuRun2023C-22Sep2023_v4-v1_ID9.txt
+)
